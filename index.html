@@ -76,7 +76,7 @@
 }
 
 @font-face {
-  font-family: 'mona12';
+  font-family: 'limgul12';
   src: url('https://cdn.jsdelivr.net/gh/MonadABXY/limgul-font@main/woff2/Limgul12.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
@@ -339,6 +339,7 @@
     /* --- [좌측] 2) 나란한 D-Day 박스 --- */
     .dday-row {
       display: flex; gap: 8px; justify-content: space-between; margin-left: 10px; margin-right: 10px; margin-bottom: 0px;
+      font-family: 'mona12';
     }
     .dday-box.mini {
       flex: 1; padding: 0px;
@@ -391,6 +392,7 @@
 
     .tab-note-content {
       width: 100%;
+      font-family: 'mona12' !important;
       background-image: url('https://i.pinimg.com/736x/82/6d/03/826d03df64add0e9fefc3e28076a96e0.jpg');
       background-size: cover;
       border: 1px solid #d4d4d4;
@@ -400,7 +402,7 @@
       padding: 25px 10px 10px 10px;
       font-size: 11px;
       line-height: 1.8;
-      height: 185px;
+      height: 182px;
       overflow-y: auto;
       overflow: hidden;
       position: relative;
@@ -436,7 +438,7 @@
     .fortune-bubble {
       position: relative;
       background: #fff;
-      border: 1px solid #d4d4d4;
+      border: 1px solid rgb(214, 214, 214);
       border-radius: 8px;
       padding: 8px 10px;
       font-size: 11px;
@@ -671,6 +673,14 @@
       opacity: 0;
       overflow: hidden;
       transition: max-height 0.3s ease, opacity 0.2s ease, padding 0.3s ease;
+      overflow-y: auto;
+      /* 🌟 스크롤바 숨김 처리 (기능은 동작) */
+      -ms-overflow-style: none; /* IE, Edge */
+      scrollbar-width: none; /* Firefox */
+    }
+
+    .playlist-modal::-webkit-scrollbar {
+      display: none;
     }
     
     .playlist-modal.show { 
@@ -694,10 +704,18 @@
         line-height: 1.6;
         border-width:7px;
       border-style:solid;
-      border-image: url("https://github.com/okayletsgo555/img/blob/main/%EA%B7%B8%EB%A0%88%EC%9D%B4%20%ED%94%84%EB%A0%88%EC%9D%B4%20%ED%94%84%EB%A0%88%EC%9E%84.png?raw=true") 8 fill round;
+      border-image: url("https://github.com/okayletsgo555/img/blob/main/%EA%B7%B8%EB%A0%88%EC%9D%B4%20%ED%94%84%EB%A0%88%EC%9E%84.png?raw=true") 8 fill round;
         cursor: pointer; }
+        
 
     .song-item:hover { background: #e4e4e4; }
+
+    /* 현재 재생 중인 플레이리스트 곡 스타일 */
+    .song-item.playing {
+      background: #e4e4e4;
+      font-weight: bold;
+      color: #cfb4c2;
+    }
 
     /* =========================================
        📌 상세 페이지 상단 바 & 버튼 공통
@@ -940,6 +958,8 @@
     }
 
     
+
+    
   </style>
 </head>
 <body>
@@ -1089,10 +1109,11 @@
               홈런을 쳤다. 7이닝 무실점 팀 승리.<br><br>
               그런데 오늘 하루 중 제일 심장이 뛴 순간이 뭐냐고 물으면, 경기 끝나고 라커룸으로 들어올 때 마주친 그 녀석의 표정이었다.<br><br>
               수고했다는 말 한마디 없이 건네준 스포츠 드링크가 왜 이렇게 차가운지... (여기에 본문 내용 작성)
+              <button class="link-btn" onclick="window.open('https://티스토리링크입력', '_blank')">LINK</button>
             </div>
           </div>
         </div>
-        <button class="link-btn" onclick="window.open('https://티스토리링크입력', '_blank')">LINK</button>
+        
         <button class="back-btn" onclick="goBack()">◀ BACK</button>
       </div>
 
@@ -1130,7 +1151,6 @@
             <div id="diaryDetailContent" class="post-card-content"></div>
           </div>
         </div>
-        <button class="link-btn" onclick="window.open('https://티스토리링크입력', '_blank')">LINK</button>
         <button class="back-btn" onclick="goBack()">◀ BACK</button>
       </div>
 
@@ -1157,9 +1177,9 @@
         <div class="post-list">
           <div class="post-card" style="min-height: 350px; background: #ffffff;">
             <div id="charDetailContent" class="post-card-content"></div>
+            <button class="link-btn" onclick="window.open('https://티스토리링크입력', '_blank')">LINK</button>
           </div>
         </div>
-        <button class="link-btn" onclick="window.open('https://티스토리링크입력', '_blank')">LINK</button>
         <button class="back-btn" onclick="goBack()">◀ BACK</button>
       </div>
 
@@ -1194,9 +1214,9 @@
             <div id="oocDetailContent" class="post-card-content">
               여기에 OOC 본문 내용이 들어갑니다.
             </div>
+            <button class="link-btn" onclick="window.open('https://티스토리링크입력', '_blank')">LINK</button>
           </div>
         </div>
-        <button class="link-btn" onclick="window.open('https://티스토리링크입력', '_blank')">LINK</button>
         <button class="back-btn" onclick="goBack()">◀ BACK</button>
       </div>
 
@@ -1208,23 +1228,24 @@
         <img src="https://github.com/okayletsgo555/img/blob/main/sticker2.png?raw=true" class="home-icon">
       </button>
       
+      <!-- 🌟 컨트롤 버튼에 클릭 이벤트 추가 -->
       <div class="music-controls">
-        <button class="ctrl-btn">◁◁</button>
-        <button class="ctrl-btn">❚❚</button>
-        <button class="ctrl-btn">▷▷</button>
+        <button class="ctrl-btn" onclick="playPrev()">◁◁</button>
+        <button class="ctrl-btn" id="playBtn" onclick="togglePlay()" style="font-size: 13px;">▶</button>
+        <button class="ctrl-btn" onclick="playNext()">▷▷</button>
       </div>
 
       <button class="ctrl-btn" onclick="togglePlaylist()">≡</button>
     </div>
 
-    <!-- 플레이리스트 팝업 -->
+    <!-- 🌟 동적으로 채워질 플레이리스트 팝업 -->
     <div id="playlistModal" class="playlist-modal">
       <div class="playlist-title">PLAYLIST</div>
-      <div class="song-item">🎵 Mr.Children - 君が好き</div>
-      <div class="song-item">🎵 Track 02</div>
-      <div class="song-item">🎵 Track 03</div>
+      <div id="playlistContainer"></div>
     </div>
 
+    <!-- 🌟 눈에 보이지 않는 유튜브 플레이어 공간 -->
+    <div id="ytplayer" style="display: none;"></div>
   </div>
 
   <script>
@@ -1432,106 +1453,105 @@
     // 🍀 랜덤 운세 위젯 로직
     const fortunes = [
       // 세이
-      { name: "세이", text: "오늘은 하고 싶은 대로 해도 괜찮은 날이야. (｡•̀ᴗ-)✧ 🕊️" },
-      { name: "세이", text: "운세는 모르겠고, 맛있는 거 먹으면 좋은 날인 거 아닌가? (๑´ڡ`๑) 🍴" },
+      { name: "세이", text: "오늘은 하고 싶은 대로 해도 괜찮은 날이야. (｡ • . •｡) 🕊️" },
+      { name: "세이", text: "운세는 모르겠고, 맛있는 거 먹으면 좋은 날인 거 아닌가? (*•؎ •) 🍴" },
       { name: "세이", text: "두 번째 플레이리스트의 다섯 번째 곡, 그게 오늘의 행운의 노래야. (´▽`ʃ♡ƪ) 🎧" },
-      { name: "세이", text: "창문을 열어두는 건 어때? 바람이 기분 좋을 것 같아. ( ˶ˆᗜˆ˵ ) 🍃" },
+      { name: "세이", text: "창문을 열어두는 건 어때? 바람이 기분 좋을 것 같아. ʕ・ᵌ・ʔ 🍃" },
       { name: "세이", text: "글쎄...... 오늘은 괜찮지 않을까? (´• ω •`) 🌿" },
-      { name: "세이", text: "동네 고양이랑 친해질 수 있을 것 같아. 잘됐네. (ฅ^•ﻌ•^ฅ) 🐈" },
-      { name: "세이", text: "......대흉이래. 미안해. 쿄헤이한테 넘겨버릴까? (｡•́︿•̀｡) 🔮" },
-      { name: "세이", text: "요리를 해보는 건 어때? 쌍란이 나올 것 같아. 정말 나오면 찍어서 보여줄래? (๑˃̵ᴗ˂̵)و 🥚" },
-      { name: "세이", text: "산책을 해 보는 건 어때? 걷다 보면 좋은 일이 생길 수도 있고, 안 날 수도 있고. (っ˘ω˘ς ) 🚶" },
-      { name: "세이", text: "오후 3시 17분에 좋은 일이 생길 거야. ( ˘͈ ᵕ ˘͈ ) ⏰" },
-      { name: "세이", text: "오늘 쿄헤이랑 눈이 마주치면 도망가는 게 좋을지도 몰라. ……아니, 왜인지는 만나보면 알 거야. (￣▽￣;) 🏃" },
+      { name: "세이", text: "동네 고양이랑 친해질 수 있을 것 같아. 잘됐네. /ᐠ - ̫ -マ 🐈" },
+      { name: "세이", text: "......대흉이래. 미안해. 쿄헤이한테 넘겨버릴까? 🔮(・-・꧞ )" },
+      { name: "세이", text: "요리를 해보는 건 어때? 쌍란이 나올 것 같아. 정말 나오면 찍어서 보여줄래? (｡ • . •｡)و 🥚" },
+      { name: "세이", text: "산책을 해 보는 건 어때? 걷다 보면 좋은 일이 생길 수도 있고, 안 생길 수도 있고. (⩌⩊⩌ ) 🚶" },
+      { name: "세이", text: "오후 3시 17분에 좋은 일이 생길 거야. (^╷ ̫ ╷^)ﾉ 💕" },
+      { name: "세이", text: "힘든 아침. 오늘은 꼭 일찍 자자. ( っ °､｡)っ⏰"},
+      { name: "세이", text: "오늘 쿄헤이랑 눈이 마주치면 도망가는 게 좋을지도 몰라. ……아니, 왜인지는 만나보면 알 거야.<br>( ´ㆆ.ㆆก)՞ ՞ 🏃" },
 
       // 쿄헤이
-      { name: "쿄헤이", text: "오늘은 운이 좋네. 나를 만났잖아? (￣▽￣)ノ ✨" },
-      { name: "쿄헤이", text: "걱정 마. 오늘은 내가 운이 좀 좋은 날이거든. (¬‿¬ ) 🍀" },
-      { name: "쿄헤이", text: "오늘의 운세? 대길. 내가 정했으니까 확실해. 반박은 받지 않습니다. ( •̀ᴗ•́ )و 🎯" },
+      { name: "쿄헤이", text: "오늘은 운이 좋네. 나를 만났잖아? ✨◝(⁰▿<)" },
+      { name: "쿄헤이", text: "걱정 마. 오늘은 내가 운이 좀 좋은 날이거든. ꒰ঌ( ˘꒳˘ )໒꒱ 🍀" },
+      { name: "쿄헤이", text: "오늘의 운세? 대길. 내가 정했으니까 확실해. 반박은 받지 않습니다. ʅ（◞‿◟）ʃ🎯" },
       { name: "쿄헤이", text: "행운은 기다리는 것보단 잡는 게 빠르지. 잡는 방법? 그건 알아서 생각하는 게 어때? (｀∀´)Ψ 🫴" },
-      { name: "쿄헤이", text: "행운의 장소는 네가 가고 싶었던 곳. 참 쉽지? (￣ー￣)b 📍" },
-      { name: "쿄헤이", text: "오늘은 먼저 손을 내미는 사람이 이겨. 악수든 뭐든. (・ω・)ノ 🤝" },
-      { name: "쿄헤이", text: "평소보다 한 번 더 웃어 봐. 잘 어울릴 테니까. (๑˘ᵕ˘๑) 😊" },
-      { name: "쿄헤이", text: "행운 아이템? 글쎄. 나 아닐까? ( ͡° 绝 ͡°) 💫" },
+      { name: "쿄헤이", text: "행운의 장소는 네가 가고 싶었던 곳. 참 쉽지? (≖⩊≖)b 📍" },
+      { name: "쿄헤이", text: "오늘은 먼저 손을 내미는 사람이 이겨. 악수든 뭐든. ( ◜ᴗ¯)🤝(¯ᴗ◝ )" },
+      { name: "쿄헤이", text: "평소보다 한 번 더 웃어 봐. 잘 어울릴 테니까. (๑° ꒳ °๑)✨" },
+      { name: "쿄헤이", text: "행운 아이템? 글쎄. 나 아닐까? (˵• ̀⩊•́˵) 💫" },
       { name: "쿄헤이", text: "운이 없는 것 같아? 아직 하루는 안 끝났잖아. (´∀｀)ﾉ 🌙" },
       { name: "쿄헤이", text: "흉이라고? 그런 건 믿지 마. (￣ε￣＠) 🚫" },
-      { name: "쿄헤이", text: "운세가 별로네. 걱정 마. 내가 있잖아? (｡•̀ᴗ-)✧ 🛡️" },
-      { name: "쿄헤이", text: "오늘은 잘생긴 사람이 운이 좋습니다. ...나를 위한 운세네! ( ˘ ³˘)♥ 💎" },
-      { name: "쿄헤이", text: "한 번 더 눌러 봐! 그게 네 진짜 운세야. (ง •̀_•́)ง 🔄" },
-      { name: "쿄헤이", text: "미안미안. 네 운세가 좋길래 내가 가져갔어. 한 번 더 누를래? (｀∀´)ノ 🎁" },
-      { name: "쿄헤이", text: "오늘은 레이랑 붙어 있지 마. 하루 종일 시끄러울걸? ……나도 포함이라고? (¬_¬) 🎧" },
-      { name: "쿄헤이", text: "료한테 행운의 숫자를 물어보면 계산부터 할 거야. 귀엽지? (´∀｀) 🧮" },
-      { name: "쿄헤이", text: "이쿠토한테 오늘 운세를 물어봤어? ‘밥이나 먹어’라고 할걸. (￣▽￣) 🍚" },
-      { name: "쿄헤이", text: "오늘은 내가 운이 좋고 레이는 운이 나쁘대. 그러니까 레이가 뭐라고 하든 신경 쓰지 마. 알았지? 제대로 알아들은 거지, 응? (;;｀∀´)✨" },
-      { name: "쿄헤이", text: "세이 짱이 웃으면 좋은 일이 생긴대. ……그럼 오늘은 대길이겠네. 내가 옆에 있을 거니까. (´∀｀) ☀️" },
-      { name: "쿄헤이", text: "오늘은 운이 좋네. 세이 짱이랑 마주칠 예정이거든. 세이 짱은 모르는 일이래? 당연하지. 내가 방금 정한 거니까. (｀∀´)✨" },
-      { name: "쿄헤이", text: "좋아하는 사람을 만나면 운이 좋아진대. 세이 짱을 만나면 얼마나 좋아지려나? ……직접 확인해봐야겠네. ( ˘ ³˘)♡ 🌸" },
-      { name: "쿄헤이", text: "세이 짱이 보고 싶은 날이네. 안 그런 날이 있냐고? 당연히 없지. (￣▽￣)♡ 🌷" },
-      { name: "쿄헤이", text: "좋아하는 사람을 생각하면 운이 좋아진대. 요즘 내 운이 좋은 이유가 여기에 있었네. (´▽｀)♡ 🍀" },
-      { name: "쿄헤이", text: "오늘은 좋아한다는 말을 숨기지 않는 게 좋대. 뭐, 나는 원래 숨길 생각 없지만. (´꒳`)♡ 💘" },
-      { name: "쿄헤이", text: "세이 짱에게 반하게 될 운세래. ……매일 같은 결과가 나오는데, 이거 고장 난 거 아냐? (￣▽￣)💗" },
-      { name: "쿄헤이", text: "오늘의 행운은 세이 짱. ……내가 정한 거냐고? 맞아. 불만 있어? (｀∀´)♡ 🍀" },
+      { name: "쿄헤이", text: "오늘은 잘생긴 사람이 운이 좋습니다. ...나를 위한 운세네! ദ്ദി(｡•̀ ,<)~✩‧₊ 💎" },
+      { name: "쿄헤이", text: "미안미안. 네 운세가 좋길래 내가 가져갔어. 한 번 더 누를래?<br>(｀∀´)ノ 🎁" },
+      { name: "쿄헤이", text: "오늘은 레이랑 붙어 있지 마. 하루 종일 시끄러울걸? 뭐? ……나도 포함이라고? (° д ° )💫" },
+      { name: "쿄헤이", text: "료한테 행운의 숫자를 물어보면 계산부터 할 거야. 귀엽지?<br>(´∀｀) 🧮" },
+      { name: "쿄헤이", text: "이쿠토한테 오늘 운세를 물어봤어? ‘밥이나 먹어’라고 할걸.<br>‎ง‎🍙ว‎ ‎٩🍙۶ง🍙ว" },
+      { name: "쿄헤이", text: "오늘은 내 운이 좋고 레이는 운이 나쁘대. 그러니까 레이가 뭐라고 하든 신경 쓰지 마. 알았지? 제대로 알아들은 거지, 응?<br>(；☉_☉)💦" },
+      { name: "쿄헤이", text: "세이 짱이 웃으면 좋은 일이 생긴대. ……그럼 오늘은 대길이겠네. 내가 옆에 있을 거니까. ( ˙ε . ) ☀️" },
+      { name: "쿄헤이", text: "오늘은 운이 좋네. 세이 짱이랑 마주칠 예정이거든.💕 ......세이 짱은 모르는 일이래? 당연하지. 내가 방금 정한 거니까.<br>(◞♥ꈍ∇ꈍ)◞♥" },
+      { name: "쿄헤이", text: "좋아하는 사람을 만나면 운이 좋아진대. 세이 짱을 만나면 얼마나 좋아지려나? ……직접 확인해봐야겠네. (づ￣ ³￣)づ💕" },
+      { name: "쿄헤이", text: "세이 짱이 보고 싶은 날이네. 안 그런 날이 있냐고? 당연히 없지. ♡⸜(˶˃ ᵕ ˂˶)⸝♡ 🌷" },
+      { name: "쿄헤이", text: "좋아하는 사람을 생각하면 운이 좋아진대. 요즘 내 운이 좋은 이유가 여기에 있었네. (⸝⸝⸝♡⩊♡⸝⸝⸝) 🍀" },
+      { name: "쿄헤이", text: "오늘은 좋아한다는 말을 숨기지 않는 게 좋대. 뭐, 나는 원래 숨길 생각 없지만. 三⊂(  ・ ̫・)⊃💘💘💘" },
+      { name: "쿄헤이", text: "세이 짱에게 반하게 될 운세래. ……매일 같은 결과가 나오는데, 이거 고장 난 거 아냐?<br>( *`ω､))-ω-*)💗" },
+      { name: "쿄헤이", text: "오늘의 행운은 세이 짱. ……내가 정한 거냐고? 맞아. 불만 있어? (づ￣ ³￣)づ 🍀" },
 
       // 이쿠토
       { name: "이쿠토", text: "괜히 무리하지 마. 내일 해도 되는 일이면 내일 해. (－_ლ) 🌙" },
-      { name: "이쿠토", text: "좋은 일이 있을 거야. ......아마. (￣▽￣;) 🌱" },
-      { name: "이쿠토", text: "운이 좋든 나쁘든 밥은 먹어라. ( ˘༥˘ ) 🍚" },
+      { name: "이쿠토", text: "좋은 일이 있을 거야. ......아마. ( ¯ㅅ¯ )🌱" },
+      { name: "이쿠토", text: "운이 좋든 나쁘든 밥은 먹어라. 🍚( '༥' 🥢 )" },
       { name: "이쿠토", text: "꽤 괜찮은 날이네. 푸딩이라도 먹어 봐. (´～｀) 🍮" },
       { name: "이쿠토", text: "귀찮은 일은 먼저 끝내. 그게 편해. (¬_¬) ✔️" },
       { name: "이쿠토", text: "오늘은 일찍 자라. (¦3[▓▓] 💤" },
       { name: "이쿠토", text: "쓸데없는 데 힘 빼지 마. (￣へ￣) 💨" },
       { name: "이쿠토", text: "괜히 나서지 않는 게 좋겠어. (・_・;) 🫥" },
       { name: "이쿠토", text: "......별일 없을 거야. ( ˘-˘ ) ☁️" },
-      { name: "이쿠토", text: "누가 도와달라고 하면 도와줘. 대신 네가 힘들 정도로 하진 말고. (｀・ω・´)ゞ 🤲" },
-      { name: "이쿠토", text: "실수가 잦은 날이래. ......뭐, 평소처럼만 하면 되겠지. 긴장하지 마. (￣^￣)ゞ 🎯" },
-      { name: "이쿠토", text: "쿄헤이 씨가 이상한 말 하면 대충 무시해. 대부분 진심 아니니까. (－_ლ) 🙄" },
-      { name: "이쿠토", text: "타케루가 네 몫까지 디저트를 사왔다면 먹어줘. 안 먹으면 그 녀석 또 신경 쓸 거다. ( ˘•ω•˘ ) 🍰" },
+      { name: "이쿠토", text: "누가 도와달라고 하면 도와줘. 대신 네가 힘들 정도로 하진 말고. （￣ー￣)ゞ 🤲" },
+      { name: "이쿠토", text: "실수가 잦은 날이래. ......뭐, 평소처럼만 하면 되겠지. 긴장하지 마. ദ്ദിㆆ_ㆆ) 🎯" },
+      { name: "이쿠토", text: "쿄헤이 씨가 이상한 말 하면 대충 무시해. 대부분 진심 아니니까. (◔_◔) 🙄" },
+      { name: "이쿠토", text: "타케루가 네 몫까지 디저트를 사왔다면 먹어줘. 안 먹으면 그 녀석 또 신경 쓸 거다.（・ₒ・) 🍰" },
 
       // 레이
-      { name: "레이", text: "분명 좋은 하루가 될 거야! (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ ☀️" },
-      { name: "레이", text: "실수해도 괜찮아. 다시 하면 되지! (๑•̀ㅂ•́)و✧ 🔥" },
-      { name: "레이", text: "행운의 장소는 사람들이 많이 모이는 곳. 혼자 있지 말고 나와! (≧▽≦) 🎉" },
+      { name: "레이", text: "분명 좋은 하루가 될 거야! (ᗒ⩊ᗕ)ﾉ*:･ﾟ✧ ☀️" },
+      { name: "레이", text: "실수해도 괜찮아. 다시 하면 되지!  🔥 ദ്ദി(｡•̀ ᗜ<)" },
+      { name: "레이", text: "행운의 장소는 사람들이 많이 모이는 곳. 혼자 있지 말고 나와! ( > ₃ <)ﾉ🎉" },
       { name: "레이", text: "조금 힘들어도 끝까지 해보자. 오늘은 네가 이기는 날이야! (ง'̀-'́)ง 🏆" },
-      { name: "레이", text: "새로운 시도를 하기 좋은 날! 나랑 캐치볼 할래? (ﾉ≧∀≦)ﾉ⚾ ⚾" },
-      { name: "레이", text: "포기하기엔 아직 이른 것 같은데? 한 번만 더 해보자! (｡•̀ᴗ-)✧ 🔥" },
+      { name: "레이", text: "새로운 시도를 하기 좋은 날! 나랑 캐치볼 할래? ⸜(｡˃ ᵕ ˂ )⸝⚾ ⚾" },
+      { name: "레이", text: "포기하기엔 아직 이른 것 같은데? 한 번만 더 해보자! ┌(｡Д｡┌ )┐ 🔥" },
       { name: "레이", text: "뭐든, 네가 생각한 것보다 잘 풀릴 거야. (´｡• ᵕ •｡`) 🌈" },
-      { name: "레이", text: "좋은 사람을 만나게 될 거래! ......혹시 나? (๑>ᴗ<๑) 💛" },
-      { name: "레이", text: "평소보다 자신 있게! 어깨 펴! ( •̀ᗝ•́ )و 💪" },
+      { name: "레이", text: "좋은 사람을 만나게 될 거래! ......혹시 나? ( ៸៸ › ⩊ ‹ ៸៸) 💛" },
+      { name: "레이", text: "평소보다 자신 있게! 어깨 펴!<br>( •̀ᗝ•́ )و 💪" },
       { name: "레이", text: "기회가 오면 망설이지 말고 잡아! (っ´▽`)っ 🎯" },
-      { name: "레이", text: "즐겁게 하면 운세도 좋아지는 법이지! (ﾉ´ヮ`)ﾉ*:･ﾟ✧ 🎈" },
+      { name: "레이", text: "뭐든 즐겁게 하면 운세도 좋아지는 법이지! ‿︵‿︵─=≡Σ((( つ•̀ω•́)つ‿︵‿︵ 🎈" },
       { name: "레이", text: "오늘은 질 수 없는 날이네! (╬ Ò﹏Ó) 🥇" },
-      { name: "레이", text: "세이 짱이랑 있으면 갑자기 어디론가 가게 될지도 몰라. 나도 몇 번 당했거든! (≧▽≦) 🗺️" },
+      { name: "레이", text: "세이 짱이랑 있으면 갑자기 어디론가 가게 될지도 몰라. 나도 몇 번 당했거든!・:*三(　ε:)`дﾟ)･; 🗺️" },
 
       // 료
-      { name: "료", text: "서두르지 않는 편이 좋겠습니다. ( ˘ᴗ˘ ) ⏳" },
-      { name: "료", text: "좋은 기회가 찾아올 가능성이 높습니다. 놓치지 마세요. ( •̀ᴗ•́ )و 🎯" },
+      { name: "료", text: "서두르지 않는 편이 좋겠습니다. ( ᖛ ̫ ᖛ ) ⏳" },
+      { name: "료", text: "좋은 기회가 찾아올 가능성이 높습니다. 놓치지 마세요. ( ◜ω◝و(و 🎯" },
       { name: "료", text: "뜻밖의 변수가 생길 수 있으니, 여유를 두고 움직이시죠. (￣ー￣) 📋" },
-      { name: "료", text: "오늘은 평소보다 15분 일찍 움직이시는 걸 추천합니다. (｀・ω・´)ゞ ⏰" },
+      { name: "료", text: "오늘은 평소보다 15분 일찍 움직이시는 걸 추천합니다.<br>(｀・ω・´)ゞ ⏰" },
       { name: "료", text: "오전보다 오후에 운이 따르겠습니다. 그래도 방심은 금물입니다. (¬‿¬) ☕" },
       { name: "료", text: "행운의 숫자는 3입니다. 특별한 근거는 없습니다만, 참고하시죠. (・∀・)🔢" },
       { name: "료", text: "중요한 결정을 혼자 내리지 않는 편이 좋겠습니다. 도움을 요청하세요. ( ˶ᵔ ᵕ ᵔ˶ ) 🤝" },
       { name: "료", text: "좋은 결과를 원하신다면 한 번 더 확인하세요 ( •̀ω•́ )✧ 🔍" },
-      { name: "료", text: "운이 좋지 않다면, 운이 필요 없게 만들면 됩니다. 스스로를 믿으세요. (￣^￣)ゞ ♟️" },
-      { name: "료", text: "충동적인 선택은 추천하지 않습니다. (－‸ლ) ⚠️" },
-      { name: "료", text: "승률은 나쁘지 않습니다. 준비만 제대로 하신다면요. (⌐■_■) 📈" },
+      { name: "료", text: "운이 좋지 않다면, 운이 필요 없게 만들면 됩니다. 스스로를 믿으세요. (⩌‸ ⩌ )ゞ ♟️" },
+      { name: "료", text: "충동적인 선택은 추천하지 않습니다. ( ｡_｡) ⚠️" },
+      { name: "료", text: "승률은 나쁘지 않습니다. 준비만 제대로 하신다면요. ヾ(・᎖・) 📈" },
       { name: "료", text: "꽤 좋은 날입니다.<br>......Well, probably. ( ˘▾˘ ) ☕" },
-      { name: "료", text: "사쿠라바 씨의 조언은 참고만 하십시오. 본인의 운세를 유리하게 바꾸는 데 능숙한 사람이라서요. ( ˘ᴗ˘ ) ♟️" },
+      { name: "료", text: "사쿠라바 씨의 조언은 참고만 하십시오. 본인의 운세를 유리하게 바꾸는 데 능숙한 사람이라서요. (՞ ¯^¯ ՞) ♟️" },
       { name: "료", text: "이쿠토가 ‘괜찮다’고했다면 아마 정말 괜찮은 겁니다. 그는 거짓말을 잘 못하니까요. (´ー｀) ☕" },
-      { name: "료", text: "오늘은 세이 씨의 제안을 한 번쯤 따라가 보시는 것도 좋겠습니다. 의외의 결과가 나올 가능성이 있습니다. ( •̀ᴗ•́ )و 🎲" },
+      { name: "료", text: "오늘은 세이 씨의 제안을 한 번쯤 따라가 보시는 것도 좋겠습니다. 의외의 결과가 나올 가능성이 있습니다. ( ˙◞˙ )و 🎲" },
 
       // 타케루
       { name: "타케루", text: "행운의 음식은 딸기 파르페라고 합니다! 꼭 드셔보세요! (☆▽☆) 참고로 제 추천은... (이후 한 시간 동안 디저트 이야기를 했다 🍓)" },
-      { name: "타케루", text: "우오오오ー!! 작은 행운도 놓치지 않는 검다!! (ﾉ≧∀≦)ﾉ ✨" },
+      { name: "타케루", text: "우오오오ー!! 작은 행운도 놓치지 않는 검다!! ε=┏(*`＞ω<)┛ 🍀" },
       { name: "타케루", text: "좋은 말씀 감사함다!! 🙇🏻‍♂️<br><br>......네? 제가 말씀드려야 하는 거라고요? 죄송함다! 죄송함다! 한 번 더 눌러주세요!!! (＞人＜;)" },
-      { name: "타케루", text: "운이 아주 좋은 것 같습니다!! 축하드림다!! (๑˃̵ᴗ˂̵)و 🎉" },
-      { name: "타케루", text: "......제가 언제든 도와드리겠슴다!! 맡겨주세요!! (ง •̀_•́)ง 🫡" },
+      { name: "타케루", text: "운이 아주 좋은 것 같습니다!! 축하드림다!! (　ﾟдﾟ) (　д ) ﾟ ﾟ 🎉" },
+      { name: "타케루", text: "......제가 언제든 도와드리겠슴다!! 안심하십쇼!! (｀д´)ゝ🔥" },
       { name: "타케루", text: "흉이라고 합니다!! 조심하면 괜찮을 겁니다!! (｀・ω・´)ゞ 🛡️" },
-      { name: "타케루", text: "오늘은 운이 좋다고 합니다! 하지만 운이 좋다고 방심하면 안 됨다!! 그러니까 오늘도 열심히 하겠슴다ー!! (๑•̀ㅂ•́)و🔥 💪" },
+      { name: "타케루", text: "오늘은 운이 좋다고 합니다! 하지만 운이 좋다고 방심하면 안 됨다!! 그러니까 오늘도 열심히 하겠슴다ー!! ヾ(°∇°*)🔥" },
       { name: "타케루", text: "오늘은 캡틴께 운세를 여쭤보시는 걸 추천함다! 분명 멋진 말씀을 해주실 검다! (☆▽☆) 🫡" },
-      { name: "타케루", text: "료 씨께서 계획하신 일이라면 틀림없슴다! 저도 계획표를 받아볼까 함다! (๑•̀ㅂ•́)و 📋" },
+      { name: "타케루", text: "료 씨께서 계획하신 일이라면 틀림없슴다! 저도 계획표를 받아볼까 함다! (◞˃ᆺ˂)◞ 📋" },
       { name: "타케루", text: "세이 씨가 도넛이 맛있는 곳을 알고 계신다고 합니다! 저도…… 아니, 아무것도 아닙니다! (・∀・;) 🍩" },
       { name: "타케루", text: "캡틴은 정말 대단하심다! 그런데 가끔 무슨 말씀을 하시는지 모르겠슴다! (◎_◎;) 💭" },
-      { name: "타케루", text: "이쿠토 씨가 추천해주신 푸딩은 정말 맛있었슴다! ……세 개 먹었슴다. (๑´ڡ`๑) 🍮" }
+      { name: "타케루", text: "이쿠토 씨가 추천해주신 푸딩은 정말 맛있었슴다! ……세 개 먹었슴다. ٩(⸝⸝・༥ ・⸝⸝)و 🍮" }
     ];
 
     function drawFortune() {
@@ -1576,6 +1596,132 @@
 
       document.getElementById(`tab-note-${tabNum}`).classList.add('active');
       document.querySelectorAll('.tab-index')[tabNum - 1].classList.add('active');
+    }
+
+    // ==========================================
+    // 🎵 YouTube BGM 플레이어 로직
+    // ==========================================
+    const bgmList = [
+      { id: 'cHApeMI_Zac', title: 'K.K Lovers' },
+      { id: 'bloSRAC6ZiY', title: 'K.K Lullaby' },
+      { id: '5US7Sg8zBC8', title: 'K.K Maria' },
+      { id: 'H87GqJujcOk', title: 'Lullaby' },
+      { id: 'HQteI8cPp7k', title: 'ラ・ム・ネ' },
+      { id: 'ujmCQzbhTUw', title: 'Piranha Plant Lullaby' },
+      { id: 'fiCY0AJIsNA', title: 'Thinkin\' of u.' },
+      { id: 'HocgiazNprE', title: 'Night' },
+      { id: 'qBMnilP508g', title: 'stew (for Winter)' }
+    ];
+
+    let player;
+    let currentBgmIndex = 0;
+
+    // 1) 유튜브 API 스크립트 불러오기
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    // 2) API가 준비되면 플레이어 생성
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('ytplayer', {
+        height: '0', // 안 보이게 크기 0
+        width: '0',
+        videoId: bgmList[0].id,
+        playerVars: {
+          'playsinline': 1,
+          'controls': 0, // 기본 컨트롤러 숨김
+          'disablekb': 1,
+          'rel': 0
+        },
+        events: {
+          'onReady': onPlayerReady,
+          'onStateChange': onPlayerStateChange
+        }
+      });
+    }
+
+    // 3) 플레이어가 준비되었을 때 플레이리스트 HTML 생성
+    function onPlayerReady(event) {
+      renderPlaylist();
+    }
+
+    // 4) 재생 상태가 변할 때 (재생/일시정지/곡 끝남)
+    function onPlayerStateChange(event) {
+      const playBtn = document.getElementById('playBtn');
+      
+      // 재생 중일 때
+      if (event.data === YT.PlayerState.PLAYING) {
+        playBtn.innerHTML = '❚❚';
+        playBtn.style.fontSize = '15px';
+      } 
+      // 일시정지 중일 때
+      else if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.CUED) {
+        playBtn.innerHTML = '▶';
+        playBtn.style.fontSize = '13px';
+      }
+      // 노래가 끝났을 때 (자동으로 다음 곡 재생)
+      else if (event.data === YT.PlayerState.ENDED) {
+        playNext();
+      }
+    }
+
+    // ▶/❚❚ 버튼 클릭 함수
+    function togglePlay() {
+      if (player && player.getPlayerState) {
+        const state = player.getPlayerState();
+        if (state === YT.PlayerState.PLAYING) {
+          player.pauseVideo();
+        } else {
+          player.playVideo();
+        }
+      }
+    }
+
+    // ▷▷ 다음 곡 재생 함수
+    function playNext() {
+      currentBgmIndex = (currentBgmIndex + 1) % bgmList.length;
+      loadAndPlay(currentBgmIndex);
+    }
+
+    // ◁◁ 이전 곡 재생 함수
+    function playPrev() {
+      currentBgmIndex = (currentBgmIndex - 1 + bgmList.length) % bgmList.length;
+      loadAndPlay(currentBgmIndex);
+    }
+
+    // 특정 곡 로드 및 재생 함수
+    function loadAndPlay(index) {
+      currentBgmIndex = index;
+      player.loadVideoById(bgmList[index].id);
+      player.playVideo();
+      updatePlaylistHighlight();
+    }
+
+    // 플레이리스트 UI 그리기
+    function renderPlaylist() {
+      const container = document.getElementById('playlistContainer');
+      container.innerHTML = '';
+      
+      bgmList.forEach((song, idx) => {
+        const item = document.createElement('div');
+        item.className = 'song-item' + (idx === currentBgmIndex ? ' playing' : '');
+        item.innerHTML = `🎵 ${song.title}`;
+        item.onclick = () => loadAndPlay(idx);
+        container.appendChild(item);
+      });
+    }
+
+    // 현재 재생 중인 곡 하이라이트 표시 업데이트
+    function updatePlaylistHighlight() {
+      const items = document.querySelectorAll('#playlistContainer .song-item');
+      items.forEach((item, idx) => {
+        if (idx === currentBgmIndex) {
+          item.classList.add('playing');
+        } else {
+          item.classList.remove('playing');
+        }
+      });
     }
   </script>
 
