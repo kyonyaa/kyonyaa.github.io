@@ -444,6 +444,7 @@
       color: var(--c-gray);
       line-height: 1.6;
       text-align: justify;
+      justify-content: space-between;
       margin-bottom: 8px;
       width: 100%;
       height: 110px;
@@ -948,6 +949,31 @@
         filter: drop-shadow(1px 2px 0px rgb(214, 214, 214));
     }
 
+    /* 기타(OOC) 카테고리 전용 타이틀 & 본문 스타일 */
+    .post-card-ooc{
+      background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('https://i.pinimg.com/736x/88/5d/bc/885dbc08e8f8dd5fcf143adb08bc4494.jpg');
+      background-size: cover;
+      border-width: 7px;
+      width: 360px;
+      border-style: solid;
+      border-image: url("https://github.com/okayletsgo555/img/blob/main/%EA%B7%B8%EB%A0%88%EC%9D%B4%20%ED%94%84%EB%A0%88%EC%9E%84.png?raw=true") 8  round;
+      padding: 7px; 
+      filter: drop-shadow(1px 2px 0px rgb(214, 214, 214));
+        text-shadow: 
+    -1px -1px 0 #FFFFFF,  
+     1px -1px 0 #FFFFFF,
+    -1px  1px 0 #FFFFFF,
+     1px  1px 0 #FFFFFF;
+    }
+
+    .post-card-ooc-title {
+      font-weight: bold; font-size: 12px; margin-bottom: 6px;
+    }
+    
+    /* 일반 목록 텍스트 */
+    .post-card-ooc-content {font-size: 11px; line-height: 1.8; }
+
+
     /* =========================================
        🖍️ 형광펜 & 코멘트 말풍선 팝업
        ========================================= */
@@ -977,7 +1003,7 @@
       white-space: nowrap;
       box-shadow: 2px 2px 0px rgba(0,0,0,0.1);
       display: none;
-      z-index: 30;
+      z-index: 100;
       font-weight: normal;
     }
 
@@ -1237,24 +1263,30 @@
       </div>
 
       <!-- 5. [OOC] 기타 카테고리 페이지 -->
-      <div id="view-ooc" class="view-screen">
-        <div class="category-tabs">
-          <div class="cat-tab active">1</div>
-          <div class="cat-tab">2</div>
-          <div class="cat-tab">3</div>
-        </div>
-        
-        <div class="post-list">
-          <div class="post-card" onclick="goToView('view-ooc-detail')" style="cursor: pointer;">
-            <div class="post-card-title">[공지] 업데이트 안내</div>
-            <div class="post-card-content">다이어리 스킨이 업데이트 되었습니다! HTML을 정리 중입니다.</div>
-          </div>
-          <div class="post-card" onclick="goToView('view-ooc-detail')" style="cursor: pointer;">
-            <div class="post-card-title">[설정] 타임라인 요약</div>
-            <div class="post-card-content">이 세계관의 2014년 타임라인에 대하여...</div>
-          </div>
-        </div>
-      </div>
+<div id="view-ooc" class="view-screen">
+  <div class="category-tabs">
+    <!-- 🌟 각 탭 클릭 시 switchOocTab 실행 -->
+    <div class="cat-tab active" onclick="switchOocTab(1, this)">일기</div>
+    <div class="cat-tab" onclick="switchOocTab(2, this)">2</div>
+    <div class="cat-tab" onclick="switchOocTab(3, this)">3</div>
+  </div>
+  
+  <div class="post-list">
+    <!-- 🌟 고정 박스 (id 추가) -->
+    <div class="post-card-ooc">
+      <div id="oocNoticeTitle" class="post-card-ooc-title">[공지] 일기 카테고리 안내</div>
+      <div id="oocNoticeContent" class="post-card-ooc-content">일기 카테고리의 공지사항 내용입니다.</div>
+    </div>
+
+    <!-- 일반 클릭형 포스트 카드 -->
+    <div class="post-card" onclick="goToView('view-ooc-detail')" style="cursor: pointer;">
+      <div class="post-card-title">[설정] 타임라인 요약</div>
+      <div class="post-card-content">이 세계관의 2014년 타임라인에 대하여...</div>
+    </div>
+  </div>
+
+  <button class="back-btn" onclick="goBack()">◀ BACK</button>
+</div>
 
       <!-- 5-1. [OOC Detail] 기타 카테고리 상세글 화면 -->
       <div id="view-ooc-detail" class="view-screen">
@@ -1397,11 +1429,11 @@
           if (hasData) {
             document.getElementById('diaryDetailNavTitle').textContent = hasData.title;
             document.getElementById('diaryDetailContent').innerHTML = `
-              <div style="text-align: center; margin-bottom: 15px;">
+              <div>
                 <span style="font-size: 10px; color: #aaa;">${dateKey}</span>
-                <h3 style="margin: 5px 0; color: #888;">${hasData.title}</h3>
+                
               </div>
-              <p style="line-height: 1.8;">${hasData.content}</p>
+              ${hasData.content}
             `;
             goToView('view-diary-detail');
           }
@@ -1437,12 +1469,9 @@
       "char-post-1": {
         title: "비 내리는 날의 기록 🌧️",
         content: `
-          <div style="text-align: center; margin-bottom: 15px;">
-            <span style="font-size: 10px; color: #aaa;">2014. 04. 15 | Weather: Rainy</span>
-            <h3 style="margin: 5px 0; color: #888;">비 내리는 날의 기록</h3>
-          </div>
+
           
-          <p style="line-height: 1.8;">
+       <br>
             연습이 일찍 끝난 날. 빗소리가 좋아서 
             
             <span class="hl-comment" onclick="toggleComment(this, event)">
@@ -1451,20 +1480,20 @@
             </span> 
             
             창밖을 바라봤다.
-          </p>
-
-          <div style="background: #fdf7fa; border-left: 3px solid #cfb4c2; padding: 8px 12px; margin: 15px 0; font-size: 11px;">
-            "오늘 연습 수고했어. 내일도 비 오면 좋겠다."
-          </div>
-
-          <p style="line-height: 1.8;">
+       
             옆에서 누군가 건넨 한마디에 
             
             <span class="hl-comment" onclick="toggleComment(this, event)">
               괜히 웃음이 나왔다.
               <span class="hl-popup">내일은 휴일이니까 ٩(ˊᗜˋ*)و</span>
             </span>
-          </p>
+
+            <br><Br>
+              <span class="hl-comment" onclick="toggleComment(this, event)">
+              괜히 웃음이 나왔다.
+              <span class="hl-popup">내일은 휴일이니까 ٩(ˊᗜˋ*)و</span>
+            </span>
+       
         `
       },
       "char-post-2": {
@@ -1507,7 +1536,7 @@
     const fortunes = [
       // 세이
       { name: "세이", text: "오늘은 하고 싶은 대로 해도 괜찮은 날이야. (｡ • . •｡) 🕊️" },
-      { name: "세이", text: "운세는 모르겠고, 맛있는 거 먹으면 좋은 날인 거 아닌가? (*•؎ •) 🍴" },
+      { name: "세이", text: "운세는 모르겠고, 맛있는 거 먹으면 좋은 날인 거 아닌가?<br>(*•؎ •) 🍴" },
       { name: "세이", text: "두 번째 플레이리스트의 다섯 번째 곡, 그게 오늘의 행운의 노래야. (´▽`ʃ♡ƪ) 🎧" },
       { name: "세이", text: "창문을 열어두는 건 어때? 바람이 기분 좋을 것 같아. ʕ・ᵌ・ʔ 🍃" },
       { name: "세이", text: "글쎄...... 오늘은 괜찮지 않을까? (´• ω •`) 🌿" },
@@ -1521,29 +1550,29 @@
 
       // 쿄헤이
       { name: "쿄헤이", text: "오늘은 운이 좋네. 나를 만났잖아? ✨◝(⁰▿<)" },
-      { name: "쿄헤이", text: "걱정 마. 오늘은 내가 운이 좀 좋은 날이거든. ꒰ঌ( ˘꒳˘ )໒꒱ 🍀" },
+      { name: "쿄헤이", text: "걱정 마. 오늘은 내가 운이 좀 좋은 날이거든. ꒰ঌ( ˘꒳˘ )໒꒱ 🍀 너랑 무슨 상관이냐고? 상관 없지. 그냥 자랑한 거니까." },
       { name: "쿄헤이", text: "오늘의 운세? 대길. 내가 정했으니까 확실해. 반박은 받지 않습니다. ʅ（◞‿◟）ʃ🎯" },
       { name: "쿄헤이", text: "행운은 기다리는 것보단 잡는 게 빠르지. 잡는 방법? 그건 알아서 생각하는 게 어때? (｀∀´)Ψ 🫴" },
       { name: "쿄헤이", text: "행운의 장소는 네가 가고 싶었던 곳. 참 쉽지? (≖⩊≖)b 📍" },
-      { name: "쿄헤이", text: "오늘은 먼저 손을 내미는 사람이 이겨. 악수든 뭐든. ( ◜ᴗ¯)🤝(¯ᴗ◝ )" },
+      { name: "쿄헤이", text: "오늘은 먼저 손을 내미는 사람이 이겨. 악수든 뭐든.<br>( ◜ᴗ¯)🤝(¯ᴗ◝ )" },
       { name: "쿄헤이", text: "평소보다 한 번 더 웃어 봐. 잘 어울릴 테니까. (๑° ꒳ °๑)✨" },
       { name: "쿄헤이", text: "행운 아이템? 글쎄. 나 아닐까? (˵• ̀⩊•́˵) 💫" },
       { name: "쿄헤이", text: "운이 없는 것 같아? 아직 하루는 안 끝났잖아. (´∀｀)ﾉ 🌙" },
-      { name: "쿄헤이", text: "흉이라고? 그런 건 믿지 마. (￣ε￣＠) 🚫" },
-      { name: "쿄헤이", text: "오늘은 잘생긴 사람이 운이 좋습니다. ...나를 위한 운세네! ദ്ദി(｡•̀ ,<)~✩‧₊ 💎" },
-      { name: "쿄헤이", text: "미안미안. 네 운세가 좋길래 내가 가져갔어. 한 번 더 누를래?<br>(｀∀´)ノ 🎁" },
+      { name: "쿄헤이", text: "흉이라고? 그런 건 믿지 마.<br>(￣ε￣＠) 🚫" },
+      { name: "쿄헤이", text: "오늘은 잘생긴 사람이 운이 좋습니다...... 나를 위한 운세네!<br>ദ്ദി(｡•̀ ,<)~✩‧₊ 💎" },
+      { name: "쿄헤이", text: "미안미안. 네 운세가 좋길래 내가 가져갔어. 한 번 더 눌러.<br>(｀∀´)ノ 🎁" },
       { name: "쿄헤이", text: "오늘은 레이랑 붙어 있지 마. 하루 종일 시끄러울걸? 뭐? ……나도 포함이라고? (° д ° )💫" },
       { name: "쿄헤이", text: "료한테 행운의 숫자를 물어보면 계산부터 할 거야. 귀엽지?<br>(´∀｀) 🧮" },
       { name: "쿄헤이", text: "이쿠토한테 오늘 운세를 물어봤어? ‘밥이나 먹어’라고 할걸.<br>‎ง‎🍙ว‎ ‎٩🍙۶ง🍙ว" },
       { name: "쿄헤이", text: "오늘은 내 운이 좋고 레이는 운이 나쁘대. 그러니까 레이가 뭐라고 하든 신경 쓰지 마. 알았지? 제대로 알아들은 거지, 응?<br>(；☉_☉)💦" },
-      { name: "쿄헤이", text: "세이 짱이 웃으면 좋은 일이 생긴대. ……그럼 오늘은 대길이겠네. 내가 옆에 있을 거니까. ( ˙ε . ) ☀️" },
+      { name: "쿄헤이", text: "세이 짱이 웃으면 좋은 일이 생긴대. ......그럼 오늘은 대길이겠네. 내가 옆에 있을 거니까. ( ˙ε . ) ☀️" },
       { name: "쿄헤이", text: "오늘은 운이 좋네. 세이 짱이랑 마주칠 예정이거든.💕 ......세이 짱은 모르는 일이래? 당연하지. 내가 방금 정한 거니까.<br>(◞♥ꈍ∇ꈍ)◞♥" },
       { name: "쿄헤이", text: "좋아하는 사람을 만나면 운이 좋아진대. 세이 짱을 만나면 얼마나 좋아지려나? ……직접 확인해봐야겠네. (づ￣ ³￣)づ💕" },
       { name: "쿄헤이", text: "세이 짱이 보고 싶은 날이네. 안 그런 날이 있냐고? 당연히 없지. ♡⸜(˶˃ ᵕ ˂˶)⸝♡ 🌷" },
-      { name: "쿄헤이", text: "좋아하는 사람을 생각하면 운이 좋아진대. 요즘 내 운이 좋은 이유가 여기에 있었네. (⸝⸝⸝♡⩊♡⸝⸝⸝) 🍀" },
-      { name: "쿄헤이", text: "오늘은 좋아한다는 말을 숨기지 않는 게 좋대. 뭐, 나는 원래 숨길 생각 없지만. 三⊂(  ・ ̫・)⊃💘💘💘" },
-      { name: "쿄헤이", text: "세이 짱에게 반하게 될 운세래. ……매일 같은 결과가 나오는데, 이거 고장 난 거 아냐?<br>( *`ω､))-ω-*)💗" },
-      { name: "쿄헤이", text: "오늘의 행운은 세이 짱. ……내가 정한 거냐고? 맞아. 불만 있어? (づ￣ ³￣)づ 🍀" },
+      { name: "쿄헤이", text: "좋아하는 사람을 생각하면 운이 좋아진대. 요즘 내 운이 좋은 이유가 여기에 있었네.<br>(⸝⸝⸝♡⩊♡⸝⸝⸝) 🍀" },
+      { name: "쿄헤이", text: "오늘은 좋아한다는 말을 숨기지 않는 게 좋대. 뭐, 나는 원래 숨길 생각 없지만.<br>三⊂(  ・ ̫・)⊃💕💕💕" },
+      { name: "쿄헤이", text: "세이 짱에게 반하게 될 운세래. ......매일 같은 결과가 나오는데, 이거 고장 난 거 아냐?<br>( *`ω､))-ω-*)💗" },
+      { name: "쿄헤이", text: "오늘의 행운은 세이 짱. ......내가 정한 거냐고? 맞아. 불만 있어? (づ￣ ³￣)づ 🍀" },
 
       // 이쿠토
       { name: "이쿠토", text: "괜히 무리하지 마. 내일 해도 되는 일이면 내일 해. (－_ლ) 🌙" },
@@ -1562,23 +1591,23 @@
 
       // 레이
       { name: "레이", text: "분명 좋은 하루가 될 거야! (ᗒ⩊ᗕ)ﾉ*:･ﾟ✧ ☀️" },
-      { name: "레이", text: "실수해도 괜찮아. 다시 하면 되지!  🔥 ദ്ദി(｡•̀ ᗜ<)" },
+      { name: "레이", text: "실수해도 괜찮아. 다시 하면 되지! 🔥 ദ്ദി(｡•̀ ᗜ<)" },
       { name: "레이", text: "행운의 장소는 사람들이 많이 모이는 곳. 혼자 있지 말고 나와! ( > ₃ <)ﾉ🎉" },
-      { name: "레이", text: "조금 힘들어도 끝까지 해보자. 오늘은 네가 이기는 날이야! (ง'̀-'́)ง 🏆" },
+      { name: "레이", text: "조금 힘들어도 끝까지 해보자. 오늘은 네가 이기는 날이야! (ง > ₃ <)ง 🏆" },
       { name: "레이", text: "새로운 시도를 하기 좋은 날! 나랑 캐치볼 할래? ⸜(｡˃ ᵕ ˂ )⸝⚾ ⚾" },
       { name: "레이", text: "포기하기엔 아직 이른 것 같은데? 한 번만 더 해보자!<br>┌(｡Д｡┌ )┐ 🔥" },
       { name: "레이", text: "뭐든, 네가 생각한 것보다 잘 풀릴 거야. (´｡• ᵕ •｡`) 🌈" },
       { name: "레이", text: "좋은 사람을 만나게 될 거래! ......혹시 나? ( ៸៸ › ⩊ ‹ ៸៸) 💛" },
       { name: "레이", text: "평소보다 자신 있게! 어깨 펴!<br>( •̀ᗝ•́ )و 💪" },
       { name: "레이", text: "기회가 오면 망설이지 말고 잡아! (っ´▽`)っ 🎯" },
-      { name: "레이", text: "뭐든 즐겁게 하면 운세도 좋아지는 법이지! ‿︵‿︵─=≡Σ((( つ•̀ω•́)つ‿︵‿︵ 🎈" },
-      { name: "레이", text: "오늘은 질 수 없는 날이네! (╬ Ò﹏Ó) 🥇" },
+      { name: "레이", text: "뭐든 즐겁게 하면 운세도 좋아지는 법이지!<br>‿︵─=≡Σ((( つ•̀ω•́)つ‿︵ 🎈" },
+      { name: "레이", text: "오늘은 질 수 없는 날이네!<br>(╬ Ò﹏Ó) 🥇" },
       { name: "레이", text: "세이 짱이랑 있으면 갑자기 어디론가 가게 될지도 몰라. 나도 몇 번 당했거든!・:*三(　ε:)`дﾟ)･; 🗺️" },
 
       // 료
       { name: "료", text: "서두르지 않는 편이 좋겠습니다. ( ᖛ ̫ ᖛ ) ⏳" },
-      { name: "료", text: "좋은 기회가 찾아올 가능성이 높습니다. 놓치지 마세요. ( ◜ω◝و(و 🎯" },
-      { name: "료", text: "뜻밖의 변수가 생길 수 있으니, 여유를 두고 움직이시죠. (￣ー￣) 📋" },
+      { name: "료", text: "좋은 기회가 찾아올 가능성이 높습니다. 놓치지 마세요.<br>( ◜ω◝و(و 🎯" },
+      { name: "료", text: "뜻밖의 변수가 생길 수 있으니, 여유를 두고 움직이시죠.<br>(￣ー￣) 📋" },
       { name: "료", text: "오늘은 평소보다 15분 일찍 움직이시는 걸 추천합니다.<br>(｀・ω・´)ゞ ⏰" },
       { name: "료", text: "오전보다 오후에 운이 따르겠습니다. 그래도 방심은 금물입니다. (¬‿¬) ☕" },
       { name: "료", text: "행운의 숫자는 3입니다. 특별한 근거는 없습니다만, 참고하시죠. (・∀・)🔢" },
@@ -1776,6 +1805,37 @@
         }
       });
     }
+
+    // ==========================================
+// 📌 OOC 탭별 고정 공지 데이터 & 전환 로직
+// ==========================================
+const oocNoticeData = {
+  1: {
+    title: "[공지] 일기 카테고리 안내",
+    content: "일기 카테고리 관련 안내사항입니다. 자유롭게 기록이 업데이트 됩니다."
+  },
+  2: {
+    title: "[공지] 두 번째 탭 안내",
+    content: "두 번째 카테고리의 고정 공지글 내용입니다."
+  },
+  3: {
+    title: "[공지] 세 번째 탭 안내",
+    content: "세 번째 카테고리의 고정 공지글 내용입니다."
+  }
+};
+
+function switchOocTab(tabNum, tabEl) {
+  // 1) 모든 OOC 탭에서 active 클래스 제거 후 클릭한 탭만 활성화
+  document.querySelectorAll('#view-ooc .cat-tab').forEach(el => el.classList.remove('active'));
+  tabEl.classList.add('active');
+
+  // 2) 데이터에서 해당 탭의 제목과 내용을 가져와 텍스트 변경
+  const data = oocNoticeData[tabNum];
+  if (data) {
+    document.getElementById('oocNoticeTitle').textContent = data.title;
+    document.getElementById('oocNoticeContent').textContent = data.content;
+  }
+}
   </script>
 
 </body>
