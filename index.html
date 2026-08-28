@@ -285,7 +285,7 @@
       background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('https://i.pinimg.com/736x/41/14/58/411458839be4feb01e6bf12e34f0f006.jpg');
       background-size: cover;
       border: 2px solid;
-      border-color: #ffffff #808080 #808080 #ffffff; /* 밖으로 튀어나온 3D 테두리 */
+      border-color: #ffffff #999 #999 #ffffff; /* 밖으로 튀어나온 3D 테두리 */
       border-radius: 8px;
       padding: 10px;
       margin-bottom: 10px;
@@ -306,7 +306,7 @@
       background: #fff;
       color: var(--c-gray);
       border: 3px solid;
-      border-color: #808080 #ffffff #ffffff #808080; /* 안으로 파인 3D 음각 테두리 */
+      border-color: #999 #ffffff #ffffff #999; /* 안으로 파인 3D 음각 테두리 */
       outline: none;
       box-sizing: border-box;
     }
@@ -319,19 +319,19 @@
       padding: 5px 5px;
       margin-right: 35%;
       border: 2px solid;
-      border-color: #ffffff #808080 #808080 #ffffff; /* 밖으로 튀어나온 3D 버튼 테두리 */
+      border-color: #ffffff #999 #999 #ffffff; /* 밖으로 튀어나온 3D 버튼 테두리 */
       border-radius: 4px;
     }
 
     /* 버튼을 클릭했을 때 안으로 쏙 들어가는 효과 */
     .login-submit:active {
-      border-color: #808080 #ffffff #ffffff #808080; 
+      border-color: #999 #ffffff #ffffff #999; 
       transform: translateY(1px);
     }
 
     /* --- [좌측] 2) 나란한 D-Day 박스 --- */
     .dday-row {
-      display: flex; gap: 8px; justify-content: space-between; margin-left: 30px; margin-right: 30px; margin-bottom: 10px;
+      display: flex; gap: 8px; justify-content: space-between; margin-left: 25px; margin-right: 25px; margin-bottom: 3px;
     }
     .dday-box.mini {
       flex: 1; padding: 0px;
@@ -341,42 +341,58 @@
       text-align: center;
       filter: drop-shadow(1px 2px 0px rgb(214, 214, 214));
     }
-    .dday-title { font-size: 8px; color: #a47d91; margin-bottom: 1.5px; }
+    .dday-title { font-size: 9px; color: #a47d91; margin-bottom: 1.5px; }
     .dday-count { font-weight: bold; font-size: 11px; color: var(--c-gray); }
 
-    /* --- [좌측] 3) 인덱스 탭 노트 --- */
+
+    /* --- [좌측] 3) 인덱스 탭 노트 (상단 배치) --- */
     .tab-note-container {
       display: flex;
-      align-items: stretch;
+      flex-direction: column;
+      align-items: flex-start;
       filter: drop-shadow(1px 2px 0px rgb(214, 214, 214));
     }
+    
+    /* 상단 인덱스 탭 꼬리표 */
+    .tab-note-indices {
+      display: flex; 
+      flex-direction: row;
+      gap: 3px;
+    }
+    .tab-index {
+      width: 50px; 
+      padding: 4px 0;
+      background: #e4e4e4; 
+      border: 1px solid #d4d4d4; 
+      border-bottom: none; 
+      border-radius: 4px 4px 0 0; 
+      text-align: center; 
+      font-size: 9px; 
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .tab-index.active { 
+      background: #fff; 
+      margin-bottom: -1px; 
+      z-index: 2; 
+    }
+
+    /* 본문 내용 */
     .tab-note-content {
-      flex: 1;
+      width: 100%;
       background: #fff;
       border: 1px solid #d4d4d4;
-      border-radius: 4px 0 0 4px;
+      border-radius: 0 4px 4px 4px; 
       padding: 10px;
       font-size: 11px;
       line-height: 1.5;
       min-height: 150px;
       position: relative;
+      z-index: 1;
     }
+
     .tab-pane { display: none; }
     .tab-pane.active { display: block; }
-    
-    /* 탭 인덱스 꼬리표 */
-    .tab-note-indices {
-      display: flex; flex-direction: column;
-    }
-    .tab-index {
-      width: 20px; padding: 5px 0;
-      background: #e4e4e4; border: 1px solid #d4d4d4; border-left: none;
-      border-radius: 0 0px 6px 0;
-      margin-bottom: 4px;
-      text-align: center; font-size: 9px; cursor: pointer;
-      font-weight: bold;
-    }
-    .tab-index.active { background: #fff; border-left: 1px solid #fff; margin-left: -1px; z-index: 2;}
     
     /* 운세 박스 (탭2 내부) */
     .lucky-box {
@@ -611,7 +627,7 @@
        📌 [Log Detail] 상세 페이지 상단 바
        ========================================= */
     .detail-top-bar {
-      margin: 10px 20px 5px 20px;
+      margin: 5px 27px 10px 27px;
       padding: 8px 12px; font-size: 11px; font-weight: bold;
       border: 1px solid #d4d4d4; 
       background-image: url('https://i.pinimg.com/736x/93/44/c1/9344c1df0d4a92c1c142ce0ea947f140.jpg');
@@ -841,17 +857,6 @@
             
             <!-- 🌟 좌측 위젯 영역 (로그인, D-Day, 탭노트) -->
             <div class="dash-left">
-              
-              <!-- 1) 로그인 박스 -->
-              <div class="login-box">
-                <label>Username</label>
-                <input type="text" class="login-input" value="yaong">
-                <label>Password</label>
-                <input type="password" class="login-input" value="12345">
-                <div style="text-align: right; margin-top: 4px;">
-                  <button class="login-submit">Submit</button>
-                </div>
-              </div>
 
               <!-- 2) 가로 2개 D-Day 위젯 -->
               <div class="dday-row">
@@ -865,8 +870,26 @@
                 </div>
               </div>
               
+              <!-- 1) 로그인 박스 -->
+              <div class="login-box">
+                <label>Username</label>
+                <input type="text" class="login-input" value="yaong">
+                <label>Password</label>
+                <input type="password" class="login-input" value="12345">
+                <div style="text-align: right; margin-top: 4px;">
+                  <button class="login-submit">Submit</button>
+                </div>
+              </div>
+
+              
+              
               <!-- 3) 인덱스 탭 노트 박스 -->
               <div class="tab-note-container">
+                <!-- 오른쪽 인덱스 탭 꼬리표 -->
+                <div class="tab-note-indices">
+                  <div class="tab-index active" onclick="switchTab(1)">INFO</div>
+                  <div class="tab-index" onclick="switchTab(2)">LUCKY</div>
+                </div>
                 <div class="tab-note-content">
                   <!-- 탭 1번 내용 (텍스트) -->
                   <div id="tab-note-1" class="tab-pane active">
@@ -879,11 +902,7 @@
                     <span style="font-size:9px; color:#aaa; font-weight:normal;">(클릭!)</span>
                   </div>
                 </div>
-                <!-- 오른쪽 인덱스 탭 꼬리표 -->
-                <div class="tab-note-indices">
-                  <div class="tab-index active" onclick="switchTab(1)">1</div>
-                  <div class="tab-index" onclick="switchTab(2)">2</div>
-                </div>
+                
               </div>
             </div>
 
@@ -963,6 +982,7 @@
             <div class="post-card-content">스크롤 테스트를 위한 여분 게시글 카드입니다.</div>
           </div>
         </div>
+        <button class="back-btn" onclick="goBack()">◀ BACK</button>
       </div>
 
       <!-- 1-2. [Log Detail] 상세 글 페이지 -->
@@ -980,7 +1000,7 @@
             </div>
           </div>
         </div>
-        <button class="back-btn" onclick="goToView('view-log')">◀ BACK</button>
+        <button class="back-btn" onclick="goBack()">◀ BACK</button>
       </div>
 
       <!-- 3. [Diary] 일기 (달력 + 고정 스크롤 목록) -->
@@ -1005,6 +1025,7 @@
         </div>
 
         <div class="post-list" id="diaryPostList"></div>
+        <button class="back-btn" onclick="goBack()">◀ BACK</button>
       </div>
 
       <!-- 4. [Char / 愛] 게시글 목록 화면 -->
@@ -1019,6 +1040,7 @@
             <div class="post-card-content">요코하마 원정 3연전 마지막 날. 호텔 근처 산책...</div>
           </div>
         </div>
+        <button class="back-btn" onclick="goBack()">◀ BACK</button>
       </div>
 
       <!-- 4-1. [Char / 愛] 상세글 화면 -->
@@ -1033,7 +1055,7 @@
           </div>
         </div>
         <!-- 🌟 BACK 버튼 누르면 view-char (목록)으로 복귀 -->
-        <button class="back-btn" onclick="goToView('view-char')">◀ BACK</button>
+        <button class="back-btn" onclick="goBack()">◀ BACK</button>
       </div>
 
       <!-- 5. [OOC] 기타 카테고리 페이지 -->
@@ -1054,6 +1076,7 @@
             <div class="post-card-content">이 세계관의 2014년 타임라인에 대하여...</div>
           </div>
         </div>
+        <button class="back-btn" onclick="goBack()">◀ BACK</button>
       </div>
 
     </div>
@@ -1084,7 +1107,21 @@
   </div>
 
   <script>
-    function goToView(viewId) {
+    // --------------------------------------------------
+    // 🔄 화면 전환 및 뒤로가기(History Stack) 로직
+    // --------------------------------------------------
+    let historyStack = []; // 지나온 화면들을 차곡차곡 쌓아둘 배열
+
+    // 두 번째 변수(isBack)를 추가해서 뒤로가기 중인지 판별
+    function goToView(viewId, isBack = false) {
+      const currentActive = document.querySelector('.view-screen.active');
+      
+      // 뒤로가기로 이동하는 게 아닐 때만, 현재 화면을 기록장에 추가
+      if (!isBack && currentActive && currentActive.id !== viewId) {
+        historyStack.push(currentActive.id);
+      }
+
+      // 화면 전환
       document.querySelectorAll('.view-screen').forEach(el => el.classList.remove('active'));
       document.getElementById(viewId).classList.add('active');
       
@@ -1094,6 +1131,17 @@
       document.getElementById('playlistModal').classList.remove('show');
     }
 
+    // ◀ BACK 버튼 전용 함수
+    function goBack() {
+      if (historyStack.length > 0) {
+        // 기록장(Stack)에서 가장 마지막 화면을 하나 빼서 거기로 이동
+        const prev = historyStack.pop(); 
+        goToView(prev, true); // true를 넣어서 기록이 또 중복으로 쌓이지 않게 방지
+      } else {
+        // 혹시 기록이 꼬여서 없으면 무조건 메인으로 강제 이동
+        goToView('view-main');
+      }
+    }
     function toggleTags() {
       const wrapper = document.getElementById('tagDropdownWrapper');
       const btn = wrapper.querySelector('.tag-toggle-btn');
@@ -1182,8 +1230,9 @@
     }
 
     const originalGoToView = goToView;
-    goToView = function(viewId) {
-      originalGoToView(viewId);
+    // 두 번째 인자(isBack)도 받을 수 있도록 수정
+    goToView = function(viewId, isBack = false) { 
+      originalGoToView(viewId, isBack); // 비밀 메시지 그대로 전달!
       if (viewId === 'view-diary') {
         renderCalendar(currentYear, currentMonth);
       }
