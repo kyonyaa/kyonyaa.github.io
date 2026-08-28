@@ -1034,8 +1034,173 @@
       display: block;
     }
 
-    
+    /* 🔒 시크릿 버튼 특별 스타일 */
+    .list-btn.secret-btn {
+      border-image: url("https://github.com/okayletsgo555/img/blob/main/%EA%B7%B8%EB%A0%88%EC%9D%B4%20%ED%94%84%EB%A0%88%EC%9E%84.png?raw=true") 8 round;
+      background-image: url('https://i.pinimg.com/736x/88/5d/bc/885dbc08e8f8dd5fcf143adb08bc4494.jpg');
+      background-size: cover;
+      color: #8fb1ca !important;
+      animation: popSecret 0.3s ease-in-out;
+    }
 
+    @keyframes popSecret {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .secret-btn .menu-icon {
+      width: 28px;   /* 원하는 가로 크기로 조절 (기본값은 보통 32px) */
+      height: 28px;  /* 원하는 세로 크기로 조절 */
+      object-fit: contain;
+    }
+
+    /* =========================================
+       🕹️ 레트로 미니 모달 팝업 스타일
+       ========================================= */
+
+       .retro-modal-shadow-wrap {
+      filter: drop-shadow(2px 3px 0px rgba(0, 0, 0, 0.2));
+      display: inline-block;
+    }
+
+    .retro-modal-overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.052);
+      z-index: 200;
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .retro-modal-overlay.show {
+      display: flex;
+    }
+
+    .retro-modal-box {
+      width: 260px;
+      background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('https://i.pinimg.com/736x/41/14/58/411458839be4feb01e6bf12e34f0f006.jpg');
+      background-size: cover;
+      border-width:7px;
+      border-style:solid;
+      border-image: url("https://github.com/okayletsgo555/img/blob/main/%EA%B7%B8%EB%A0%88%EC%9D%B4%20%ED%94%84%EB%A0%88%EC%9E%84.png?raw=true") 8 round;
+      background-clip: padding-box;
+      padding: 4px;
+      box-sizing: border-box;
+      font-family: 'umdot12', monospace !important;
+      animation: popModal 0.2s ease-out;
+    }
+
+    @keyframes popModal {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .retro-modal-header {
+      text-shadow: 
+    -1px -1px 0 #FFFFFF,  
+     1px -1px 0 #FFFFFF,
+    -1px  1px 0 #FFFFFF,
+     1px  1px 0 #FFFFFF;
+
+      background-size: cover;
+      color: var(--c--gray);
+      padding: 5px 6px;
+      font-size: 10px;
+      border-radius: 4px;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .retro-modal-close {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      padding: 0;
+      line-height: 1;
+    }
+
+    .retro-modal-body {
+      padding: 12px 10px;
+      border-radius: 4px;
+      border: 3px solid;
+      border-color: #bababa #ffffff #ffffff #bababa;
+      background-color: #ffffff;
+      margin: 6px 0px;
+      font-size: 11px;
+      color: var(--c-gray);
+      line-height: 1.6;
+      text-align: center;
+      word-break: keep-all;
+        text-shadow: 
+    -1px -1px 0 #FFFFFF,  
+     1px -1px 0 #FFFFFF,
+    -1px  1px 0 #FFFFFF,
+     1px  1px 0 #FFFFFF;
+    }
+
+    .retro-modal-footer {
+      display: flex;
+      justify-content: center;
+     
+    }
+
+    .retro-modal-btn {
+      background: var(--c--palepink);
+      font-family: inherit;
+      font-size: 10px;
+      padding: 4px 12px;
+      border: 2px solid;
+      border-color: #ffffff #bababa #bababa #ffffff;
+      border-radius: 4px;
+      color: var(--c-gray);
+      cursor: pointer;
+      margin-top: 3px;
+    }
+
+    .retro-modal-btn:active {
+      border-color: #bababa #ffffff #ffffff #bababa;
+      transform: translateY(1px);
+    }
+
+
+    /* =========================================
+   💖 픽셀 하트 뿅뿅 애니메이션
+   ========================================= */
+.heart-container {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none; /* 클릭을 방해하지 않음 */
+  z-index: 300;
+  overflow: hidden;
+}
+
+.pixel-heart {
+  position: absolute;
+  font-size: 16px;
+  user-select: none;
+  animation: floatUp 1.2s ease-out forwards;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(0.5);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-40px) scale(1.2);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(-90px) scale(1);
+    opacity: 0;
+  }
+}
     
   </style>
 </head>
@@ -1071,11 +1236,11 @@
               
               <div class="login-box">
                 <label>Username</label>
-                <input type="text" class="login-input" value="yaong">
+                <input type="text" class="login-input" placeholder="ID">
                 <label>Password</label>
-                <input type="password" class="login-input" value="12345">
+                <input type="password" class="login-input" placeholder="PW">
                 <div style="text-align: right; margin-top: 4px;">
-                  <button class="login-submit">Submit</button>
+                  <button class="login-submit" onclick="handleLogin()">Submit</button>
                 </div>
               </div>
 
@@ -1122,6 +1287,11 @@
                 <div class="list-btn" onclick="goToView('view-ooc')">
                   <img src="https://github.com/okayletsgo555/img/blob/main/8cb0e1a672c2b0c231b9f026d4d8be78_preview_rev_1.png?raw=true" class="menu-icon" alt="ooc">
                   <span>その他</span>
+                </div>
+                <!-- 🌟 히든 메뉴 (초기에는 display: none으로 숨겨둠, 항상 맨 아래 배치) -->
+                <div id="secretMenuBtn" class="list-btn secret-btn" onclick="goToView('view-secret')" style="display: none;">
+                  <img src="https://github.com/okayletsgo555/img/blob/main/%ED%95%98%EB%8A%98%ED%8F%B4%EB%8D%94.png?raw=true" class="menu-icon" alt="secret">
+                  <span>SECRET</span>
                 </div>
               </div>
             </div>
@@ -1263,30 +1433,30 @@
       </div>
 
       <!-- 5. [OOC] 기타 카테고리 페이지 -->
-<div id="view-ooc" class="view-screen">
-  <div class="category-tabs">
-    <!-- 🌟 각 탭 클릭 시 switchOocTab 실행 -->
-    <div class="cat-tab active" onclick="switchOocTab(1, this)">일기</div>
-    <div class="cat-tab" onclick="switchOocTab(2, this)">2</div>
-    <div class="cat-tab" onclick="switchOocTab(3, this)">3</div>
-  </div>
+      <div id="view-ooc" class="view-screen">
+       <div class="category-tabs">
+         <!-- 🌟 각 탭 클릭 시 switchOocTab 실행 -->
+         <div class="cat-tab active" onclick="switchOocTab(1, this)">일기</div>
+         <div class="cat-tab" onclick="switchOocTab(2, this)">2</div>
+         <div class="cat-tab" onclick="switchOocTab(3, this)">3</div>
+      </div>
   
-  <div class="post-list">
-    <!-- 🌟 고정 박스 (id 추가) -->
-    <div class="post-card-ooc">
+       <div class="post-list">
+      <!-- 🌟 고정 박스 (id 추가) -->
+     <div class="post-card-ooc">
       <div id="oocNoticeTitle" class="post-card-ooc-title">[공지] 일기 카테고리 안내</div>
       <div id="oocNoticeContent" class="post-card-ooc-content">일기 카테고리의 공지사항 내용입니다.</div>
-    </div>
+     </div>
 
-    <!-- 일반 클릭형 포스트 카드 -->
-    <div class="post-card" onclick="goToView('view-ooc-detail')" style="cursor: pointer;">
+      <!-- 일반 클릭형 포스트 카드 -->
+     <div class="post-card" onclick="goToView('view-ooc-detail')" style="cursor: pointer;">
       <div class="post-card-title">[설정] 타임라인 요약</div>
       <div class="post-card-content">이 세계관의 2014년 타임라인에 대하여...</div>
-    </div>
-  </div>
+      </div>
+      </div>
 
-  <button class="back-btn" onclick="goBack()">◀ BACK</button>
-</div>
+     <button class="back-btn" onclick="goBack()">◀ BACK</button>
+       </div>
 
       <!-- 5-1. [OOC Detail] 기타 카테고리 상세글 화면 -->
       <div id="view-ooc-detail" class="view-screen">
@@ -1302,6 +1472,66 @@
             
           </div>
         </div>
+        <button class="back-btn" onclick="goBack()">◀ BACK</button>
+      </div>
+
+      <!-- 🔒 6. [SECRET] 비밀 해금 목록 페이지 -->
+      <div id="view-secret" class="view-screen">
+        <div class="selected-tags-bar-wrapper">
+          <!-- 🌟 시크릿 전용 태그 드롭다운 (id 변경) -->
+          <div id="secretTagDropdownWrapper" class="tag-dropdown-wrapper">
+            <div class="tag-toggle-btn" onclick="toggleSecretTags()">▲</div>
+            <div class="tag-dropdown-content">
+              <div class="tag-search-wrapper">
+                <input type="text" class="tag-search-input" placeholder="search secret">
+              </div>
+              <div class="tag-chip-container">
+                <div class="tag-chip active">ALL</div>
+                <div class="tag-chip">흑역사</div>
+                <div class="tag-chip">비하인드</div>
+                <div class="tag-chip">미공개</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 시크릿 전용 선택된 태그 바 -->
+          <div class="selected-tags-bar" style="background-image: url('https://i.pinimg.com/736x/88/5d/bc/885dbc08e8f8dd5fcf143adb08bc4494.jpg'); border-width:7px; border-style:solid; border-image: url('https://github.com/okayletsgo555/img/blob/main/%EA%B7%B8%EB%A0%88%EC%9D%B4%20%ED%94%84%EB%A0%88%EC%9E%84.png?raw=true') 8 round;
+">
+            <span style="font-weight: bold; color: #8fb1ca;">ALL (SECRET)</span>
+          </div>
+        </div>
+
+        <div class="post-list">
+          <div class="post-card" onclick="goToView('view-secret-detail')" style="cursor: pointer;">
+            <div class="post-card-title">삭제된 일기장 조각 🗝️</div>
+            <div class="post-card-content">이건 나만 볼 수 있는 부끄러운 과거의 기록이다...</div>
+          </div>
+          <div class="post-card" onclick="goToView('view-secret-detail')" style="cursor: pointer;">
+            <div class="post-card-title">초기 설정 비하인드 📝</div>
+            <div class="post-card-content">사실 쿄헤이는 초기 설정에서 이런 캐릭터가 아니었는데...</div>
+          </div>
+        </div>
+        <button class="back-btn" onclick="goBack()">◀ BACK</button>
+      </div>
+
+      <!-- 🔒 6-1. [SECRET Detail] 비밀 상세 글 페이지 -->
+      <div id="view-secret-detail" class="view-screen">
+        <!-- 🌟 시크릿 전용 상단 바 -->
+        <div class="detail-top-bar" style="background-image: url('https://i.pinimg.com/736x/88/5d/bc/885dbc08e8f8dd5fcf143adb08bc4494.jpg');">
+          <span style="font-size: 12px; font-weight: bold; color: #a47d91;">삭제된 일기장 조각 🗝️</span>
+          
+          <button class="link-btn" onclick="window.open('#', '_blank')" style="display: none;">LINK</button>
+        </div>
+
+        <div class="post-list">
+          <div class="detail-card" style="min-height: 300px;">
+            <div class="post-card-content">
+              이건 나만 볼 수 있는 부끄러운 과거의 기록이다...<br><br>
+              (비밀 본문 내용 작성)
+            </div>
+          </div>
+        </div>
+        
         <button class="back-btn" onclick="goBack()">◀ BACK</button>
       </div>
 
@@ -1331,6 +1561,28 @@
 
     <!-- 🌟 눈에 보이지 않는 유튜브 플레이어 공간 -->
     <div id="ytplayer" style="display: none;"></div>
+
+    <!-- 🌟 레트로 미니 팝업창 -->
+    <div id="retroModal" class="retro-modal-overlay">
+  <!-- 🌟 그림자 전용 Wrap 추가 -->
+  <div class="retro-modal-shadow-wrap">
+    <div class="retro-modal-box">
+      <div class="retro-modal-header">
+        <span>SYSTEM MESSAGE</span>
+        <button class="retro-modal-close" onclick="closeRetroModal()">X</button>
+      </div>
+      <div class="retro-modal-body" id="retroModalContent">
+        <!-- 메시지 출력 -->
+      </div>
+      <div class="retro-modal-footer">
+        <button class="retro-modal-btn" onclick="closeRetroModal()">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 💖 픽셀 하트 애니메이션 레이어 -->
+<div id="heartContainer" class="heart-container"></div>
   </div>
 
   <script>
@@ -1383,6 +1635,22 @@
     function togglePlaylist() {
       const modal = document.getElementById('playlistModal');
       modal.classList.toggle('show');
+    }
+
+    function toggleSecretTags() {
+      const wrapper = document.getElementById('secretTagDropdownWrapper');
+      const btn = wrapper.querySelector('.tag-toggle-btn');
+      
+      wrapper.classList.toggle('show');
+      btn.innerHTML = wrapper.classList.contains('show') ? '▼' : '▲';
+    }
+
+    function closeSecretTags() {
+      const wrapper = document.getElementById('secretTagDropdownWrapper');
+      if (wrapper) {
+        wrapper.classList.remove('show');
+        wrapper.querySelector('.tag-toggle-btn').innerHTML = '▲';
+      }
     }
 
     // 📅 2014년 4월 시작 동적 달력 스크립트
@@ -1640,8 +1908,15 @@
       const luckyBox = document.getElementById('luckyBox');
       if (!luckyBox) return;
 
-      const randomIndex = Math.floor(Math.random() * fortunes.length);
-      const selected = fortunes[randomIndex];
+      let pool = fortunes;
+
+      // 🌟 쿄헤이 계정으로 로그인한 경우 쿄헤이 운세만 필터링
+      if (currentUserMode === 'kyohei') {
+        pool = fortunes.filter(f => f.name === '쿄헤이');
+      }
+
+      const randomIndex = Math.floor(Math.random() * pool.length);
+      const selected = pool[randomIndex];
       
       luckyBox.innerHTML = `
         <div class="fortune-bubble-wrapper">
@@ -1836,6 +2111,116 @@ function switchOocTab(tabNum, tabEl) {
     document.getElementById('oocNoticeContent').textContent = data.content;
   }
 }
+   // ==========================================
+    // 🕹️ 레트로 팝업 제어 함수
+    // ==========================================
+    function showRetroModal(message) {
+      const modal = document.getElementById('retroModal');
+      const content = document.getElementById('retroModalContent');
+      content.innerHTML = message.replace(/\n/g, '<br>');
+      modal.classList.add('show');
+    }
+
+    function closeRetroModal() {
+      const modal = document.getElementById('retroModal');
+      modal.classList.remove('show');
+    }
+
+    // ==========================================
+    // 🔑 로그인 핸들러 (showRetroModal 적용)
+    // ==========================================
+    function handleLogin() {
+      const usernameInput = document.querySelector('.login-box input[type="text"]');
+      const passwordInput = document.querySelector('.login-box input[type="password"]');
+      
+      const user = usernameInput.value.toLowerCase().trim();
+      const pass = passwordInput.value.trim();
+
+      if (user === 'kyohei' && pass === '12345') {
+        currentUserMode = 'kyohei';
+        showRetroModal("✨ [KYOHEI MODE] 접속 완료!\n'오늘의 운세'가 고정됩니다!");
+        
+        unlockHiddenBgm({ id: 'cHApeMI_Zac', title: 'K.K Lovers (Hidden)' });
+        drawFortune();
+      } 
+      else if ((user === 'yaong' || user === 'admin') && pass === 'goodnight') {
+        currentUserMode = 'admin';
+        showRetroModal("🔓 [ADMIN] 관리자 인증 성공!\n🔒 SECRET 메뉴가 해금되었습니다.");
+        document.getElementById('secretMenuBtn').style.display = 'flex';
+      } 
+      else if (pass === '12345') {
+        currentUserMode = user;
+        showRetroModal(`✨ ${user} 계정으로 로그인되었습니다.`);
+      } 
+      else {
+        showRetroModal("⚠️ 로그인 실패!\n비밀번호가 틀렸거나\n인가되지 않은 계정입니다.");
+      }
+    }
+
+    // 💖 픽셀 하트 뿅뿅 생성 함수
+    function spawnHearts() {
+      const container = document.getElementById('heartContainer');
+      if (!container) return;
+
+      const heartIcons = ['💖', '💗', '🍓', '🎀', '✨', '🍀'];
+
+      for (let i = 0; i < 15; i++) {
+        setTimeout(() => {
+          const heart = document.createElement('div');
+          heart.className = 'pixel-heart';
+          
+          // 랜덤 아이콘 & 위치 설정
+          heart.textContent = heartIcons[Math.floor(Math.random() * heartIcons.length)];
+          heart.style.left = Math.random() * 80 + 10 + '%'; // 좌우 10%~90% 랜덤
+          heart.style.top = Math.random() * 40 + 40 + '%';  // 화면 중앙 부근에서 생성
+
+          container.appendChild(heart);
+
+          // 애니메이션 종료 후 요소 제거
+          setTimeout(() => heart.remove(), 1200);
+        }, i * 80); // 0.08초 간격으로 시차를 두고 뿅뿅 뜸
+      }
+    }
+
+    // 🔑 기존 handleLogin() 함수 안에 키워드 이벤트 추가
+    function handleLogin() {
+      const usernameInput = document.querySelector('.login-box input[type="text"]');
+      const passwordInput = document.querySelector('.login-box input[type="password"]');
+      
+      const user = usernameInput.value.toLowerCase().trim();
+      const pass = passwordInput.value.trim();
+
+      // 🌟 [맛보기 추가!] 'lucky', 'love', '행운', '파르페' 키워드 입력 시
+      if (['lucky', 'love', '행운', '파르페'].includes(user) || ['lucky', 'love'].includes(pass)) {
+        spawnHearts(); // 하트 애니메이션 실행
+        showRetroModal("🎉 [SPECIAL EVENT]\n접속 성공!\n\n오늘의 특별 행운 아이템:\n🍓 딸기 파르페 🍓");
+      }
+      // 1) 쿄헤이 계정
+      else if (user === 'kyohei' && pass === '12345') {
+        currentUserMode = 'kyohei';
+        spawnHearts(); // 쿄헤이 접속 시에도 하트 뿅뿅!
+        showRetroModal("✨ [KYOHEI MODE] 접속 완료!\n'오늘의 운세'가 고정되며,\n🔒 SECRET 메뉴가 해금됩니다!");
+        
+        document.getElementById('secretMenuBtn').style.display = 'flex';
+        unlockHiddenBgm({ id: 'cHApeMI_Zac', title: 'K.K Lovers (Hidden)' });
+        drawFortune();
+      } 
+      // 2) 관리자 계정
+      else if ((user === 'yaong' || user === 'admin') && pass === 'goodnight') {
+        currentUserMode = 'admin';
+        showRetroModal("🔓 [ADMIN] 관리자 인증 성공!\n🔒 SECRET 메뉴가 해금되었습니다.");
+        document.getElementById('secretMenuBtn').style.display = 'flex';
+      } 
+      // 3) 일반/기타 계정
+      else if (pass === '12345') {
+        currentUserMode = user;
+        showRetroModal(`✨ ${user} 계정으로 로그인되었습니다.`);
+      } 
+      // 4) 실패 시
+      else {
+        showRetroModal("⚠️ 로그인 실패!\n비밀번호가 틀렸거나\n인가되지 않은 계정입니다.");
+      }
+    }
   </script>
 
 </body>
