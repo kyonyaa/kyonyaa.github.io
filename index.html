@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>아카이빙 다이어리</title>
+  <style>
+   @import url('https://cdn.jsdelivr.net/gh/MonadABXY/mona-font/web/mona.css');
+
+   #appFrame .list-btn{
+    font-family: 'Maruminyahangul' !important;
+   }
+
+   #appFrame .hl-popup{
+    font-family: 'umdot12' !important;
+   }
+
+   /* --------------------------------------------------
+   🎨 픽셀 / 레트로 웹폰트 모음
+   -------------------------------------------------- */
+
+/* 1. KiwiSoda */
+@font-face {
+  font-family: 'kiwi';
+  src: url('https://dl.dropbox.com/s/388cvx0do21kj3n/KiwiSoda.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* 2. DenkiChip (영문/숫자 픽셀) */
+@font-face {
+  font-family: 'DenkiChip';
+  src: url('https://cdn.jsdelivr.net/gh/hicchicc/x8y12pxDenkiChip@main/fonts/woff2/x8y12pxDenkiChip.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* 3. NegaTape (영문/숫자 픽셀) */
+@font-face {
+  font-family: 'NegaTape';
+  src: url('https://cdn.jsdelivr.net/gh/hicchicc/x5y8pxNegaTape@main/fonts/woff2/x5y8pxNegaTape.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* 4. MisakiGothic (일본어 픽셀) */
+@font-face {
+  font-family: 'MisakiGothic';
+  src: url('https://cdn.jsdelivr.net/gh/mplus-fonts/mplus-font-paper@main/fonts/misaki_gothic.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* 5. MaruMinyaHangul (한글 픽셀) */
+@font-face {
+  font-family: 'MaruMinyaHangul';
+  src: url('https://cdn.jsdelivr.net/gh/quiple/x12y12pxMaruMinyaHangul@main/fonts/x12y12pxMaruMinyaHangul.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* 6. Umdot12 (픽셀) */
+@font-face {
+  font-family: 'Umdot12';
+  src: url('https://cdn.jsdelivr.net/gh/MonadABXY/umdot-font@main/woff2/Umdot12.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* 7. Tangba12 (픽셀) */
+@font-face {
+  font-family: 'Tangba12';
+  src: url('https://cdn.jsdelivr.net/gh/MonadABXY/tangba-font@main/woff2/Tangba12.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Limgul12';
+  src: url('https://cdn.jsdelivr.net/gh/MonadABXY/limgul-font@main/woff2/Limgul12.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+  .article .title-wrap, .article-data, .sticker-wrapper, .personal, .came {
+    display: none !important;
+  }
+  
+  #container {
+    width: 100% !important;
+    height: 800px !important;
+    max-height: 1200px;
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+  }
+
+  .text-emoji {
+    display: inline-block !important;
+    float: none !important;
+    clear: none !important;
+    height: 1.2em;
+    width: auto;
+    vertical-align: middle;
+    margin: 0 2px;
+  }
+
+    /* 🎨 컬러 팔레트 & 기본 셋업 */
+    :root {
+      --c--lightgray: #C7C7C7;
+      --c--white: #ffffff;
+      --c--palepink: #fdf7fa;
+      --c-gray: #787878;
+    }
+
+    * { box-sizing: border-box; }
+    body {  
+      display: flex;
+      justify-content: center;
+      align-items: center; 
+      min-height: 100vh;
+      margin: 0;
+      font-family: 'mona12' !important;
+      color: var(--c-gray) !important;
+      -webkit-font-smoothing: none;
+    }
+
+    /* 📱 전체 앱 프레임 (380px 고정) */
+    .app-frame {
+      position: relative;
+      width: 100%; max-width: 380px; height: 700px;
+      background-image: url('https://i.pinimg.com/736x/1c/78/ce/1c78cef8e7cf4857a08162e4aecf7503.jpg');
+      background-image: url('https://i.pinimg.com/736x/57/be/c8/57bec8cd105b8a5319a8295e0cf5e9a3.jpg');
+      background-size: cover;
+      color: var(--c-gray) !important;
+      overflow: hidden;
+      border: 1px solid #e4e4e4;
+      display: flex; flex-direction: column;
+      margin: 60px auto;
+    }
+
+    /* =========================================
+       📌 상단 고정 헤더
+       ========================================= */
+    .fixed-header-wrapper {
+      position: relative;
+      z-index: 5;
+      
+    }
+
+    .main-header {
+      height: 140px;
+      margin: 20px;
+      margin-bottom: 3px !important;
+      background-image: url('https://i.pinimg.com/736x/28/65/a3/2865a3949ed0510ca75f13a4db70d622.jpg');
+      background-size: contain;
+      border-width: 9px;
+      border-style: solid;
+      border-image: url("https://i.postimg.cc/RhJCpKqH/testborder3.png") 15 round;
+      background-clip: padding-box;
+      display: flex; justify-content: center; align-items: center;
+      font-weight: bold; font-size: 14px;
+      position: relative;
+    }
+
+    /* =========================================
+       📌 본문 영역 
+       ========================================= */
+    .content-area {
+      flex: 1;
+      display: flex; 
+      flex-direction: column;
+      position: relative;
+      z-index: 10;
+      margin-bottom: 42px;
+      min-height: 0;
+    }
+
+    .view-screen {
+      flex: 1;
+      display: none;
+      flex-direction: column;
+      min-height: 0;
+    }
+    .view-screen.active { display: flex; }
+
+    /* =========================================
+       📌 [MAIN] 화면 - 이미지 아이콘 버튼
+       ========================================= */
+    .inner {
+      width: 330px;
+      border-width: 9px;
+      border-style: solid;
+      border-image: url("https://i.postimg.cc/jdM6yh46/qoxgh5.png") 8 round;
+      margin: 5px auto;
+      padding: 5px;
+    }
+
+    .maintext {
+     text-rendering: optimizeLegibility;
+     font-family:'NegaTape';
+     font-size: 1.5em;
+     padding: 0px;
+     margin: auto;
+     margin-top: 2px !important;
+     margin-bottom: 6px !important;
+     color: #9d999a;
+     text-align: center;
+    }
+    
+    .main-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .list-btn {
+      font-family: 'MaruMinyaHangul' !important;
+      color: var(--c-gray) !important;
+      border-width: 7px;
+      border-style:solid;
+      border-image: url("https://github.com/okayletsgo555/img/blob/main/%EA%B7%B8%EB%A0%88%EC%9D%B4%20%ED%94%84%EB%A0%88%EC%9E%84.png?raw=true") 8 fill round;
+      margin: auto;
+      width: 100px;
+      height: 37px;
+      padding: 0px 0px 0px 3px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 10px;
+      font-size: 11px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.1s;
+      filter: drop-shadow(1px 2px 0px rgb(214, 214, 214));
+    }
+
+    .list-btn:active {
+      transform: translateY(2px);
+    }
+
+    .list-btn:hover {
+      transform: translateY(-2px);
+      color: #cfb4c2;
+    }
+
+    .list-btn .menu-icon {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+      margin-bottom: 0;
+      image-rendering: pixelated;
+      filter: drop-shadow(1px 2px 0px rgba(0,0,0,0.15));
+    }
+
+    /* =========================================
+       📌 [MAIN] 2열 대시보드 레이아웃
+       ========================================= */
+    .main-dashboard {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 25px; 
+      padding: 10px 5px;
+    }
+
+    /* 좌/우 너비 조절 */
+    .dash-left {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 140px; /* 약간 넓힘 */
+    }
+    .dash-right {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 110px;
+    }
+
+    /* --- [좌측] 1) 로그인 박스 --- */
+    .login-box {
+      font-size: 10px;
+      font-family: 'umdot12', monospace !important;
+      filter: drop-shadow(1px 2px 0px rgb(214, 214, 214));
+    }
+    .login-box label {
+      display: block; margin-bottom: 5px; color: var(--c-gray);
+    }
+    .login-input {
+      width: 100%; padding: 5px; margin-bottom: 8px;
+      font-family: inherit; font-size: 11px;
+      border: 1px solid #d4d4d4; background: #fff;
+      color: var(--c-gray);
+    }
+    .login-submit {
+      background: var(--c--palepink); border: 1px solid #d4d4d4;
+      font-family: inherit; font-size: 9px; cursor: pointer; padding: 5px 5px;
+      margin-right: 35%;
+    }
+
+    /* --- [좌측] 2) 나란한 D-Day 박스 --- */
+    .dday-row {
+      display: flex; gap: 8px; justify-content: space-between;
+    }
+    .dday-box.mini {
+      flex: 1; padding: 0px;
+      border-width: 6px;
+      border-style: solid;
+      border-image: url("https://github.com/okayletsgo555/img/blob/main/%EA%B7%B8%EB%A0%88%EC%9D%B4%20%ED%94%84%EB%A0%88%EC%9E%84.png?raw=true") 8 fill round;
+      text-align: center;
+      filter: drop-shadow(1px 2px 0px rgb(214, 214, 214));
+    }
+    .dday-title { font-size: 8px; color: #a47d91; margin-bottom: 1.5px; }
+    .dday-count { font-weight: bold; font-size: 11px; color: var(--c-gray); }
+
+    /* --- [좌측] 3) 인덱스 탭 노트 --- */
+    .tab-note-container {
+      display: flex;
+      align-items: stretch;
+      filter: drop-shadow(1px 2px 0px rgb(214, 214, 214));
+    }
+    .tab-note-content {
+      flex: 1;
+      background: #fff;
+      border: 1px solid #d4d4d4;
+      border-radius: 4px 0 0 4px;
+      padding: 10px;
+      font-size: 11px;
+      line-height: 1.5;
+      min-height: 70px;
+      position: relative;
+    }
+    .tab-pane { display: none; }
+    .tab-pane.active { display: block; }
+    
+    /* 탭 인덱스 꼬리표 */
+    .tab-note-indices {
+      display: flex; flex-direction: column;
+    }
+    .tab-index {
+      width: 15px; padding: 5px 0;
+      background: #e4e4e4; border: 1px solid #d4d4d4; border-left: none;
+      border-radius: 0 4px 4px 0;
+      margin-bottom: 4px;
+      text-align: center; font-size: 9px; cursor: pointer;
+      font-weight: bold;
+    }
+    .tab-index.active { background: #fff; border-left: 1px solid #fff; margin-left: -1px; z-index: 2; }
+    
+    /* 운세 박스 (탭2 내부) */
+    .lucky-box {
+      text-align: center; cursor: pointer; font-weight: bold; margin-top: 5px;
+    }
+
+    /* --- [우측] 프로필 이미지 --- */
+    .profile-img-box {
+      width: 100%; aspect-ratio: 1;
+      margin-bottom: 10px;
+      filter: drop-shadow(1px 2px 0px rgb(214, 214, 214));
+      overflow: hidden; display: flex; justify-content: center; align-items: center;
+    }
+    .profile-img { width: 100%; height: 100%; object-fit: cover; }
+    .lucky-box:hover {
+      background: #fdf7fa;
+      border-color: #cfb4c2;
+    }
+    .lucky-box:active {
+      transform: translateY(2px);
+      box-shadow: 0px 1px 0px rgb(214, 214, 214);
+    }
+
+    /* 메인 텍스트 아카이브 디자인 수정 */
+    .maintext {
+     text-rendering: optimizeLegibility;
+     font-family: 'NegaTape';
+     font-size: 1.4em;
+     margin-bottom: 8px;
+     color: #9d999a;
+     text-align: center;
+    }
+
+    /* =========================================
+       📌 [Log] ALL 바 & 태그 드롭다운 (고정)
+       ========================================= */
+    .selected-tags-bar-wrapper {
+      position: relative;
+      margin: 5px 20px 10px 20px;
+      z-index: 20;
+      flex-shrink: 0;
+    }
+
+    .selected-tags-bar {
+      margin: 0;
+      padding: 8px 12px; font-size: 11px; font-weight: bold;
+      border: 1px solid #d4d4d4; 
+      background-image: url('https://i.pinimg.com/736x/93/44/c1/9344c1df0d4a92c1c142ce0ea947f140.jpg');
+      background-size: cover;
+      position: relative;
+      z-index: 10;
+      font-size: 12px;
+      box-shadow: 1px 2px 0px rgb(214, 214, 214);
+    }
+
+    .tag-dropdown-wrapper {
+      position: absolute;
+      bottom: 100%; 
+      left: 0; right: 0;
+      z-index: 5;
+    }
+    
+    .tag-toggle-btn {
+      position: absolute;
+      top: -22px; right: -0.01px; 
+      width: 32px; height: 23px;
+      background-image: url('https://i.pinimg.com/736x/93/44/c1/9344c1df0d4a92c1c142ce0ea947f140.jpg');
+      border: 1px solid #d4d4d4;
+      border-bottom: none; 
+      border-radius: 8px 8px 0 0; 
+      display: flex; justify-content: center; align-items: center;
+      font-size: 10px; color: var(--c-gray); cursor: pointer;
+      z-index: 25;
+      box-shadow: 1px 0px 0px rgb(214, 214, 214);
+    }
+
+    .tag-dropdown-content {
+      background: #ffffff;
+      border: 1px solid #d4d4d4;
+      border-bottom: none; 
+      border-radius: 12px 0 0 0; 
+      padding: 0 12px;
+      display: flex; flex-direction: column;
+      background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), 
+        url('https://i.pinimg.com/736x/1c/78/ce/1c78cef8e7cf4857a08162e4aecf7503.jpg');
+      background-size: cover;
+      max-height: 0; opacity: 0; overflow: hidden;
+      transition: max-height 0.3s ease, opacity 0.2s ease, padding 0.3s ease;
+      overflow-y: auto;
+    }
+
+    .tag-dropdown-wrapper.show .tag-dropdown-content {
+      max-height: 300px;
+      padding: 12px;
+      opacity: 1;
+    }
+
+    .tag-search-wrapper {
+      margin-bottom: 10px;
+      width: 100%;
+    }
+    .tag-search-input {
+      width: 100%;
+      padding: 5px;
+      font-family: inherit;
+      font-size: 12px;
+      border-width:7px;
+      border-style:solid;
+      border-image: url("https://github.com/okayletsgo555/img/blob/main/%EA%B7%B8%EB%A0%88%EC%9D%B4%20%ED%94%84%EB%A0%88%EC%9E%84.png?raw=true") 8 fill round;
+      background: var(--c--white);
+      background-clip: padding-box;
+      color: var(--c-gray);
+      outline: none;
+    }
+
+    .tag-chip-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-content: flex-start;
+    }
+
+    .tag-chip {
+      background: var(--c--palepink); border: 1px solid #d4d4d4; border-radius: 8px;
+      padding: 5px 0; font-size: 11px; font-weight: bold; cursor: pointer;
+      width: calc(33.33% - 4px); text-align: center;
+      display: flex; justify-content: center; align-items: center; box-sizing: border-box;
+    }
+    .tag-chip.active { 
+      background-image: url('https://i.pinimg.com/736x/93/44/c1/9344c1df0d4a92c1c142ce0ea947f140.jpg');
+      background-size: cover;
+      color: var(--c--gray); 
+    }
+
+    /* =========================================
+       📌 [Log] 게시글 목록
+       ========================================= */
+    .post-list { 
+      flex: 1; 
+      overflow-y: auto !important;
+      padding: 0 20px 15px 20px; 
+      display: flex; flex-direction: column; gap: 10px; 
+      -ms-overflow-style: none; scrollbar-width: none;
+      min-height: 0;
+    }
+
+    .post-list::-webkit-scrollbar { display: none; }
+
+    .post-card {
+      border-width: 7px;
+      border-style: solid;
+      border-image: url("https://github.com/okayletsgo555/img/blob/main/%EA%B7%B8%EB%A0%88%EC%9D%B4%20%ED%94%84%EB%A0%88%EC%9E%84.png?raw=true") 8 fill round;
+      padding: 7px; 
+      filter: drop-shadow(1px 2px 0px rgb(214, 214, 214));
+    }
+
+    .post-card-title { font-weight: bold; font-size: 12px; margin-bottom: 6px; }
+    .post-card-content { font-size: 11px; line-height: 1.8; }
+
+    /* =========================================
+       📌 하단 고정 BGM & 네비게이션 바
+       ========================================= */
+    .bottom-bar {
+      position: absolute;
+      bottom: 0; 
+      left: 0; 
+      right: 0;
+      height: 45px;
+      background-image: url('https://i.pinimg.com/736x/93/44/c1/9344c1df0d4a92c1c142ce0ea947f140.jpg');
+      background-size: cover;
+      border-top: 1px solid #d4d4d4;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0 15px; z-index: 100; flex-shrink: 0;
+    }
+
+    .ctrl-btn {
+      background: none; border: none; font-size: 15px; color: var(--c-gray);
+      cursor: pointer; padding: 5px;
+    }
+    .music-controls { display: flex; gap: 10px; align-items: center; }
+
+    .playlist-modal {
+      position: absolute; 
+      bottom: 42px; 
+      right: 10px; 
+      width: 140px;
+      background: var(--c--palepink); 
+      border: 1px solid #d4d4d4; 
+      border-bottom: none; 
+      border-radius: 12px 12px 0 0; 
+      padding: 0 10px;
+      display: flex; flex-direction: column; gap: 5px; z-index: 99;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, opacity 0.2s ease, padding 0.3s ease;
+    }
+    
+    .playlist-modal.show { 
+      max-height: 200px;
+      padding: 10px;
+      opacity: 1;
+    }
+    .playlist-title { font-size: 11px; font-weight: bold; text-align: center; padding-bottom: 4px; margin-bottom: 2px;
+      text-shadow: 
+    -1px -1px 0 #FFFFFF,  
+     1px -1px 0 #FFFFFF,
+    -1px  1px 0 #FFFFFF,
+     1px  1px 0 #FFFFFF;
+    }
+    .song-item {
+        width: 120px;
+        font-size: 11px;
+        padding: 1px;
+        background: var(--c--white);
+        line-height: 1.6;
+        border-width:7px;
+      border-style:solid;
+      border-image: url("https://github.com/okayletsgo555/img/blob/main/%EA%B7%B8%EB%A0%88%EC%9D%B4%20%ED%94%84%EB%A0%88%EC%9E%84.png?raw=true") 8 fill round;
+        cursor: pointer; }
+
+    .song-item:hover { background: #e4e4e4; }
+
+    /* =========================================
+       📌 [Log Detail] 상세 페이지 상단 바
+       ========================================= */
+    .detail-top-bar {
+      margin: 10px 20px 5px 20px;
+      padding: 8px 12px; font-size: 11px; font-weight: bold;
+      border: 1px solid #d4d4d4; 
+      background-image: url('https://i.pinimg.com/736x/93/44/c1/9344c1df0d4a92c1c142ce0ea947f140.jpg');
+      background-size: cover;
+      position: relative;
+      z-index: 10;
+      font-size: 12px;
+      gap: 10px;
+      filter: drop-shadow(1px 2px 0px rgb(214, 214, 214));
+    }
+
+    .back-btn {
+      color: var(--c--gray);
+      background: var(--c--palepink);
+      border: 1px solid #d4d4d4;
+      border-radius: 4px;
+      padding: 4px 8px 8px 8px;
+      font-size: 10px;
+      font-family: inherit;
+      cursor: pointer;
+      width: 60px;
+      height: 30px;
+      position: absolute; 
+      bottom: 0px; 
+      right: 10px; 
+      filter: drop-shadow(1px 2px 0px rgb(214, 214, 214));
+    }
+
+    .back-btn:active {
+      transform: translateY(2px);
+    }
+
+    .back-btn:hover {
+      transform: translateY(-2px);
+      color: #cfb4c2;
+    }
+
+    /* =========================================
+       📌 [Diary] 2014년 4월 달력
+       ========================================= */
+    .calendar-wrapper {
+      width: 280px;
+      margin: 10px auto 20px auto;
+      background: var(--c--white);
+      border-width: 7px;
+      border-style: solid;
+      border-image: url("https://github.com/okayletsgo555/img/blob/main/%EA%B7%B8%EB%A0%88%EC%9D%B4%20%ED%94%84%EB%A0%88%EC%9E%84.png?raw=true") 8 fill round;
+      padding: 10px;
+    }
+    
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    .caledar-hr {
+      display: block;
+      flex-shrink: 0;
+      border: 0px; 
+      height: 0.7px;
+      background: #d4d4d4;  
+      width: 100%; 
+      margin: 1px auto;
+      margin-bottom: 10px;
+    }
+
+    .cal-nav-btn {
+      background: none;
+      border: none;
+      font-size: 11px;
+      color: var(--c-gray);
+      cursor: pointer;
+      padding: 2px 6px;
+    }
+    .cal-nav-btn:hover { color: #cfb4c2; }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 2px;
+      text-align: center;
+      font-size: 11px;
+    }
+    .cal-day-header {
+      font-weight: bold;
+      color: var(--c--gray);
+      padding-bottom: 5px;
+    }
+    .cal-cell {
+      height: 40px;
+      border: 1px dashed #e4e4e4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding-top: 2px;
+      cursor: pointer;
+      font-size: 10px;
+    }
+    .cal-cell:hover { background: #f9f9f9; }
+    .cal-cell.empty { border: none; cursor: default; }
+    .cal-emo {
+      font-size: 12px;
+      margin-top: 1px;
+    }
+
+    /* =========================================
+       📌 [OOC] 카테고리 탭
+       ========================================= */
+    .category-tabs {
+      display: flex;
+      gap: 5px;
+      margin: 12px 20px -2px 24px;
+    }
+    .cat-tab {
+      background: #e4e4e4;
+      border: 1px solid #d4d4d4;
+      border-radius: 6px 6px 0 0;
+      padding: 6px 12px;
+      font-size: 11px;
+      font-weight: bold;
+      cursor: pointer;
+      border-bottom: none;
+    }
+    .cat-tab.active {
+      background: var(--c--palepink);
+    }
+
+    .cat-tab:hover {
+      transform: translateY(-1px);
+    }
+
+    .home-icon {
+        width: 30px;
+        height: 30px;
+        margin: 15px -10px 10px -10px;
+        filter: drop-shadow(1px 2px 0px rgb(214, 214, 214));
+    }
+
+    /* =========================================
+       🖍️ 형광펜 & 코멘트 말풍선 팝업
+       ========================================= */
+    .hl-comment {
+      background: linear-gradient(140deg, #e8f2f8 0%, #e8f2f8 100%);
+      padding: 1px 3px;
+      border-radius: 2px;
+      cursor: pointer;
+      position: relative;
+      font-weight: bold;
+    }
+    .hl-comment:hover {
+      background: #f0f4f7;
+    }
+
+    /* 말풍선 팝업 */
+    /* =========================================
+       🖍️ 형광펜 & 코멘트 말풍선 팝업 (꼬리표 수정)
+       ========================================= */
+    .hl-popup {
+      position: absolute;
+      bottom: 165%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--c--palepink);
+      border: 1px solid #cdcdcd;
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-size: 10px;
+      color: var(--c-gray);
+      white-space: nowrap;
+      box-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+      display: none;
+      z-index: 30;
+      font-weight: normal;
+    }
+
+    /* 1. 바깥쪽 테두리 삼각형 (기존 after) */
+    .hl-popup::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px; /* 크기 커진만큼 조절 */
+      border-width: 8px;
+      border-style: solid;
+      border-color: #cdcdcd transparent transparent transparent;
+    }
+
+    /* 2. 안쪽 배경색 삼각형 (새로 추가하는 before) */
+    .hl-popup::before {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -4px; /* 테두리 두께(1px)만큼 안쪽으로 정렬 */
+      border-width: 6px; /* 테두리보다 1px 작게 */
+      border-style: solid;
+      border-color: var(--c--palepink) transparent transparent transparent;
+      z-index: 1; /* 테두리 삼각형 위에 얹기 */
+    }
+
+    .hl-comment.show-popup .hl-popup {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="appFrame" class="app-frame">
+    
+    <!-- 📌 [고정 영역] 상단 헤더 -->
+    <div class="fixed-header-wrapper">
+      <div class="main-header"></div>
+    </div>
+
+    <!-- 📌 [가변 영역] 본문 구역 -->
+    <div class="content-area">
+      <!-- 1. [MAIN] 화면 -->
+      <div id="view-main" class="view-screen active">
+        <div class="inner">
+          <div class="main-dashboard">
+            
+            <!-- 🌟 좌측 위젯 영역 (로그인, D-Day, 탭노트) -->
+            <div class="dash-left">
+              
+              <!-- 1) 로그인 박스 -->
+              <div class="login-box">
+                <label>Username</label>
+                <input type="text" class="login-input" value="yaong">
+                <label>Password</label>
+                <input type="password" class="login-input" value="12345">
+                <div style="text-align: right; margin-top: 4px;">
+                  <button class="login-submit">Submit</button>
+                </div>
+              </div>
+
+              <!-- 2) 가로 2개 D-Day 위젯 -->
+              <div class="dday-row">
+                <div class="dday-box mini">
+                  <div class="dday-title">一目惚れ</div>
+                  <div class="dday-count" id="dday-1">D-DAY</div>
+                </div>
+                <div class="dday-box mini">
+                  <div class="dday-title">キョニャ</div>
+                  <div class="dday-count" id="dday-2">D-DAY</div>
+                </div>
+              </div>
+              
+              <!-- 3) 인덱스 탭 노트 박스 -->
+              <div class="tab-note-container">
+                <div class="tab-note-content">
+                  <!-- 탭 1번 내용 (텍스트) -->
+                  <div id="tab-note-1" class="tab-pane active">
+                    방명록을 남겨주세요.<br>
+                    오늘도 맑음 ☀️
+                  </div>
+                  <!-- 탭 2번 내용 (운세) -->
+                  <div id="tab-note-2" class="tab-pane lucky-box" onclick="drawFortune()">
+                    오늘의 운세 보기 🍀<br>
+                    <span style="font-size:9px; color:#aaa; font-weight:normal;">(클릭!)</span>
+                  </div>
+                </div>
+                <!-- 오른쪽 인덱스 탭 꼬리표 -->
+                <div class="tab-note-indices">
+                  <div class="tab-index active" onclick="switchTab(1)">1</div>
+                  <div class="tab-index" onclick="switchTab(2)">2</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 🌟 우측 메뉴 버튼 영역 (기존 유지) -->
+            <div class="dash-right">
+              
+              <!-- 프로필 이미지 박스 추가 -->
+              <div class="profile-img-box">
+                <img src="https://i.pinimg.com/736x/9f/4d/e5/9f4de57dd6b8969ee4dcea3634700c4c.jpg" alt="Profile" class="profile-img">
+              </div>
+
+              <div class="maintext">アーカイブ</div>
+              <div class="main-list">
+                <div class="list-btn" onclick="goToView('view-log')">
+                  <img src="https://github.com/okayletsgo555/img/blob/main/8cb0e1a672c2b0c231b9f026d4d8be78_preview_rev_1.png?raw=true" class="menu-icon" alt="log">
+                  <span>ログ</span>
+                </div>
+                <div class="list-btn" onclick="goToView('view-diary')">
+                  <img src="https://github.com/okayletsgo555/img/blob/main/8cb0e1a672c2b0c231b9f026d4d8be78_preview_rev_1.png?raw=true" class="menu-icon" alt="diary">
+                  <span>日記</span>
+                </div>
+                <div class="list-btn" onclick="goToView('view-char')">
+                  <img src="https://github.com/okayletsgo555/img/blob/main/8cb0e1a672c2b0c231b9f026d4d8be78_preview_rev_1.png?raw=true" class="menu-icon" alt="char">
+                  <span>愛</span>
+                </div>
+                <div class="list-btn" onclick="goToView('view-ooc')">
+                  <img src="https://github.com/okayletsgo555/img/blob/main/8cb0e1a672c2b0c231b9f026d4d8be78_preview_rev_1.png?raw=true" class="menu-icon" alt="ooc">
+                  <span>その他</span>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. [Log] 화면 -->
+      <div id="view-log" class="view-screen">
+        <div class="selected-tags-bar-wrapper">
+          <div id="tagDropdownWrapper" class="tag-dropdown-wrapper">
+            <div class="tag-toggle-btn" onclick="toggleTags()">▲</div>
+            
+            <div class="tag-dropdown-content">
+              <div class="tag-search-wrapper">
+                <input type="text" class="tag-search-input" placeholder="search">
+              </div>
+              <div class="tag-chip-container">
+                <div class="tag-chip active">ALL</div>
+                <div class="tag-chip">블루윙스</div>
+                <div class="tag-chip">쿄헤이</div>
+                <div class="tag-chip">세이</div>
+                <div class="tag-chip">히비</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="selected-tags-bar">
+            <span style="font-weight: normal;">ALL</span>
+          </div>
+        </div>
+
+        <div class="post-list">
+          <div class="post-card" onclick="goToView('view-log-detail')" style="cursor: pointer;">
+            <div class="post-card-title">0점의 밤</div>
+            <div class="post-card-content">홈런을 쳤다. 7이닝 무실점 팀 승리. 그런데 오늘 하루 중 제일 심장이 뛴 순간이 뭐냐고 물으면...</div>
+          </div>
+          <div class="post-card">
+            <div class="post-card-title">휴일의 직장인</div>
+            <div class="post-card-content">12시!!!! 세이 짱 12시 기상!!!! 귀여워!!!! 쉬는 날 직장인이잖아!!!! 나는 5시 반인데!!!!</div>
+          </div>
+          <div class="post-card">
+            <div class="post-card-title">스윕 가자 ٩(ˊᗜˋ*)و</div>
+            <div class="post-card-content">게시물이 늘어나면 여기서부터는 이 목록 창만 스크롤이 됩니다! 태그바는 그 자리에 예쁘게 남아있습니다.</div>
+          </div>
+          <div class="post-card">
+            <div class="post-card-title">아카이빙 테스트</div>
+            <div class="post-card-content">스크롤 테스트를 위한 여분 게시글 카드입니다.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1-2. [Log Detail] 상세 글 페이지 -->
+      <div id="view-log-detail" class="view-screen">
+        <div class="detail-top-bar">
+          <span style="font-size: 12px; font-weight: bold;">0점의 밤</span>
+        </div>
+        
+        <div class="post-list">
+          <div class="post-card" style="min-height: 300px;">
+            <div class="post-card-content" style="font-size: 12px; line-height: 1.8;">
+              홈런을 쳤다. 7이닝 무실점 팀 승리.<br><br>
+              그런데 오늘 하루 중 제일 심장이 뛴 순간이 뭐냐고 물으면, 경기 끝나고 라커룸으로 들어올 때 마주친 그 녀석의 표정이었다.<br><br>
+              수고했다는 말 한마디 없이 건네준 스포츠 드링크가 왜 이렇게 차가운지... (여기에 본문 내용 작성)
+            </div>
+          </div>
+        </div>
+        <button class="back-btn" onclick="goToView('view-log')">◄ BACK</button>
+      </div>
+
+      <!-- 3. [Diary] 일기 (달력 + 고정 스크롤 목록) -->
+      <div id="view-diary" class="view-screen">
+        <div class="calendar-wrapper">
+          <div class="calendar-header">
+            <button class="cal-nav-btn" onclick="changeMonth(-1)">◄</button>
+            <span id="calTitle">2014 . 04</span>
+            <button class="cal-nav-btn" onclick="changeMonth(1)">►</button>
+          </div>
+          <hr class="caledar-hr">
+          <div class="calendar-grid">
+            <div class="cal-day-header" style="color: #d88;">日</div>
+            <div class="cal-day-header">月</div>
+            <div class="cal-day-header">火</div>
+            <div class="cal-day-header">水</div>
+            <div class="cal-day-header">木</div>
+            <div class="cal-day-header">金</div>
+            <div class="cal-day-header" style="color: #88d;">土</div>
+          </div>
+          <div id="calDaysGrid" class="calendar-grid" style="margin-top: 2px;"></div>
+        </div>
+
+        <div class="post-list" id="diaryPostList"></div>
+      </div>
+
+      <!-- 4. [Char / 愛] 게시글 목록 화면 -->
+      <div id="view-char" class="view-screen">
+        <div class="post-list" style="padding-top: 15px;">
+          <div class="post-card" onclick="openCharDetail('char-post-1')" style="cursor: pointer;">
+            <div class="post-card-title">비 내리는 날의 기록 🌧️</div>
+            <div class="post-card-content">연습이 일찍 끝난 날. 빗소리가 좋아서 방에서 한참 동안...</div>
+          </div>
+          <div class="post-card" onclick="openCharDetail('char-post-2')" style="cursor: pointer;">
+            <div class="post-card-title">원정 경기 일기 ⚾</div>
+            <div class="post-card-content">요코하마 원정 3연전 마지막 날. 호텔 근처 산책...</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4-1. [Char / 愛] 상세글 화면 -->
+      <div id="view-char-detail" class="view-screen">
+        <div class="detail-top-bar">
+          <span id="charDetailNavTitle" style="font-size: 12px; font-weight: bold;">글 제목</span>
+        </div>
+
+        <div class="post-list">
+          <div class="post-card" style="min-height: 350px; background: #ffffff;">
+            <div id="charDetailContent" class="post-card-content"></div>
+          </div>
+        </div>
+        <!-- 🌟 BACK 버튼 누르면 view-char (목록)으로 복귀 -->
+        <button class="back-btn" onclick="goToView('view-char')">◄ BACK</button>
+      </div>
+
+      <!-- 5. [OOC] 기타 카테고리 페이지 -->
+      <div id="view-ooc" class="view-screen">
+        <div class="category-tabs">
+          <div class="cat-tab active">1</div>
+          <div class="cat-tab">2</div>
+          <div class="cat-tab">3</div>
+        </div>
+        
+        <div class="post-list">
+          <div class="post-card">
+            <div class="post-card-title">[공지] 업데이트 안내</div>
+            <div class="post-card-content">다이어리 스킨이 업데이트 되었습니다! HTML을 정리 중입니다.</div>
+          </div>
+          <div class="post-card">
+            <div class="post-card-title">[설정] 타임라인 요약</div>
+            <div class="post-card-content">이 세계관의 2014년 타임라인에 대하여...</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 📌 [고정 영역] 하단 BGM 바 -->
+    <div class="bottom-bar">
+      <button class="ctrl-btn" onclick="goToView('view-main')">
+        <img src="https://github.com/okayletsgo555/img/blob/main/sticker2.png?raw=true" class="home-icon">
+      </button>
+      
+      <div class="music-controls">
+        <button class="ctrl-btn">◁◁</button>
+        <button class="ctrl-btn">❚❚</button>
+        <button class="ctrl-btn">▷▷</button>
+      </div>
+
+      <button class="ctrl-btn" onclick="togglePlaylist()">≡</button>
+    </div>
+
+    <!-- 플레이리스트 팝업 -->
+    <div id="playlistModal" class="playlist-modal">
+      <div class="playlist-title">PLAYLIST</div>
+      <div class="song-item">🎵 Mr.Children - 君が好き</div>
+      <div class="song-item">🎵 Track 02</div>
+      <div class="song-item">🎵 Track 03</div>
+    </div>
+
+  </div>
+
+  <!-- 둥둥 뜨는 홈 버튼 -->
+<a href="/" class="floating-home-btn" title="메인 홈으로 이동">
+  <img class="toro" src="https://yokai.crd.co/assets/images/image57.gif?v=b4df531c;">
+  <span class="btn-text"></span>
+</a>
+
+<style>
+    /* 플로팅 홈 버튼 스타일 */
+.floating-home-btn {
+  position: fixed;        /* 화면에 위치 고정 */
+  bottom: 630px;           /* 아래에서 25px 띄움 */
+  left: 25px;            /* 오른쪽에서 25px 띄움 */
+  z-index: 99999;         /* 다른 요소들보다 제일 위에 띄움 */
+  
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  line-height: 1.4;
+  padding: 10px -10px;
+  background-color: #ffffff00; 
+  color: #82736e;
+  text-decoration: none;
+  font-size: 11px;
+  transition: all 0.2s ease;
+    text-shadow: 
+    -1px -1px 0 #FFF6FE,  
+     1px -1px 0 #FFF6FE,
+    -1px  1px 0 #FFF6FE,
+     1px  1px 0 #FFF6FE;
+}
+
+.toro {
+    width: 40px;
+}
+
+/* 마우스 올렸을 때 효과 */
+.floating-home-btn:hover {
+  transform: translateY(-3px); /* 좀 더 확실하게 튀어 오르는 느낌 */
+}
+
+/* ★ 4. 마우스 올렸을 때 글자 스타일 변화 (선택사항) */
+.floating-home-btn:hover .btn-text {
+  color: #a2b3d6;        /* 마우스 올리면 글자색을 포인트 컬러로 변경 */
+  text-shadow: none;     /* 마우스 올리면 테두리 제거 (선택) */
+}
+</style>
+
+  <script>
+    function goToView(viewId) {
+      document.querySelectorAll('.view-screen').forEach(el => el.classList.remove('active'));
+      document.getElementById(viewId).classList.add('active');
+      
+      if (viewId !== 'view-log') {
+        closeTags(); 
+      }
+      document.getElementById('playlistModal').classList.remove('show');
+    }
+
+    function toggleTags() {
+      const wrapper = document.getElementById('tagDropdownWrapper');
+      const btn = wrapper.querySelector('.tag-toggle-btn');
+      
+      wrapper.classList.toggle('show');
+      btn.innerHTML = wrapper.classList.contains('show') ? '▼' : '▲';
+    }
+
+    function closeTags() {
+      const wrapper = document.getElementById('tagDropdownWrapper');
+      if (wrapper) {
+        wrapper.classList.remove('show');
+        wrapper.querySelector('.tag-toggle-btn').innerHTML = '▲';
+      }
+    }
+
+    function togglePlaylist() {
+      const modal = document.getElementById('playlistModal');
+      modal.classList.toggle('show');
+    }
+
+    // 📅 2014년 4월 시작 동적 달력 스크립트
+    let currentYear = 2014;
+    let currentMonth = 4;
+
+    const diaryData = {
+      "2014-04-01": { emoji: "⚾️", title: "개막전", content: "드디어 개막이다. 올해는 꼭..." },
+      "2014-04-03": { emoji: "🐾", title: "길냥이", content: "길고양이한테 캔을 줬다." },
+      "2014-04-08": { emoji: "🌸", title: "벚꽃", content: "벚꽃이 피었다. 훈련 끝나고 가는 길에..." },
+      "2014-05-05": { emoji: "🎏", title: "어린이날", content: "5월 다이어리 테스트 글입니다." }
+    };
+
+    function renderCalendar(year, month) {
+      const titleEl = document.getElementById('calTitle');
+      const gridEl = document.getElementById('calDaysGrid');
+      if (!gridEl) return;
+
+      const formattedMonth = String(month).padStart(2, '0');
+      titleEl.textContent = `${year}年 ${formattedMonth}月`;
+
+      gridEl.innerHTML = '';
+
+      const firstDay = new Date(year, month - 1, 1).getDay();
+      const lastDate = new Date(year, month, 0).getDate();
+
+      for (let i = 0; i < firstDay; i++) {
+        const emptyCell = document.createElement('div');
+        emptyCell.className = 'cal-cell empty';
+        gridEl.appendChild(emptyCell);
+      }
+
+      for (let date = 1; date <= lastDate; date++) {
+        const cell = document.createElement('div');
+        cell.className = 'cal-cell';
+        
+        const dateKey = `${year}-${formattedMonth}-${String(date).padStart(2, '0')}`;
+        const hasData = diaryData[dateKey];
+
+        cell.innerHTML = `
+          <span>${date}</span>
+          ${hasData ? `<span class="cal-emo">${hasData.emoji}</span>` : ''}
+        `;
+
+        cell.onclick = () => {
+          if (hasData) {
+            alert(`[${dateKey}] ${hasData.title}\n${hasData.content}`);
+          }
+        };
+
+        gridEl.appendChild(cell);
+      }
+    }
+
+    function changeMonth(delta) {
+      currentMonth += delta;
+
+      if (currentMonth < 1) {
+        currentMonth = 12;
+        currentYear--;
+      } else if (currentMonth > 12) {
+        currentMonth = 1;
+        currentYear++;
+      }
+
+      renderCalendar(currentYear, currentMonth);
+    }
+
+    const originalGoToView = goToView;
+    goToView = function(viewId) {
+      originalGoToView(viewId);
+      if (viewId === 'view-diary') {
+        renderCalendar(currentYear, currentMonth);
+      }
+    };
+
+    // 📖 [Char / 愛] 상세글 HTML 데이터 & 연결 로직
+    const charPostsData = {
+      "char-post-1": {
+        title: "비 내리는 날의 기록 🌧️",
+        content: `
+          <div style="text-align: center; margin-bottom: 15px;">
+            <span style="font-size: 10px; color: #aaa;">2014. 04. 15 | Weather: Rainy</span>
+            <h3 style="margin: 5px 0; color: #888;">비 내리는 날의 기록</h3>
+          </div>
+          
+          <p style="line-height: 1.8;">
+            연습이 일찍 끝난 날. 빗소리가 좋아서 
+            
+            <!-- 🌟 형광펜 코멘트 적용 부분 -->
+            <span class="hl-comment" onclick="toggleComment(this, event)">
+              방에서 한참 동안
+              <span class="hl-popup">💭 사실 세이 짱이 자고 있었음!</span>
+            </span> 
+            
+            창밖을 바라봤다.
+          </p>
+
+          <div style="background: #fdf7fa; border-left: 3px solid #cfb4c2; padding: 8px 12px; margin: 15px 0; font-size: 11px;">
+            "오늘 연습 수고했어. 내일도 비 오면 좋겠다."
+          </div>
+
+          <p style="line-height: 1.8;">
+            옆에서 누군가 건넨 한마디에 
+            
+            <!-- 🌟 또 다른 형광펜 예시 -->
+            <span class="hl-comment" onclick="toggleComment(this, event)">
+              괜히 웃음이 나왔다.
+              <span class="hl-popup">내일은 휴일이니까 ٩(ˊᗜˋ*)و</span>
+            </span>
+          </p>
+        `
+      }
+    };
+
+    function openCharDetail(postId) {
+      const post = charPostsData[postId];
+      if (!post) return;
+
+      document.getElementById('charDetailNavTitle').textContent = post.title;
+      document.getElementById('charDetailContent').innerHTML = post.content;
+
+      goToView('view-char-detail');
+    }
+
+    // 형광펜 코멘트 팝업 토글
+    function toggleComment(el, event) {
+      event.stopPropagation(); // 이벤트 전파 방지
+      
+      // 다른 열려있는 팝업 닫기
+      document.querySelectorAll('.hl-comment').forEach(item => {
+        if (item !== el) item.classList.remove('show-popup');
+      });
+
+      el.classList.toggle('show-popup');
+    }
+
+    // 바탕 클릭 시 팝업 닫기
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.hl-comment').forEach(item => {
+        item.classList.remove('show-popup');
+      });
+    });
+    // --------------------------------------------------
+    // 🍀 2열 대시보드 - D-Day & 랜덤 운세 위젯
+    // --------------------------------------------------
+
+    // 1) 랜덤 운세 배열 (자유롭게 추가/수정 가능)
+    const fortunes = [
+      "오늘은 완투승 느낌! ⚾<br>컨디션 최고조입니다.",
+      "요코하마 산책하기 딱<br>좋은 날씨네요 ☀️",
+      "당분 섭취가 필요합니다.<br>단 거 챙겨드세요 🍰",
+      "쉬는 날인데 직장인처럼<br>기상할 수도... ⏰",
+      "예상치 못한 행운이!<br>오늘은 뭐든 잘 풀려요 ✨",
+      "오늘은 푹 쉬는 걸 추천.<br>늦잠 자세요 💤"
+    ];
+
+    // 운세 뽑기 함수
+    function drawFortune() {
+      const luckyBox = document.getElementById('luckyBox');
+      const randomIndex = Math.floor(Math.random() * fortunes.length);
+      luckyBox.innerHTML = fortunes[randomIndex];
+    }
+
+    // 2) 디데이 계산 함수
+    function calcDDay(targetDateStr) {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      
+      const target = new Date(targetDateStr);
+      target.setHours(0, 0, 0, 0);
+      
+      const diffTime = today - target;
+      const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+      
+      if (diffDays === 0) return "D-DAY";
+      if (diffDays > 0) return `♡ +${diffDays}`;
+      return `D${diffDays}`; // 과거면 D-며칠
+    }
+
+    // 페이지 시작될 때 디데이 숫자 채워넣기 (원하는 날짜로 변경!)
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('dday-1').textContent = calcDDay("2026-03-26"); // 요코하마 개막일 기준 예시
+      document.getElementById('dday-2').textContent = calcDDay("2026-7-25"); // 다른 목표일 예시
+    });
+
+    // --------------------------------------------------
+    // 🏷️ 좌측 인덱스 탭 전환 로직
+    // --------------------------------------------------
+    function switchTab(tabNum) {
+      // 모든 내용과 꼬리표의 active 클래스 해제
+      document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-index').forEach(el => el.classList.remove('active'));
+
+      // 클릭한 번호만 active
+      document.getElementById(`tab-note-${tabNum}`).classList.add('active');
+      document.querySelectorAll('.tab-index')[tabNum - 1].classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
