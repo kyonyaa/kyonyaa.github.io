@@ -81,10 +81,6 @@
   font-weight: normal;
   font-style: normal;
 }
-
-  .article .title-wrap, .article-data, .sticker-wrapper, .personal, .came {
-    display: none !important;
-  }
   
   #container {
     width: 100% !important;
@@ -188,12 +184,14 @@
        📌 [MAIN] 화면 - 이미지 아이콘 버튼
        ========================================= */
     .inner {
-      width: 330px;
+      width: 350px;
+      height: 100%;
       border-width: 9px;
       border-style: solid;
       border-image: url("https://i.postimg.cc/jdM6yh46/qoxgh5.png") 8 round;
       margin: 5px auto;
       padding: 5px;
+      margin-bottom: 15px !important;
     }
 
     .maintext {
@@ -260,7 +258,7 @@
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      gap: 25px; 
+      gap: 20px; 
       padding: 10px 5px;
     }
 
@@ -269,7 +267,7 @@
       display: flex;
       flex-direction: column;
       gap: 12px;
-      width: 140px; /* 약간 넓힘 */
+      width: 200px; /* 약간 넓힘 */
     }
     .dash-right {
       display: flex;
@@ -283,25 +281,36 @@
       font-size: 10px;
       font-family: 'umdot12', monospace !important;
       filter: drop-shadow(1px 2px 0px rgb(214, 214, 214));
+      border: 1px solid;
+      padding: 10px;
+      margin-bottom: 10px;
     }
     .login-box label {
-      display: block; margin-bottom: 5px; color: var(--c-gray);
+      display: block; margin-bottom: 10px; color: var(--c-gray);
     }
     .login-input {
-      width: 100%; padding: 5px; margin-bottom: 8px;
-      font-family: inherit; font-size: 11px;
-      border: 1px solid #d4d4d4; background: #fff;
+      width: 100%;
+      padding: 5px;
+      margin-bottom: 8px;
+      font-family: inherit;
+      font-size: 11px;
+      border: 1px solid #d4d4d4;
+      background: #fff;
       color: var(--c-gray);
     }
     .login-submit {
-      background: var(--c--palepink); border: 1px solid #d4d4d4;
-      font-family: inherit; font-size: 9px; cursor: pointer; padding: 5px 5px;
+      background: var(--c--palepink);
+      border: 1px solid #d4d4d4;
+      font-family: inherit;
+      font-size: 9px;
+      cursor: pointer;
+      padding: 5px 5px;
       margin-right: 35%;
     }
 
     /* --- [좌측] 2) 나란한 D-Day 박스 --- */
     .dday-row {
-      display: flex; gap: 8px; justify-content: space-between;
+      display: flex; gap: 8px; justify-content: space-between; margin-left: 30px; margin-right: 30px; margin-bottom: 10px;
     }
     .dday-box.mini {
       flex: 1; padding: 0px;
@@ -328,7 +337,7 @@
       padding: 10px;
       font-size: 11px;
       line-height: 1.5;
-      min-height: 70px;
+      min-height: 150px;
       position: relative;
     }
     .tab-pane { display: none; }
@@ -339,14 +348,14 @@
       display: flex; flex-direction: column;
     }
     .tab-index {
-      width: 15px; padding: 5px 0;
+      width: 20px; padding: 5px 0;
       background: #e4e4e4; border: 1px solid #d4d4d4; border-left: none;
-      border-radius: 0 4px 4px 0;
+      border-radius: 0 0px 6px 0;
       margin-bottom: 4px;
       text-align: center; font-size: 9px; cursor: pointer;
       font-weight: bold;
     }
-    .tab-index.active { background: #fff; border-left: 1px solid #fff; margin-left: -1px; z-index: 2; }
+    .tab-index.active { background: #fff; border-left: 1px solid #fff; margin-left: -1px; z-index: 2;}
     
     /* 운세 박스 (탭2 내부) */
     .lucky-box {
@@ -1045,53 +1054,6 @@
     </div>
 
   </div>
-
-  <!-- 둥둥 뜨는 홈 버튼 -->
-<a href="/" class="floating-home-btn" title="메인 홈으로 이동">
-  <img class="toro" src="https://yokai.crd.co/assets/images/image57.gif?v=b4df531c;">
-  <span class="btn-text"></span>
-</a>
-
-<style>
-    /* 플로팅 홈 버튼 스타일 */
-.floating-home-btn {
-  position: fixed;        /* 화면에 위치 고정 */
-  bottom: 630px;           /* 아래에서 25px 띄움 */
-  left: 25px;            /* 오른쪽에서 25px 띄움 */
-  z-index: 99999;         /* 다른 요소들보다 제일 위에 띄움 */
-  
-  display: flex;
-  align-items: center;
-  gap: 3px;
-  line-height: 1.4;
-  padding: 10px -10px;
-  background-color: #ffffff00; 
-  color: #82736e;
-  text-decoration: none;
-  font-size: 11px;
-  transition: all 0.2s ease;
-    text-shadow: 
-    -1px -1px 0 #FFF6FE,  
-     1px -1px 0 #FFF6FE,
-    -1px  1px 0 #FFF6FE,
-     1px  1px 0 #FFF6FE;
-}
-
-.toro {
-    width: 40px;
-}
-
-/* 마우스 올렸을 때 효과 */
-.floating-home-btn:hover {
-  transform: translateY(-3px); /* 좀 더 확실하게 튀어 오르는 느낌 */
-}
-
-/* ★ 4. 마우스 올렸을 때 글자 스타일 변화 (선택사항) */
-.floating-home-btn:hover .btn-text {
-  color: #a2b3d6;        /* 마우스 올리면 글자색을 포인트 컬러로 변경 */
-  text-shadow: none;     /* 마우스 올리면 테두리 제거 (선택) */
-}
-</style>
 
   <script>
     function goToView(viewId) {
