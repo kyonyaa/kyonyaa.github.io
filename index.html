@@ -519,7 +519,7 @@
     .selected-tags-bar {
       width: 360px;
       margin: auto;
-      padding: 8px 12px; font-weight: bold;
+      padding: 12px 12px; font-weight: bold;
       border: 1px solid #d4d4d4; 
       background-image: url('https://i.pinimg.com/736x/93/44/c1/9344c1df0d4a92c1c142ce0ea947f140.jpg');
       background-size: cover;
@@ -612,13 +612,13 @@
     }
 
     /* =========================================
-       📌 게시글 목록 공통
+       📌 일반 게시글 목록 공통
        ========================================= */
     .post-list { 
       margin: auto;
       flex: 1; 
       overflow-y: auto !important;
-      padding: 0 20px 45px 20px; /* 하단 백버튼 공간 확보를 위한 패딩 수정 */
+      padding: 0 20px 45px 20px; 
       display: flex; flex-direction: column; gap: 10px; 
       -ms-overflow-style: none; scrollbar-width: none;
       min-height: 0;
@@ -626,6 +626,7 @@
 
     .post-list::-webkit-scrollbar { display: none; }
 
+    /* 목록 전용 카드 */
     .post-card {
       border-width: 7px;
       width: 360px;
@@ -636,8 +637,39 @@
     }
 
     .post-card-title { font-weight: bold; font-size: 12px; margin-bottom: 6px; }
+    
+    /* 일반 목록 텍스트 */
     .post-card-content { font-size: 11px; line-height: 1.8; }
 
+    /* =========================================
+       📌 상세글 전용 본문 박스 (공책 스타일)
+       ========================================= */
+    .detail-card {
+      border-width: 7px;
+      width: 360px;
+      border-style: solid;
+      
+      /* 🌟 기존 '8 fill round'에서 'fill'을 삭제해서 배경이 보이게 수정 */
+      border-image: url("https://github.com/okayletsgo555/img/blob/main/%EA%B7%B8%EB%A0%88%EC%9D%B4%20%ED%94%84%EB%A0%88%EC%9E%84.png?raw=true") 8 round;
+      padding: 30px 8px 30px 8px;
+      min-height: 350px;
+
+      
+      /* 줄무늬 공책 배경 (흰 바탕 + 회색 선 분리) */
+      background-color: #ffffff;
+      background-image: repeating-linear-gradient(
+        transparent,
+        transparent 25px,
+        #d0d0d0 26px
+      );
+    }
+    /* 상세글 내부 텍스트 폰트 크기 및 줄간격 세팅 */
+    .detail-card .post-card-content {
+      font-size: 12px !important;    /* 🌟 여기서 폰트 크기를 마음대로 조절하세요! */
+      line-height: 26px !important;  /* 🌟 줄무늬 간격(22px)과 똑같이 맞춰야 글자가 선 위에 예쁘게 올라갑니다 */
+      margin-top: -28px;               /* 글자가 줄 위에 자연스럽게 얹혀지도록 미세 위치 조정 */
+
+    }
     /* =========================================
        📌 하단 고정 BGM & 네비게이션 바
        ========================================= */
@@ -724,8 +756,8 @@
        📌 상세 페이지 상단 바 & 버튼 공통
        ========================================= */
     .detail-top-bar {
-      margin: 5px 23px 10px 23px;
-      padding: 8px 12px; font-weight: bold;
+      margin: 5px 21px 10px 21px;
+      padding: 12px 12px; font-weight: bold;
       border: 1px solid #d4d4d4; 
       background-image: url('https://i.pinimg.com/736x/93/44/c1/9344c1df0d4a92c1c142ce0ea947f140.jpg');
       background-size: cover;
@@ -743,7 +775,7 @@
       background: var(--c--palepink);
       border: 1px solid #d4d4d4;
       border-radius: 4px;
-      padding: 4px 8px 8px 8px;
+      padding: 8px 8px 12px 8px;
       font-size: 12px;
       cursor: pointer;
       width: 70px;
@@ -771,22 +803,38 @@
       font-size: 9px;
       font-weight: bold;
       cursor: pointer;
-      padding: 5px 12px;
+      padding: 3px 8px;
       border: 2px solid;
       border-color: #ffffff #bababa #bababa #ffffff;
       border-radius: 4px;
       color: inherit;
       text-decoration: none;
+      
+      /* 🌟 제목 바 우측 중앙 정렬 배치 */
       position: absolute;
-      bottom: 5px;
-      left:10px;
-      height: 25px;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 24px;
+      
       z-index: 50;
-      filter: drop-shadow(1px 2px 0px rgb(214, 214, 214));
+      filter: drop-shadow(1px 1px 0px rgb(214, 214, 214));
       display: flex;
       justify-content: center;
       align-items: center;
     }
+
+    .link-btn:active {
+      border-color: #bababa #ffffff #ffffff #bababa;
+      transform: translateY(-50%) translateY(1px);
+      filter: none;
+    }
+
+.link-btn:active {
+  border-color: #bababa #ffffff #ffffff #bababa;
+  transform: translateY(2px);
+  filter: none;
+}
 
     .link-btn:active {
       border-color: #bababa #ffffff #ffffff #bababa;
@@ -1105,15 +1153,17 @@
       <div id="view-log-detail" class="view-screen">
         <div class="detail-top-bar">
           <span style="font-size: 12px; font-weight: bold;">0점의 밤</span>
+          <button class="link-btn" onclick="window.open('https://티스토리링크입력', '_blank')">LINK</button>
         </div>
         <div class="post-list">
-          <div class="post-card" style="min-height: 300px;">
-            <div class="post-card-content" style="font-size: 12px; line-height: 1.8;">
-              홈런을 쳤다. 7이닝 무실점 팀 승리.<br><br>
+          <div class="detail-card" style="min-height: 300px;">
+            <div class="post-card-content">
+              <br>홈런을 쳤다. 7이닝 무실점 팀 승리.<br><br>
               그런데 오늘 하루 중 제일 심장이 뛴 순간이 뭐냐고 물으면, 경기 끝나고 라커룸으로 들어올 때 마주친 그 녀석의 표정이었다.<br><br>
               수고했다는 말 한마디 없이 건네준 스포츠 드링크가 왜 이렇게 차가운지... (여기에 본문 내용 작성)
-              <button class="link-btn" onclick="window.open('https://티스토리링크입력', '_blank')">LINK</button>
+              
             </div>
+            
           </div>
         </div>
         
@@ -1150,7 +1200,7 @@
           <span id="diaryDetailNavTitle" style="font-size: 12px; font-weight: bold;">날짜</span>
         </div>
         <div class="post-list">
-          <div class="post-card" style="min-height: 350px; background: #ffffff;">
+          <div class="detail-card">
             <div id="diaryDetailContent" class="post-card-content"></div>
           </div>
         </div>
@@ -1176,11 +1226,11 @@
       <div id="view-char-detail" class="view-screen">
         <div class="detail-top-bar">
           <span id="charDetailNavTitle" style="font-size: 12px; font-weight: bold;">글 제목</span>
+          <button class="link-btn" onclick="window.open('https://티스토리링크입력', '_blank')">LINK</button>
         </div>
         <div class="post-list">
-          <div class="post-card" style="min-height: 350px; background: #ffffff;">
+          <div class="detail-card">
             <div id="charDetailContent" class="post-card-content"></div>
-            <button class="link-btn" onclick="window.open('https://티스토리링크입력', '_blank')">LINK</button>
           </div>
         </div>
         <button class="back-btn" onclick="goBack()">◀ BACK</button>
@@ -1204,20 +1254,20 @@
             <div class="post-card-content">이 세계관의 2014년 타임라인에 대하여...</div>
           </div>
         </div>
-        <button class="back-btn" onclick="goBack()">◀ BACK</button>
       </div>
 
       <!-- 5-1. [OOC Detail] 기타 카테고리 상세글 화면 -->
       <div id="view-ooc-detail" class="view-screen">
         <div class="detail-top-bar">
           <span id="oocDetailNavTitle" style="font-size: 12px; font-weight: bold;">기타 게시글</span>
+          <button class="link-btn" onclick="window.open('https://티스토리링크입력', '_blank')">LINK</button>
         </div>
         <div class="post-list">
-          <div class="post-card" style="min-height: 350px; background: #ffffff;">
+          <div class="detail-card">
             <div id="oocDetailContent" class="post-card-content">
               여기에 OOC 본문 내용이 들어갑니다.
             </div>
-            <button class="link-btn" onclick="window.open('https://티스토리링크입력', '_blank')">LINK</button>
+            
           </div>
         </div>
         <button class="back-btn" onclick="goBack()">◀ BACK</button>
@@ -1516,7 +1566,7 @@
       { name: "레이", text: "행운의 장소는 사람들이 많이 모이는 곳. 혼자 있지 말고 나와! ( > ₃ <)ﾉ🎉" },
       { name: "레이", text: "조금 힘들어도 끝까지 해보자. 오늘은 네가 이기는 날이야! (ง'̀-'́)ง 🏆" },
       { name: "레이", text: "새로운 시도를 하기 좋은 날! 나랑 캐치볼 할래? ⸜(｡˃ ᵕ ˂ )⸝⚾ ⚾" },
-      { name: "레이", text: "포기하기엔 아직 이른 것 같은데? 한 번만 더 해보자! ┌(｡Д｡┌ )┐ 🔥" },
+      { name: "레이", text: "포기하기엔 아직 이른 것 같은데? 한 번만 더 해보자!<br>┌(｡Д｡┌ )┐ 🔥" },
       { name: "레이", text: "뭐든, 네가 생각한 것보다 잘 풀릴 거야. (´｡• ᵕ •｡`) 🌈" },
       { name: "레이", text: "좋은 사람을 만나게 될 거래! ......혹시 나? ( ៸៸ › ⩊ ‹ ៸៸) 💛" },
       { name: "레이", text: "평소보다 자신 있게! 어깨 펴!<br>( •̀ᗝ•́ )و 💪" },
