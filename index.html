@@ -76,7 +76,7 @@
 }
 
 @font-face {
-  font-family: 'umdot12';
+  font-family: 'mona12';
   src: url('https://cdn.jsdelivr.net/gh/MonadABXY/limgul-font@main/woff2/Limgul12.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
@@ -177,6 +177,7 @@
       display: none;
       flex-direction: column;
       min-height: 0;
+      position: relative; /* 백버튼 absolute 배치를 위해 필수 */
     }
     .view-screen.active { display: flex; }
 
@@ -269,7 +270,7 @@
       display: flex;
       flex-direction: column;
       gap: 12px;
-      width: 210px; /* 약간 넓힘 */
+      width: 210px;
     }
     .dash-right {
       display: flex;
@@ -286,7 +287,7 @@
       background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('https://i.pinimg.com/736x/41/14/58/411458839be4feb01e6bf12e34f0f006.jpg');
       background-size: cover;
       border: 2px solid;
-      border-color: #ffffff #999 #999 #ffffff; /* 밖으로 튀어나온 3D 테두리 */
+      border-color: #ffffff #bababa #bababa #ffffff;
       border-radius: 8px;
       padding: 10px;
       margin-bottom: 5px;
@@ -294,7 +295,7 @@
     
     .login-box label {
       display: block; 
-      margin-bottom: 2px; /* 레트로 폼 특유의 좁은 간격으로 수정 */
+      margin-bottom: 2px;
       color: #333; 
     }
     
@@ -307,26 +308,29 @@
       background: #fff;
       color: var(--c-gray);
       border: 3px solid;
-      border-color: #999 #ffffff #ffffff #999; /* 안으로 파인 3D 음각 테두리 */
+      border-color: #bababa #ffffff #ffffff #bababa;
       outline: none;
       box-sizing: border-box;
     }
     
     .login-submit {
-      background: var(--c--palepink); /* 기존 핑크색 유지 */
+      background: var(--c--palepink);
       font-family: inherit;
       font-size: 9px;
       cursor: pointer;
       padding: 5px 5px;
       margin-right: 35%;
       border: 2px solid;
-      border-color: #ffffff #999 #999 #ffffff; /* 밖으로 튀어나온 3D 버튼 테두리 */
+      border-color: #ffffff #bababa #bababa #ffffff;
       border-radius: 4px;
+      color: inherit;
+      text-decoration: none;
+      -webkit-appearance: none;
+      appearance: none;
     }
 
-    /* 버튼을 클릭했을 때 안으로 쏙 들어가는 효과 */
     .login-submit:active {
-      border-color: #999 #ffffff #ffffff #999; 
+      border-color: #bababa #ffffff #ffffff #bababa; 
       transform: translateY(1px);
     }
 
@@ -345,7 +349,6 @@
     .dday-title { font-size: 9px; color: #a47d91; margin-bottom: 1.5px; }
     .dday-count { font-weight: bold; font-size: 11px; color: var(--c-gray); }
 
-
     /* --- [좌측] 3) 인덱스 탭 노트 (상단 배치) --- */
     .tab-note-container {
       display: flex;
@@ -354,7 +357,6 @@
       filter: drop-shadow(1px 2px 0px rgb(214, 214, 214));
     }
     
-    /* 상단 인덱스 탭 꼬리표 */
     .tab-note-indices {
       display: flex; 
       flex-direction: row;
@@ -362,7 +364,7 @@
     }
     .tab-index {
       width: 50px; 
-      padding: 4px 0;
+      padding: 7px 0;
       background: var(--c--palepink); 
       border: 1px solid #d4d4d4; 
       border-bottom: none; 
@@ -370,6 +372,7 @@
       text-align: center; 
       font-size: 9px; 
       cursor: pointer;
+      margin-bottom: -1px;
       font-weight: bold;
     }
     .tab-index.active { 
@@ -378,7 +381,6 @@
       z-index: 2; 
     }
 
-    /* 본문 내용 */
     .tab-note-content {
       width: 100%;
       background: #fff;
@@ -386,7 +388,7 @@
       border-radius: 0 4px 4px 4px; 
       padding: 10px;
       font-size: 11px;
-      line-height: 1.5;
+      line-height: 1.8;
       min-height: 170px;
       overflow-y: auto;
       position: relative;
@@ -396,20 +398,13 @@
     .tab-pane { display: none; }
     .tab-pane.active { display: block; }
     
-    /* 운세 박스 (탭2 내부) */
     .lucky-box {
-      text-align: center; cursor: pointer; font-weight: bold; margin-top: 5px;
+      text-align: center; cursor: pointer; font-weight: bold; margin-top: 5px; 
     }
 
-    .lucky-box:hover {
-      background: #fdf7fa;
-      border-color: #cfb4c2;
-    }
     .lucky-box:active {
       transform: translateY(2px);
-      box-shadow: 0px 1px 0px rgb(214, 214, 214);
     }
-
 
     /* --- [우측] 프로필 이미지 --- */
     .profile-img-box {
@@ -421,8 +416,6 @@
     }
     .profile-img { width: 100%; height: 100%; object-fit: cover; }
 
-    
-    /* 메인 텍스트 아카이브 디자인 수정 */
     .maintext {
      text-rendering: optimizeLegibility;
      font-family: 'NegaTape';
@@ -445,7 +438,7 @@
     .selected-tags-bar {
       width: 360px;
       margin: auto;
-      padding: 8px 12px; font-size: 11px; font-weight: bold;
+      padding: 8px 12px; font-weight: bold;
       border: 1px solid #d4d4d4; 
       background-image: url('https://i.pinimg.com/736x/93/44/c1/9344c1df0d4a92c1c142ce0ea947f140.jpg');
       background-size: cover;
@@ -538,13 +531,13 @@
     }
 
     /* =========================================
-       📌 [Log] 게시글 목록
+       📌 게시글 목록 공통
        ========================================= */
     .post-list { 
       margin: auto;
       flex: 1; 
       overflow-y: auto !important;
-      padding: 0 20px 15px 20px; 
+      padding: 0 20px 45px 20px; /* 하단 백버튼 공간 확보를 위한 패딩 수정 */
       display: flex; flex-direction: column; gap: 10px; 
       -ms-overflow-style: none; scrollbar-width: none;
       min-height: 0;
@@ -595,7 +588,7 @@
       border: 1px solid #d4d4d4; 
       border-bottom: none; 
       border-radius: 12px 12px 0 0; 
-      padding: 10 10px;
+      padding: 10px;
       display: flex; flex-direction: column; gap: 5px; z-index: 99;
       max-height: 0;
       opacity: 0;
@@ -624,17 +617,17 @@
         line-height: 1.6;
         border-width:7px;
       border-style:solid;
-      border-image: url("https://github.com/okayletsgo555/img/blob/main/%EA%B7%B8%EB%A0%88%EC%9D%B4%20%ED%94%84%EB%A0%88%EC%9E%84.png?raw=true") 8 fill round;
+      border-image: url("https://github.com/okayletsgo555/img/blob/main/%EA%B7%B8%EB%A0%88%EC%9D%B4%20%ED%94%84%EB%A0%88%EC%9D%B4%20%ED%94%84%EB%A0%88%EC%9E%84.png?raw=true") 8 fill round;
         cursor: pointer; }
 
     .song-item:hover { background: #e4e4e4; }
 
     /* =========================================
-       📌 [Log Detail] 상세 페이지 상단 바
+       📌 상세 페이지 상단 바 & 버튼 공통
        ========================================= */
     .detail-top-bar {
       margin: 5px 27px 10px 27px;
-      padding: 8px 12px; font-size: 11px; font-weight: bold;
+      padding: 8px 12px; font-weight: bold;
       border: 1px solid #d4d4d4; 
       background-image: url('https://i.pinimg.com/736x/93/44/c1/9344c1df0d4a92c1c142ce0ea947f140.jpg');
       background-size: cover;
@@ -645,6 +638,7 @@
       filter: drop-shadow(1px 2px 0px rgb(214, 214, 214));
     }
 
+    /* ◀ BACK 버튼 (각 화면 우측 하단 고정) */
     .back-btn {
       font-family: 'undot12' !important;
       color: var(--c--gray);
@@ -652,14 +646,14 @@
       border: 1px solid #d4d4d4;
       border-radius: 4px;
       padding: 4px 8px 8px 8px;
-      font-size: 11px;
-      font-family: inherit;
+      font-size: 12px;
       cursor: pointer;
       width: 70px;
-      height: 40px;
+      height: 35px;
       position: absolute; 
       bottom: 0px; 
-      right: 10px; 
+      right: 20px; 
+      z-index: 50;
       filter: drop-shadow(1px 2px 0px rgb(214, 214, 214));
     }
 
@@ -670,6 +664,36 @@
     .back-btn:hover {
       transform: translateY(-2px);
       color: #cfb4c2;
+    }
+
+    /* 🔗 하단 좌측 LINK 버튼 (각 상세 화면 좌측 하단 고정) */
+    .link-btn {
+      background: var(--c--palepink);
+      font-family: inherit;
+      font-size: 9px;
+      font-weight: bold;
+      cursor: pointer;
+      padding: 5px 12px;
+      border: 2px solid;
+      border-color: #ffffff #bababa #bababa #ffffff;
+      border-radius: 4px;
+      color: inherit;
+      text-decoration: none;
+      position: absolute;
+      bottom: 5px;
+      left: 20px;
+      height: 35px;
+      z-index: 50;
+      filter: drop-shadow(1px 2px 0px rgb(214, 214, 214));
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .link-btn:active {
+      border-color: #bababa #ffffff #ffffff #bababa;
+      transform: translateY(2px);
+      filter: none;
     }
 
     /* =========================================
@@ -751,13 +775,13 @@
     .category-tabs {
       display: flex;
       gap: 5px;
-      margin: 12px 20px -2px 24px;
+      margin: 12px 25px -2px 28px;
     }
     .cat-tab {
       background: #e4e4e4;
       border: 1px solid #d4d4d4;
       border-radius: 6px 6px 0 0;
-      padding: 6px 12px;
+      padding: 6px 14px;
       font-size: 11px;
       font-weight: bold;
       cursor: pointer;
@@ -793,10 +817,6 @@
       background: #f0f4f7;
     }
 
-    /* 말풍선 팝업 */
-    /* =========================================
-       🖍️ 형광펜 & 코멘트 말풍선 팝업 (꼬리표 수정)
-       ========================================= */
     .hl-popup {
       position: absolute;
       bottom: 165%;
@@ -815,33 +835,89 @@
       font-weight: normal;
     }
 
-    /* 1. 바깥쪽 테두리 삼각형 (기존 after) */
     .hl-popup::after {
       content: '';
       position: absolute;
       top: 100%;
       left: 50%;
-      margin-left: -5px; /* 크기 커진만큼 조절 */
+      margin-left: -5px;
       border-width: 8px;
       border-style: solid;
       border-color: #cdcdcd transparent transparent transparent;
     }
 
-    /* 2. 안쪽 배경색 삼각형 (새로 추가하는 before) */
     .hl-popup::before {
       content: '';
       position: absolute;
       top: 100%;
       left: 50%;
-      margin-left: -4px; /* 테두리 두께(1px)만큼 안쪽으로 정렬 */
-      border-width: 6px; /* 테두리보다 1px 작게 */
+      margin-left: -4px;
+      border-width: 6px;
       border-style: solid;
       border-color: var(--c--palepink) transparent transparent transparent;
-      z-index: 1; /* 테두리 삼각형 위에 얹기 */
+      z-index: 1;
     }
 
     .hl-comment.show-popup .hl-popup {
       display: block;
+    }
+
+    /* =========================================
+       🍀 운세 말풍선 UI
+       ========================================= */
+    .fortune-bubble-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      margin-top: -5px;
+    }
+
+    .fortune-bubble {
+      position: relative;
+      background: #fff;
+      border: 1px solid #d4d4d4;
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 11px;
+      color: var(--c-gray);
+      line-height: 1.6;
+      text-align: justify;
+      margin-bottom: 8px;
+      width: 100%;
+      box-sizing: border-box;
+      box-shadow: 1px 2px 0px rgb(214, 214, 214);
+    }
+
+    .fortune-bubble::before {
+      content: '';
+      position: absolute;
+      bottom: -7px;
+      right: 14px;
+      border-width: 7px 7px 0;
+      border-style: solid;
+      border-color: #d4d4d4 transparent transparent transparent;
+    }
+
+    .fortune-bubble::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      right: 15px;
+      border-width: 6px 6px 0;
+      border-style: solid;
+      border-color: #fff transparent transparent transparent;
+    }
+
+    .fortune-name {
+      font-size: 10px;
+      font-weight: bold;
+      color: #a47d91;
+      background: var(--c--palepink);
+      border: 1px solid #d4d4d4;
+      padding: 3px 8px;
+      border-radius: 4px;
+      box-shadow: 1px 1px 0px rgb(214, 214, 214);
+      margin-right: 5px;
     }
   </style>
 </head>
@@ -856,15 +932,14 @@
 
     <!-- 📌 [가변 영역] 본문 구역 -->
     <div class="content-area">
+      
       <!-- 1. [MAIN] 화면 -->
       <div id="view-main" class="view-screen active">
         <div class="inner">
           <div class="main-dashboard">
             
-            <!-- 🌟 좌측 위젯 영역 (로그인, D-Day, 탭노트) -->
+            <!-- 🌟 좌측 위젯 영역 -->
             <div class="dash-left">
-
-              <!-- 2) 가로 2개 D-Day 위젯 -->
               <div class="dday-row">
                 <div class="dday-box mini">
                   <div class="dday-title">一生分の好き</div>
@@ -876,7 +951,6 @@
                 </div>
               </div>
               
-              <!-- 1) 로그인 박스 -->
               <div class="login-box">
                 <label>Username</label>
                 <input type="text" class="login-input" value="yaong">
@@ -887,37 +961,28 @@
                 </div>
               </div>
 
-              
-              
-              <!-- 3) 인덱스 탭 노트 박스 -->
               <div class="tab-note-container">
-                <!-- 오른쪽 인덱스 탭 꼬리표 -->
                 <div class="tab-note-indices">
                   <div class="tab-index active" onclick="switchTab(1)">INFO</div>
                   <div class="tab-index" onclick="switchTab(2)">LUCKY</div>
                 </div>
                 <div class="tab-note-content">
-                  <!-- 탭 1번 내용 (텍스트) -->
                   <div id="tab-note-1" class="tab-pane active">
                     방명록을 남겨주세요.<br>
                     오늘도 맑음 ☀️
                   </div>
-                  <!-- 탭 2번 내용 (운세) -->
-                 <div id="tab-note-2" class="tab-pane">
+                  <div id="tab-note-2" class="tab-pane">
                     <div id="luckyBox" class="lucky-box" onclick="drawFortune()">
                       오늘의 운세 보기 🍀<br>
                       <span style="font-size:9px; color:#aaa; font-weight:normal;">(클릭!)</span>
-                      </div>
+                    </div>
                   </div>
                 </div>
-                
               </div>
             </div>
 
-            <!-- 🌟 우측 메뉴 버튼 영역 (기존 유지) -->
+            <!-- 🌟 우측 메뉴 버튼 영역 -->
             <div class="dash-right">
-              
-              <!-- 프로필 이미지 박스 추가 -->
               <div class="profile-img-box">
                 <img src="https://i.pinimg.com/736x/28/b0/06/28b0068418fc677d8d800733fb62b9ae.jpg" alt="Profile" class="profile-img">
               </div>
@@ -942,7 +1007,7 @@
                 </div>
               </div>
             </div>
-            
+
           </div>
         </div>
       </div>
@@ -952,7 +1017,6 @@
         <div class="selected-tags-bar-wrapper">
           <div id="tagDropdownWrapper" class="tag-dropdown-wrapper">
             <div class="tag-toggle-btn" onclick="toggleTags()">▲</div>
-            
             <div class="tag-dropdown-content">
               <div class="tag-search-wrapper">
                 <input type="text" class="tag-search-input" placeholder="search">
@@ -998,7 +1062,6 @@
         <div class="detail-top-bar">
           <span style="font-size: 12px; font-weight: bold;">0점의 밤</span>
         </div>
-        
         <div class="post-list">
           <div class="post-card" style="min-height: 300px;">
             <div class="post-card-content" style="font-size: 12px; line-height: 1.8;">
@@ -1008,10 +1071,11 @@
             </div>
           </div>
         </div>
+        <button class="link-btn" onclick="window.open('https://티스토리링크입력', '_blank')">LINK</button>
         <button class="back-btn" onclick="goBack()">◀ BACK</button>
       </div>
 
-      <!-- 3. [Diary] 일기 (달력 + 고정 스크롤 목록) -->
+      <!-- 3. [Diary] 일기 (달력) -->
       <div id="view-diary" class="view-screen">
         <div class="calendar-wrapper">
           <div class="calendar-header">
@@ -1031,8 +1095,21 @@
           </div>
           <div id="calDaysGrid" class="calendar-grid" style="margin-top: 2px;"></div>
         </div>
-
         <div class="post-list" id="diaryPostList"></div>
+        <button class="back-btn" onclick="goBack()">◀ BACK</button>
+      </div>
+
+      <!-- 3-1. [Diary Detail] 일기 상세글 화면 -->
+      <div id="view-diary-detail" class="view-screen">
+        <div class="detail-top-bar">
+          <span id="diaryDetailNavTitle" style="font-size: 12px; font-weight: bold;">날짜</span>
+        </div>
+        <div class="post-list">
+          <div class="post-card" style="min-height: 350px; background: #ffffff;">
+            <div id="diaryDetailContent" class="post-card-content"></div>
+          </div>
+        </div>
+        <button class="link-btn" onclick="window.open('https://티스토리링크입력', '_blank')">LINK</button>
         <button class="back-btn" onclick="goBack()">◀ BACK</button>
       </div>
 
@@ -1056,13 +1133,12 @@
         <div class="detail-top-bar">
           <span id="charDetailNavTitle" style="font-size: 12px; font-weight: bold;">글 제목</span>
         </div>
-
         <div class="post-list">
           <div class="post-card" style="min-height: 350px; background: #ffffff;">
             <div id="charDetailContent" class="post-card-content"></div>
           </div>
         </div>
-        <!-- 🌟 BACK 버튼 누르면 view-char (목록)으로 복귀 -->
+        <button class="link-btn" onclick="window.open('https://티스토리링크입력', '_blank')">LINK</button>
         <button class="back-btn" onclick="goBack()">◀ BACK</button>
       </div>
 
@@ -1075,15 +1151,31 @@
         </div>
         
         <div class="post-list">
-          <div class="post-card">
+          <div class="post-card" onclick="goToView('view-ooc-detail')" style="cursor: pointer;">
             <div class="post-card-title">[공지] 업데이트 안내</div>
             <div class="post-card-content">다이어리 스킨이 업데이트 되었습니다! HTML을 정리 중입니다.</div>
           </div>
-          <div class="post-card">
+          <div class="post-card" onclick="goToView('view-ooc-detail')" style="cursor: pointer;">
             <div class="post-card-title">[설정] 타임라인 요약</div>
             <div class="post-card-content">이 세계관의 2014년 타임라인에 대하여...</div>
           </div>
         </div>
+        <button class="back-btn" onclick="goBack()">◀ BACK</button>
+      </div>
+
+      <!-- 5-1. [OOC Detail] 기타 카테고리 상세글 화면 -->
+      <div id="view-ooc-detail" class="view-screen">
+        <div class="detail-top-bar">
+          <span id="oocDetailNavTitle" style="font-size: 12px; font-weight: bold;">기타 게시글</span>
+        </div>
+        <div class="post-list">
+          <div class="post-card" style="min-height: 350px; background: #ffffff;">
+            <div id="oocDetailContent" class="post-card-content">
+              여기에 OOC 본문 내용이 들어갑니다.
+            </div>
+          </div>
+        </div>
+        <button class="link-btn" onclick="window.open('https://티스토리링크입력', '_blank')">LINK</button>
         <button class="back-btn" onclick="goBack()">◀ BACK</button>
       </div>
 
@@ -1118,18 +1210,15 @@
     // --------------------------------------------------
     // 🔄 화면 전환 및 뒤로가기(History Stack) 로직
     // --------------------------------------------------
-    let historyStack = []; // 지나온 화면들을 차곡차곡 쌓아둘 배열
+    let historyStack = [];
 
-    // 두 번째 변수(isBack)를 추가해서 뒤로가기 중인지 판별
     function goToView(viewId, isBack = false) {
       const currentActive = document.querySelector('.view-screen.active');
       
-      // 뒤로가기로 이동하는 게 아닐 때만, 현재 화면을 기록장에 추가
       if (!isBack && currentActive && currentActive.id !== viewId) {
         historyStack.push(currentActive.id);
       }
 
-      // 화면 전환
       document.querySelectorAll('.view-screen').forEach(el => el.classList.remove('active'));
       document.getElementById(viewId).classList.add('active');
       
@@ -1139,17 +1228,15 @@
       document.getElementById('playlistModal').classList.remove('show');
     }
 
-    // ◀ BACK 버튼 전용 함수
     function goBack() {
       if (historyStack.length > 0) {
-        // 기록장(Stack)에서 가장 마지막 화면을 하나 빼서 거기로 이동
         const prev = historyStack.pop(); 
-        goToView(prev, true); // true를 넣어서 기록이 또 중복으로 쌓이지 않게 방지
+        goToView(prev, true);
       } else {
-        // 혹시 기록이 꼬여서 없으면 무조건 메인으로 강제 이동
         goToView('view-main');
       }
     }
+
     function toggleTags() {
       const wrapper = document.getElementById('tagDropdownWrapper');
       const btn = wrapper.querySelector('.tag-toggle-btn');
@@ -1189,7 +1276,6 @@
 
       const formattedMonth = String(month).padStart(2, '0');
       titleEl.textContent = `${year}年 ${formattedMonth}月`;
-
       gridEl.innerHTML = '';
 
       const firstDay = new Date(year, month - 1, 1).getDay();
@@ -1204,7 +1290,6 @@
       for (let date = 1; date <= lastDate; date++) {
         const cell = document.createElement('div');
         cell.className = 'cal-cell';
-        
         const dateKey = `${year}-${formattedMonth}-${String(date).padStart(2, '0')}`;
         const hasData = diaryData[dateKey];
 
@@ -1215,10 +1300,17 @@
 
         cell.onclick = () => {
           if (hasData) {
-            alert(`[${dateKey}] ${hasData.title}\n${hasData.content}`);
+            document.getElementById('diaryDetailNavTitle').textContent = hasData.title;
+            document.getElementById('diaryDetailContent').innerHTML = `
+              <div style="text-align: center; margin-bottom: 15px;">
+                <span style="font-size: 10px; color: #aaa;">${dateKey}</span>
+                <h3 style="margin: 5px 0; color: #888;">${hasData.title}</h3>
+              </div>
+              <p style="line-height: 1.8;">${hasData.content}</p>
+            `;
+            goToView('view-diary-detail');
           }
         };
-
         gridEl.appendChild(cell);
       }
     }
@@ -1238,9 +1330,8 @@
     }
 
     const originalGoToView = goToView;
-    // 두 번째 인자(isBack)도 받을 수 있도록 수정
     goToView = function(viewId, isBack = false) { 
-      originalGoToView(viewId, isBack); // 비밀 메시지 그대로 전달!
+      originalGoToView(viewId, isBack);
       if (viewId === 'view-diary') {
         renderCalendar(currentYear, currentMonth);
       }
@@ -1259,7 +1350,6 @@
           <p style="line-height: 1.8;">
             연습이 일찍 끝난 날. 빗소리가 좋아서 
             
-            <!-- 🌟 형광펜 코멘트 적용 부분 -->
             <span class="hl-comment" onclick="toggleComment(this, event)">
               방에서 한참 동안
               <span class="hl-popup">💭 사실 세이 짱이 자고 있었음!</span>
@@ -1275,12 +1365,21 @@
           <p style="line-height: 1.8;">
             옆에서 누군가 건넨 한마디에 
             
-            <!-- 🌟 또 다른 형광펜 예시 -->
             <span class="hl-comment" onclick="toggleComment(this, event)">
               괜히 웃음이 나왔다.
               <span class="hl-popup">내일은 휴일이니까 ٩(ˊᗜˋ*)و</span>
             </span>
           </p>
+        `
+      },
+      "char-post-2": {
+        title: "원정 경기 일기 ⚾",
+        content: `
+          <div style="text-align: center; margin-bottom: 15px;">
+            <span style="font-size: 10px; color: #aaa;">2014. 04. 20 | Weather: Clear</span>
+            <h3 style="margin: 5px 0; color: #888;">원정 경기 일기</h3>
+          </div>
+          <p style="line-height: 1.8;">요코하마 원정 3연전 마지막 날. 호텔 근처 산책...</p>
         `
       }
     };
@@ -1295,135 +1394,32 @@
       goToView('view-char-detail');
     }
 
-    // 형광펜 코멘트 팝업 토글
     function toggleComment(el, event) {
-      event.stopPropagation(); // 이벤트 전파 방지
-      
-      // 다른 열려있는 팝업 닫기
+      event.stopPropagation();
       document.querySelectorAll('.hl-comment').forEach(item => {
         if (item !== el) item.classList.remove('show-popup');
       });
-
       el.classList.toggle('show-popup');
     }
 
-    // 바탕 클릭 시 팝업 닫기
     document.addEventListener('click', () => {
       document.querySelectorAll('.hl-comment').forEach(item => {
         item.classList.remove('show-popup');
       });
     });
-    // --------------------------------------------------
-    // 🍀 2열 대시보드 - D-Day & 랜덤 운세 위젯
-    // --------------------------------------------------
 
-    // --------------------------------------------------
     // 🍀 랜덤 운세 위젯 로직
-    // --------------------------------------------------
     const fortunes = [
-      // 세이
-      "오늘은 하고 싶은 대로 해도 괜찮은 날이야. (｡•̀ᴗ-)✧ 🕊️",
-      "운세는 모르겠고, 맛있는 거 먹으면 좋은 날인 거 아닌가? (๑´ڡ`๑) 🍴",
-      "두 번째 플레이리스트의 다섯 번째 곡, 그게 오늘의 행운의 노래야. (´▽`ʃ♡ƪ) 🎧",
-      "창문을 열어두는 건 어때? 바람이 기분 좋을 것 같아. ( ˶ˆᗜˆ˵ ) 🍃",
-      "글쎄...... 오늘은 괜찮지 않을까? (´• ω •`) 🌿",
-      "동네 고양이랑 친해질 수 있을 것 같아. 잘됐네. (ฅ^•ﻌ•^ฅ) 🐈",
-      "......대흉이래. 미안해. 쿄헤이한테 넘겨버릴까? (｡•́︿•̀｡) 🔮",
-      "요리를 해보는 건 어때? 쌍란이 나올 것 같아. 정말 나오면 찍어서 보여줄래? (๑˃̵ᴗ˂̵)و 🥚",
-      "산책을 해 보는 건 어때? 걷다 보면 좋은 일이 생길 수도 있고, 안 날 수도 있고. (っ˘ω˘ς ) 🚶",
-      "오후 3시 17분에 좋은 일이 생길 거야. ( ˘͈ ᵕ ˘͈ ) ⏰",
-      "오늘 쿄헤이랑 눈이 마주치면 도망가는 게 좋을지도 몰라. ……아니, 왜인지는 만나보면 알 거야. (￣▽￣;) 🏃",
-
-      // 쿄헤이
-      "오늘은 운이 좋네. 나를 만났잖아? (￣▽￣)ノ ✨",
-      "걱정 마. 오늘은 내가 운이 좀 좋은 날이거든. (¬‿¬ ) 🍀",
-      "오늘의 운세? 대길. 내가 정했으니까 확실해. 반박은 받지 않습니다. ( •̀ᴗ•́ )و 🎯",
-      "행운은 기다리는 것보단 잡는 게 빠르지. 잡는 방법? 그건 알아서 생각하는 게 어때? (｀∀´)Ψ 🫴",
-      "행운의 장소는 네가 가고 싶었던 곳. 참 쉽지? (￣ー￣)b 📍",
-      "오늘은 먼저 손을 내미는 사람이 이겨. 악수든 뭐든. (・ω・)ノ 🤝",
-      "평소보다 한 번 더 웃어 봐. 잘 어울릴 테니까. (๑˘ᵕ˘๑) 😊",
-      "행운 아이템? 글쎄. 나 아닐까? ( ͡° ͜ʖ ͡°) 💫",
-      "운이 없는 것 같아? 아직 하루는 안 끝났잖아. (´∀｀)ﾉ 🌙",
-      "흉이라고? 그런 건 믿지 마. (￣ε￣＠) 🚫",
-      "운세가 별로네. 걱정 마. 내가 있잖아? (｡•̀ᴗ-)✧ 🛡️",
-      "오늘은 잘생긴 사람이 운이 좋습니다. ...나를 위한 운세네! ( ˘ ³˘)♥ 💎",
-      "한 번 더 눌러 봐! 그게 네 진짜 운세야. (ง •̀_•́)ง 🔄",
-      "미안미안. 네 운세가 좋길래 내가 가져갔어. 한 번 더 누를래? (๑•̀ㅂ•́)و 🎁",
-      "오늘은 레이랑 붙어 있지 마. 하루 종일 시끄러울걸? ……나도 포함이라고? (¬_¬) 🎧",
-      "료한테 행운의 숫자를 물어보면 계산부터 할 거야. 귀엽지? (´∀｀) 🧮",
-      "이쿠토한테 오늘 운세를 물어봤어? ‘밥이나 먹어’라고 할걸. (￣▽￣) 🍚",
-      "오늘은 내가 운이 좋고 레이는 운이 나쁘대. 그러니까 레이가 뭐라고 하든 신경 쓰지 마. 알았지? 제대로 알아들은 거지, 응? (;;｀∀´)✨",
-      "세이 짱이 웃으면 좋은 일이 생긴대. ……그럼 오늘은 대길이겠네. 내가 옆에 있을 거니까. (´∀｀) ☀️",
-      "오늘은 운이 좋네. 세이 짱이랑 마주칠 예정이거든. 세이 짱은 모르는 일이래? 당연하지. 내가 방금 정한 거니까. (｀∀´)✨",
-      "좋아하는 사람을 만나면 운이 좋아진대. 세이 짱을 만나면 얼마나 좋아지려나? ……직접 확인해봐야겠네. ( ˘ ³˘)♡ 🌸",
-      "세이 짱이 보고 싶은 날이네. 안 그런 날이 있냐고? 당연히 없지. (￣▽￣)♡ 🌷",
-      "좋아하는 사람을 생각하면 운이 좋아진대. 요즘 내 운이 좋은 이유가 여기에 있었네. (´▽｀)♡ 🍀",
-      "오늘은 좋아한다는 말을 숨기지 않는 게 좋대. 뭐, 나는 원래 숨길 생각 없지만. (´꒳`)♡ 💘",
-      "세이 짱에게 반하게 될 운세래. ……매일 같은 결과가 나오는데, 이거 고장 난 거 아냐? (￣▽￣)💗",
-      "오늘의 행운은 세이 짱. ……내가 정한 거냐고? 맞아. 불만 있어? (｀∀´)♡ 🍀",
-
-      // 이쿠토
-      "괜히 무리하지 마. 내일 해도 되는 일이면 내일 해. (－_ლ) 🌙",
-      "좋은 일이 있을 거야. ......아마. (￣▽￣;) 🌱",
-      "운이 좋든 나쁘든 밥은 먹어라. ( ˘༥˘ ) 🍚",
-      "꽤 괜찮은 날이네. 푸딩이라도 먹어 봐. (´～｀) 🍮",
-      "귀찮은 일은 먼저 끝내. 그게 편해. (¬_¬) ✔️",
-      "오늘은 일찍 자라. (¦3[▓▓] 💤",
-      "쓸데없는 데 힘 빼지 마. (￣へ￣) 💨",
-      "괜히 나서지 않는 게 좋겠어. (・_・;) 🫥",
-      "......별일 없을 거야. ( ˘-˘ ) ☁️",
-      "누가 도와달라고 하면 도와줘. 대신 네가 힘들 정도로 하진 말고. (｀・ω・´)ゞ 🤲",
-      "실수가 잦은 날이래. ......뭐, 평소처럼만 하면 되겠지. 긴장하지 마. (￣^￣)ゞ 🎯",
-      "쿄헤이 씨가 이상한 말 하면 대충 무시해. 대부분 진심 아니니까. (－_ლ) 🙄",
-      "타케루가 네 몫까지 디저트를 사왔다면 먹어줘. 안 먹으면 그 녀석 또 신경 쓸 거다. ( ˘•ω•˘ ) 🍰",
-      
-
-
-      // 레이
-      "분명 좋은 하루가 될 거야! (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ ☀️",
-      "실수해도 괜찮아. 다시 하면 되지! (๑•̀ㅂ•́)و✧ 🔥",
-      "행운의 장소는 사람들이 많이 모이는 곳. 혼자 있지 말고 나와! (≧▽≦) 🎉",
-      "조금 힘들어도 끝까지 해보자. 오늘은 네가 이기는 날이야! (ง'̀-'́)ง 🏆",
-      "새로운 시도를 하기 좋은 날! 나랑 캐치볼 할래? (ﾉ≧∀≦)ﾉ⚾ ⚾",
-      "포기하기엔 아직 이른 것 같은데? 한 번만 더 해보자! (｡•̀ᴗ-)✧ 🔥",
-      "뭐든, 네가 생각한 것보다 잘 풀릴 거야. (´｡• ᵕ •｡`) 🌈",
-      "좋은 사람을 만나게 될 거래! ......혹시 나? (๑>ᴗ<๑) 💛",
-      "평소보다 자신 있게! 어깨 펴! ( •̀ᗝ•́ )و 💪",
-      "기회가 오면 망설이지 말고 잡아! (っ´▽`)っ 🎯",
-      "즐겁게 하면 운세도 좋아지는 법이지! (ﾉ´ヮ`)ﾉ*:･ﾟ✧ 🎈",
-      "오늘은 질 수 없는 날이네! (╬ Ò﹏Ó) 🥇",
-      "세이 짱이랑 있으면 갑자기 어디론가 가게 될지도 몰라. 나도 몇 번 당했거든! (≧▽≦) 🗺️",
-
-      // 료
-      "서두르지 않는 편이 좋겠습니다. ( ˘ᴗ˘ ) ⏳",
-      "좋은 기회가 찾아올 가능성이 높습니다. 놓치지 마세요. ( •̀ᴗ•́ )و 🎯",
-      "뜻밖의 변수가 생길 수 있으니, 여유를 두고 움직이시죠. (￣ー￣) 📋",
-      "오늘은 평소보다 15분 일찍 움직이시는 걸 추천합니다. (｀・ω・´)ゞ ⏰",
-      "오전보다 오후에 운이 따르겠습니다. 그래도 방심은 금물입니다. (¬‿¬) ☕",
-      "행운의 숫자는 3입니다. 특별한 근거는 없습니다만, 참고하시죠. (・∀・)🔢",
-      "중요한 결정을 혼자 내리지 않는 편이 좋겠습니다. 도움을 요청하세요. ( ˶ᵔ ᵕ ᵔ˶ ) 🤝",
-      "좋은 결과를 원하신다면 한 번 더 확인하세요 ( •̀ω•́ )✧ 🔍",
-      "운이 좋지 않다면, 운이 필요 없게 만들면 됩니다. 스스로를 믿으세요. (￣^￣)ゞ ♟️",
-      "충동적인 선택은 추천하지 않습니다. (－‸ლ) ⚠️",
-      "승률은 나쁘지 않습니다. 준비만 제대로 하신다면요. (⌐■_■) 📈",
-      "꽤 좋은 날입니다. ......Well, probably. ( ˘▾˘ ) ☕",
-      "사쿠라바 씨의 조언은 참고만 하십시오. 본인의 운세를 유리하게 바꾸는 데 능숙한 사람이라서요. ( ˘ᴗ˘ ) ♟️",
-      "이쿠토가 ‘괜찮다’고 했다면 아마 정말 괜찮은 겁니다. 그는 거짓말을 잘 못하니까요. (´ー｀) ☕",
-      "오늘은 세이 씨의 제안을 한 번쯤 따라가 보시는 것도 좋겠습니다. 의외의 결과가 나올 가능성이 있습니다. ( •̀ᴗ•́ )و 🎲",
-
-      // 타케루
-      "행운의 음식은 딸기 파르페라고 합니다! 꼭 드셔보세요! 참고로 제 추천은... (이후 한 시간 동안 디저트 이야기를 했다.) (☆▽☆) 🍓",
-      "우오오오ー!! 작은 행운도 놓치지 않는 검다!! (ﾉ≧∀≦)ﾉ ✨",
-      "좋은 말씀 감사함다!!<br><br>......네? 제가 말씀드려야 하는 거라고요? 죄송함다! 죄송함다! 한 번 더 눌러주세요!!! (＞人＜;) 🙇",
-      "운이 아주 좋은 것 같습니다!! 축하드림다!! (๑˃̵ᴗ˂̵)و 🎉",
-      "......제가 언제든 도와드리겠슴다!! 맡겨주세요!! (ง •̀_•́)ง 🫡",
-      "흉이라고 합니다!! 조심하면 괜찮을 겁니다!! (｀・ω・´)ゞ 🛡️",
-      "오늘은 운이 좋다고 합니다! 하지만 운이 좋다고 방심하면 안 됨다!! 그러니까 오늘도 열심히 하겠슴다ー!! (๑•̀ㅂ•́)و🔥 💪",
-      "오늘은 캡틴께 운세를 여쭤보시는 걸 추천함다! 분명 멋진 말씀을 해주실 검다! (☆▽☆) 🫡",
-      "료 씨께서 계획하신 일이라면 틀림없슴다! 저도 계획표를 받아볼까 함다! (๑•̀ㅂ•́)و 📋",
-      "세이 씨가 도넛이 맛있는 곳을 알고 계신다고 합니다! 저도…… 아니, 아무것도 아닙니다! (・∀・;) 🍩",
-      "캡틴은 정말 대단하심다! 그런데 가끔 무슨 말씀을 하시는지 모르겠슴다! (◎_◎;) 💭",
-      "이쿠토 씨가 추천해주신 푸딩은 정말 맛있었슴다! ……세 개 먹었슴다. (๑´ڡ`๑) 🍮"
+      { name: "세이", text: "오늘은 하고 싶은 대로 해도 괜찮은 날이야. 🕊️" },
+      { name: "세이", text: "운세는 모르겠고, 맛있는 거 먹으면 좋은 날인 거 아닌가? 🍴" },
+      { name: "쿄헤이", text: "오늘은 운이 좋네. 나를 만났잖아? ✨" },
+      { name: "쿄헤이", text: "오늘의 운세? 대길. 내가 정했으니까 확실해. 반박은 받지 않습니다. 🎯" },
+      { name: "이쿠토", text: "괜히 무리하지 마. 내일 해도 되는 일이면 내일 해. 🌙" },
+      { name: "이쿠토", text: "운이 좋든 나쁘든 밥은 먹어라. 🍚" },
+      { name: "레이", text: "분명 좋은 하루가 될 거야! ☀️" },
+      { name: "레이", text: "새로운 시도를 하기 좋은 날! 나랑 캐치볼 할래? ⚾" },
+      { name: "료", text: "서두르지 않는 편이 좋겠습니다. ⏳" },
+      { name: "타케루", text: "우오오오ー!! 작은 행운도 놓치지 않는 검다!! ✨" }
     ];
 
     function drawFortune() {
@@ -1431,16 +1427,17 @@
       if (!luckyBox) return;
 
       const randomIndex = Math.floor(Math.random() * fortunes.length);
+      const selected = fortunes[randomIndex];
       
       luckyBox.innerHTML = `
-        <div style="font-size: 11px; color: var(--c-gray); line-height: 1.4;">
-          ${fortunes[randomIndex]}
+        <div class="fortune-bubble-wrapper">
+          <div class="fortune-bubble">${selected.text}</div>
+          <div class="fortune-name">${selected.name}</div>
         </div>
-
       `;
+      luckyBox.style.marginTop = "0px";
     }
 
-    // 2) 디데이 계산 함수
     function calcDDay(targetDateStr) {
       const today = new Date();
       today.setHours(0, 0, 0, 0);
@@ -1453,24 +1450,18 @@
       
       if (diffDays === 0) return "D-DAY";
       if (diffDays > 0) return `♡ +${diffDays}日`;
-      return `D${diffDays}`; // 과거면 D-며칠
+      return `D${diffDays}`;
     }
 
-    // 페이지 시작될 때 디데이 숫자 채워넣기 (원하는 날짜로 변경!)
     document.addEventListener('DOMContentLoaded', () => {
-      document.getElementById('dday-1').textContent = calcDDay("2026-03-26"); // 요코하마 개막일 기준 예시
-      document.getElementById('dday-2').textContent = calcDDay("2026-7-25"); // 다른 목표일 예시
+      document.getElementById('dday-1').textContent = calcDDay("2026-03-26");
+      document.getElementById('dday-2').textContent = calcDDay("2026-07-25");
     });
 
-    // --------------------------------------------------
-    // 🏷️ 좌측 인덱스 탭 전환 로직
-    // --------------------------------------------------
     function switchTab(tabNum) {
-      // 모든 내용과 꼬리표의 active 클래스 해제
       document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('active'));
       document.querySelectorAll('.tab-index').forEach(el => el.classList.remove('active'));
 
-      // 클릭한 번호만 active
       document.getElementById(`tab-note-${tabNum}`).classList.add('active');
       document.querySelectorAll('.tab-index')[tabNum - 1].classList.add('active');
     }
