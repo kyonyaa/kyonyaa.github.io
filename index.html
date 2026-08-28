@@ -349,7 +349,7 @@
       text-align: center;
       filter: drop-shadow(1px 2px 0px rgb(214, 214, 214));
     }
-    .dday-title { font-size: 9px; color: #a47d91; margin-bottom: 1.5px; }
+    .dday-title { font-size: 10px; color: #ae93a1; margin-bottom: 1.5px; }
     .dday-count { font-weight: bold; font-size: 11px; color: var(--c-gray); }
 
     /* --- [좌측] 3) 인덱스 탭 노트 (상단 배치) --- */
@@ -386,7 +386,6 @@
       z-index: 2; 
       transform: translateY(1px);
       color: #a47d91;
-      transition: all 0.7s ease;
     }
 
     .tab-note-content {
@@ -661,7 +660,8 @@
       bottom: 42px; 
       right: 10px; 
       width: 140px;
-      background: var(--c--palepink); 
+      background-image: url('https://i.pinimg.com/736x/88/5d/bc/885dbc08e8f8dd5fcf143adb08bc4494.jpg');
+      background-size: cover;
       border: 1px solid #d4d4d4; 
       border-bottom: none; 
       border-radius: 12px 12px 0 0; 
@@ -712,7 +712,7 @@
     .song-item.playing {
       background: #e4e4e4;
       font-weight: bold;
-      color: #cfb4c2;
+      color: #8fb1ca;
     }
 
     /* =========================================
@@ -1229,7 +1229,7 @@
       <!-- 🌟 컨트롤 버튼에 클릭 이벤트 추가 -->
       <div class="music-controls">
         <button class="ctrl-btn" onclick="playPrev()">◁◁</button>
-        <button class="ctrl-btn" id="playBtn" onclick="togglePlay()" style="font-size: 13px;">▶</button>
+        <button class="ctrl-btn" id="playBtn" onclick="togglePlay()" style="font-size: 15px;">▶</button>
         <button class="ctrl-btn" onclick="playNext()">▷▷</button>
       </div>
 
