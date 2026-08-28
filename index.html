@@ -116,7 +116,7 @@
       align-items: center; 
       min-height: 100vh;
       margin: 0;
-      font-family: 'mona12' !important;
+      font-family: 'umdot12' !important;
       color: var(--c-gray) !important;
       -webkit-font-smoothing: none;
     }
@@ -184,7 +184,7 @@
        📌 [MAIN] 화면 - 이미지 아이콘 버튼
        ========================================= */
     .inner {
-      width: 350px;
+      width: 360px;
       height: 100%;
       border-width: 9px;
       border-style: solid;
@@ -195,6 +195,7 @@
     }
 
     .maintext {
+     display: none;
      text-rendering: optimizeLegibility;
      font-family:'NegaTape';
      font-size: 1.5em;
@@ -281,31 +282,51 @@
       font-size: 10px;
       font-family: 'umdot12', monospace !important;
       filter: drop-shadow(1px 2px 0px rgb(214, 214, 214));
-      border: 1px solid;
+      background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('https://i.pinimg.com/736x/41/14/58/411458839be4feb01e6bf12e34f0f006.jpg');
+      background-size: cover;
+      border: 2px solid;
+      border-color: #ffffff #808080 #808080 #ffffff; /* 밖으로 튀어나온 3D 테두리 */
+      border-radius: 8px;
       padding: 10px;
       margin-bottom: 10px;
     }
+    
     .login-box label {
-      display: block; margin-bottom: 10px; color: var(--c-gray);
+      display: block; 
+      margin-bottom: 2px; /* 레트로 폼 특유의 좁은 간격으로 수정 */
+      color: #333; 
     }
+    
     .login-input {
       width: 100%;
       padding: 5px;
       margin-bottom: 8px;
       font-family: inherit;
       font-size: 11px;
-      border: 1px solid #d4d4d4;
       background: #fff;
       color: var(--c-gray);
+      border: 3px solid;
+      border-color: #808080 #ffffff #ffffff #808080; /* 안으로 파인 3D 음각 테두리 */
+      outline: none;
+      box-sizing: border-box;
     }
+    
     .login-submit {
-      background: var(--c--palepink);
-      border: 1px solid #d4d4d4;
+      background: var(--c--palepink); /* 기존 핑크색 유지 */
       font-family: inherit;
       font-size: 9px;
       cursor: pointer;
       padding: 5px 5px;
       margin-right: 35%;
+      border: 2px solid;
+      border-color: #ffffff #808080 #808080 #ffffff; /* 밖으로 튀어나온 3D 버튼 테두리 */
+      border-radius: 4px;
+    }
+
+    /* 버튼을 클릭했을 때 안으로 쏙 들어가는 효과 */
+    .login-submit:active {
+      border-color: #808080 #ffffff #ffffff #808080; 
+      transform: translateY(1px);
     }
 
     /* --- [좌측] 2) 나란한 D-Day 박스 --- */
@@ -400,7 +421,8 @@
     }
 
     .selected-tags-bar {
-      margin: 0;
+      width: 360px;
+      margin: auto;
       padding: 8px 12px; font-size: 11px; font-weight: bold;
       border: 1px solid #d4d4d4; 
       background-image: url('https://i.pinimg.com/736x/93/44/c1/9344c1df0d4a92c1c142ce0ea947f140.jpg');
@@ -420,7 +442,7 @@
     
     .tag-toggle-btn {
       position: absolute;
-      top: -22px; right: -0.01px; 
+      top: -22px; right: 7px; 
       width: 32px; height: 23px;
       background-image: url('https://i.pinimg.com/736x/93/44/c1/9344c1df0d4a92c1c142ce0ea947f140.jpg');
       border: 1px solid #d4d4d4;
@@ -433,6 +455,8 @@
     }
 
     .tag-dropdown-content {
+      width: 360px;
+      margin: auto;
       background: #ffffff;
       border: 1px solid #d4d4d4;
       border-bottom: none; 
@@ -495,6 +519,7 @@
        📌 [Log] 게시글 목록
        ========================================= */
     .post-list { 
+      margin: auto;
       flex: 1; 
       overflow-y: auto !important;
       padding: 0 20px 15px 20px; 
@@ -507,6 +532,7 @@
 
     .post-card {
       border-width: 7px;
+      width: 360px;
       border-style: solid;
       border-image: url("https://github.com/okayletsgo555/img/blob/main/%EA%B7%B8%EB%A0%88%EC%9D%B4%20%ED%94%84%EB%A0%88%EC%9E%84.png?raw=true") 8 fill round;
       padding: 7px; 
@@ -547,7 +573,7 @@
       border: 1px solid #d4d4d4; 
       border-bottom: none; 
       border-radius: 12px 12px 0 0; 
-      padding: 0 10px;
+      padding: 10 10px;
       display: flex; flex-direction: column; gap: 5px; z-index: 99;
       max-height: 0;
       opacity: 0;
@@ -571,6 +597,7 @@
         width: 120px;
         font-size: 11px;
         padding: 1px;
+        margin-bottom:5px;
         background: var(--c--white);
         line-height: 1.6;
         border-width:7px;
@@ -597,16 +624,17 @@
     }
 
     .back-btn {
+      font-family: 'undot12' !important;
       color: var(--c--gray);
       background: var(--c--palepink);
       border: 1px solid #d4d4d4;
       border-radius: 4px;
       padding: 4px 8px 8px 8px;
-      font-size: 10px;
+      font-size: 11px;
       font-family: inherit;
       cursor: pointer;
-      width: 60px;
-      height: 30px;
+      width: 70px;
+      height: 40px;
       position: absolute; 
       bottom: 0px; 
       right: 10px; 
@@ -864,7 +892,7 @@
               
               <!-- 프로필 이미지 박스 추가 -->
               <div class="profile-img-box">
-                <img src="https://i.pinimg.com/736x/9f/4d/e5/9f4de57dd6b8969ee4dcea3634700c4c.jpg" alt="Profile" class="profile-img">
+                <img src="https://i.pinimg.com/736x/28/b0/06/28b0068418fc677d8d800733fb62b9ae.jpg" alt="Profile" class="profile-img">
               </div>
 
               <div class="maintext">アーカイブ</div>
@@ -952,7 +980,7 @@
             </div>
           </div>
         </div>
-        <button class="back-btn" onclick="goToView('view-log')">◄ BACK</button>
+        <button class="back-btn" onclick="goToView('view-log')">◀ BACK</button>
       </div>
 
       <!-- 3. [Diary] 일기 (달력 + 고정 스크롤 목록) -->
@@ -1005,7 +1033,7 @@
           </div>
         </div>
         <!-- 🌟 BACK 버튼 누르면 view-char (목록)으로 복귀 -->
-        <button class="back-btn" onclick="goToView('view-char')">◄ BACK</button>
+        <button class="back-btn" onclick="goToView('view-char')">◀ BACK</button>
       </div>
 
       <!-- 5. [OOC] 기타 카테고리 페이지 -->
