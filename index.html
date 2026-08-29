@@ -916,6 +916,226 @@
       margin-top: 1px;
     }
 
+
+    /* =========================================
+       🎨 계정별 다이어리 테마 색상 (sei / kyohei)
+       ========================================= */
+    :root, body.theme-sei {
+      --diary-out-bg: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('https://i.pinimg.com/736x/41/14/58/411458839be4feb01e6bf12e34f0f006.jpg');  /* sei 테마 (palepink) */
+      --diary-in-bg: #ffffff;   /* 속지 흰색 */
+      --diary-point: #bababa;   /* 텍스트/테두리 포인트 */
+    }
+
+    body.theme-kyohei {
+      --diary-out-bg: #e6f2ff;  /* kyohei 테마 (구분용 연파랑) */
+      --diary-in-bg: #ffffff;
+      --diary-point: #4a70a4;   /* 블루 톤 포인트 */
+    }
+
+    /* =========================================
+       📖 상단 인덱스 배치용 2중 박스 프레임
+       ========================================= */
+    .diary-outer-box {
+      position: relative;
+      background-size: cover;
+      background-image: var(--diary-out-bg);
+      border: 2px solid var(--diary-point);
+      margin: 10px auto;
+      padding: 10px;
+      min-height: 420px;
+      width: 360px;
+      margin-top: 30px !important;
+      z-index: 50;
+    }
+
+
+    .diary-inner-box {
+      background-color: var(--diary-in-bg);
+      border: 1px solid var(--diary-point);
+      padding: 10px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      box-sizing: border-box;
+    }
+
+    
+    /* =========================================
+       📑 상단 월별 인덱스 (12개 탭 가로 정렬)
+       ========================================= */
+    /* 📑 상단 인덱스 컨테이너 */
+    .diary-index-container {
+      position: absolute;
+      top: -22px;
+      left: -0.5px;
+      right: 5px;
+      display: flex;
+      justify-content: flex-start;
+      z-index: 5;
+    }
+
+    /* 🏷️ 실물 다이어리 스타일의 오목한 곡선 탭 */
+    .diary-index-tab {
+      flex: 0 0 40px;
+      height: 24px;
+      background-color: #ffffff;
+      color: var(--diary-point);
+      border-radius: 4px 12px 0px 0px; 
+      
+      /* 🌟 1. 전체 border를 지우고, 겹침을 방지하기 위해 위쪽/왼쪽 선만 지정 */
+      border: none;
+      border-top: 1px solid var(--diary-point);
+      border-left: 1px solid var(--diary-point);
+      margin-top: -3.6px;
+      font-size: 9px;
+      line-height: 22px;
+      text-align: center;
+      cursor: pointer;
+      font-weight: bold;
+      box-sizing: border-box;
+
+      /* 🌟 텍스트를 오른쪽으로 밀어내기 위해 중앙 정렬을 끄고 패딩 추가 */
+      text-align: left; /* 중앙 정렬 해제 */
+      padding-left: 16px; /* 원하는 만큼 오른쪽으로 미는 수치 (8px ~ 12px 추천) */
+      padding-top: 2px;
+  
+      
+      /* 🌟 2. 겹치는 간격 및 입체 그림자 */
+      margin-right: -12px; 
+      position: relative;
+      transition: all 0.2s ease;
+      
+      /* 오른쪽 인덱스 경계선을 깔끔하게 다듬는 그림자 효과 */
+      box-shadow: 2px 0 2px rgba(0, 0, 0, 0.05);
+    }
+
+    /* 맨 마지막(12月) 탭만 오른쪽 테두리를 마감해줌 */
+    .diary-index-tab:last-child {
+      border-right: 1px solid var(--diary-point);
+    }
+
+    /* 순차적 z-index 정렬 (1월이 맨 위, 12월이 맨 아래) */
+    .diary-index-tab:nth-child(1)  { z-index: 12; }
+    .diary-index-tab:nth-child(2)  { z-index: 11; }
+    .diary-index-tab:nth-child(3)  { z-index: 10; }
+    .diary-index-tab:nth-child(4)  { z-index: 9;  }
+    .diary-index-tab:nth-child(5)  { z-index: 8;  }
+    .diary-index-tab:nth-child(6)  { z-index: 7;  }
+    .diary-index-tab:nth-child(7)  { z-index: 6;  }
+    .diary-index-tab:nth-child(8)  { z-index: 5;  }
+    .diary-index-tab:nth-child(9)  { z-index: 4;  }
+    .diary-index-tab:nth-child(10) { z-index: 3;  }
+    .diary-index-tab:nth-child(11) { z-index: 2;  }
+    .diary-index-tab:nth-child(12) { z-index: 1;  }
+
+    /* 🌟 클릭해서 선택된(활성화된) 탭 */
+    .diary-index-tab.active {
+      background-color: var(--c--palepink) !important;
+      color: var(--c--gray) !important;
+      
+      /* 활성화 탭은 우측 선까지 복구해서 명확하게 분리 */
+      border-right: 1px solid var(--diary-point);
+      
+      transform: translateY(-2px);
+      height: 26.1px; 
+      padding: 0;      
+      /* 포개짐 구분을 위한 명확한 그림자 */
+      box-shadow: 3px -1px 0px rgba(0, 0, 0, 0.2);
+
+      text-align: left; /* 중앙 정렬 해제 */
+      padding-left: 16px; /* 원하는 만큼 오른쪽으로 미는 수치 (8px ~ 12px 추천) */
+      padding-top: 2px;
+    }
+
+    /* =========================================
+       🗓️ 내부 속지 요소들 (Main)
+       ========================================= */
+    .diary-title-bar {
+      text-align: center;
+      font-weight: bold;
+      font-size: 14px;
+      color: var(--diary-point);
+    }
+
+    /* 🌟 캘린더 & 먼슬리 골 테두리 효과 */
+    .diary-calendar-box, .diary-monthly-goal {
+      border: 3px solid;
+      border-color: #bababa #ffffff #ffffff #bababa; /* 안으로 파인 효과 */
+      padding: 8px;
+      background: #fafafa;
+    }
+    
+    .diary-calendar-box {
+      flex: 1; /* 캘린더 영역을 넓게 차지하도록 */
+      min-height: 120px;
+      text-align: center;
+      line-height: 120px; /* 임시 글씨용 */
+      color: #999;
+    }
+
+    /* 하단 2단 세로 배치 (투두 / 요약) */
+    .diary-2col {
+      display: flex;
+      gap: 8px;
+    }
+    .diary-2col > div {
+      flex: 1;
+      border: 1px dashed var(--diary-point);
+      padding: 6px;
+      font-size: 10px;
+      min-height: 50px;
+      color: var(--c-gray);
+    }
+
+    /* 🌟 더보기 버튼 테두리 효과 */
+    .diary-more-btn {
+      border: 2px solid;
+      border-color: #ffffff #bababa #bababa #ffffff; /* 밖으로 튀어나온 효과 */
+      background: #e0e0e0;
+      text-align: center;
+      padding: 6px 0;
+      font-size: 11px;
+      font-weight: bold;
+      color: #555;
+      cursor: pointer;
+      margin-top: auto;
+    }
+    .diary-more-btn:active {
+      border-color: #bababa #ffffff #ffffff #bababa;
+    }
+
+    /* =========================================
+       📝 내부 속지 요소들 (Detail)
+       ========================================= */
+    .diary-detail-header {
+      display: flex;
+      justify-content: space-between;
+      font-weight: bold;
+      color: var(--diary-point);
+      font-size: 12px;
+      padding: 0 2px 4px 2px;
+    }
+
+    .diary-detail-title {
+      border: 2px solid var(--diary-point);
+      text-align: center;
+      font-weight: bold;
+      padding: 6px;
+      color: var(--diary-point);
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    .diary-detail-content {
+      flex: 1;
+      border: 1px solid #ddd;
+      padding: 8px;
+      font-size: 11px;
+      overflow-y: auto;
+      background: #fff;
+    }
+
     /* =========================================
        📌 [OOC] 카테고리 탭
        ========================================= */
@@ -1087,7 +1307,7 @@
       background-clip: padding-box;
       padding: 4px;
       box-sizing: border-box;
-      font-family: 'umdot12', monospace !important;
+      font-family: 'umdot12' !important;
       animation: popModal 0.2s ease-out;
     }
 
@@ -1201,15 +1421,23 @@
     opacity: 0;
   }
 }
+
+.hh {
+    width: 100%;
+    margin: 0px -60px -40px -10px;
+    z-index: 90;
+    display: block;
+  }
     
   </style>
 </head>
 <body>
 
   <div id="appFrame" class="app-frame">
-    
+    <img class="hh" src="https://dividers.crd.co/assets/images/gallery04/9fa2a9c9.gif?v=05d33f91">
     <!-- 📌 [고정 영역] 상단 헤더 -->
     <div class="fixed-header-wrapper">
+      
       <div class="main-header"></div>
     </div>
 
@@ -1276,7 +1504,7 @@
                   <img src="https://github.com/okayletsgo555/img/blob/main/8cb0e1a672c2b0c231b9f026d4d8be78_preview_rev_1.png?raw=true" class="menu-icon" alt="log">
                   <span>ログ</span>
                 </div>
-                <div class="list-btn" onclick="goToView('view-diary')">
+                <div class="list-btn" onclick="goToView('view-diary-wrapper')">
                   <img src="https://github.com/okayletsgo555/img/blob/main/8cb0e1a672c2b0c231b9f026d4d8be78_preview_rev_1.png?raw=true" class="menu-icon" alt="diary">
                   <span>日記</span>
                 </div>
@@ -1366,42 +1594,71 @@
         <button class="back-btn" onclick="goBack()">◀ BACK</button>
       </div>
 
-      <!-- 3. [Diary] 일기 (달력) -->
-      <div id="view-diary" class="view-screen">
-        <div class="calendar-wrapper">
-          <div class="calendar-header">
-            <button class="cal-nav-btn" onclick="changeMonth(-1)">◄</button>
-            <span id="calTitle">2014 . 04</span>
-            <button class="cal-nav-btn" onclick="changeMonth(1)">►</button>
-          </div>
-          <hr class="caledar-hr">
-          <div class="calendar-grid">
-            <div class="cal-day-header" style="color: #d88;">日</div>
-            <div class="cal-day-header">月</div>
-            <div class="cal-day-header">火</div>
-            <div class="cal-day-header">水</div>
-            <div class="cal-day-header">木</div>
-            <div class="cal-day-header">金</div>
-            <div class="cal-day-header" style="color: #88d;">土</div>
-          </div>
-          <div id="calDaysGrid" class="calendar-grid" style="margin-top: 2px;"></div>
+      <!-- 📖 [Diary] 이중 프레임 다이어리 화면 -->
+<div id="view-diary-wrapper" class="view-screen">
+  
+  <div class="diary-outer-box">
+    
+    <!-- 📑 12개의 월별 인덱스 -->
+    <div class="diary-index-container">
+      <div class="diary-index-tab" onclick="changeMonth(1)">1月</div>
+      <div class="diary-index-tab" onclick="changeMonth(2)">2月</div>
+      <div class="diary-index-tab" onclick="changeMonth(3)">3月</div>
+      <div class="diary-index-tab active" onclick="changeMonth(4)">4月</div>
+      <div class="diary-index-tab" onclick="changeMonth(5)">5月</div>
+      <div class="diary-index-tab" onclick="changeMonth(6)">6月</div>
+      <div class="diary-index-tab" onclick="changeMonth(7)">7月</div>
+      <div class="diary-index-tab" onclick="changeMonth(8)">8月</div>
+      <div class="diary-index-tab" onclick="changeMonth(9)">9月</div>
+      <div class="diary-index-tab" onclick="changeMonth(10)">10月</div>
+      <div class="diary-index-tab" onclick="changeMonth(11)">11月</div>
+      <div class="diary-index-tab" onclick="changeMonth(12)">12月</div>
+    </div>
+
+    <!-- 1️⃣ [속지 1] 다이어리 메인 화면 -->
+    <div id="diary-inner-main" class="diary-inner-box">
+      <!-- 년월 한자 표시 -->
+      <div class="diary-title-bar">2014年 4月</div>
+
+      <div class="diary-calendar-box">Calendar (달력 렌더링 영역)</div>
+      
+      <div class="diary-monthly-goal">Monthly goal: 개막전 승리하기!</div>
+
+      <div class="diary-2col">
+        <div class="diary-todo">
+          ☑️ TO-DO LIST<br>
+          <span style="color:#a47d91;">- [v] 장보기</span><br>
+          - [ ] 산책하기
         </div>
-        <div class="post-list" id="diaryPostList"></div>
-        <button class="back-btn" onclick="goBack()">◀ BACK</button>
+        <div class="diary-summary">
+          📝 SUMMARY<br>
+          요약글 한 줄 표시 공간
+        </div>
       </div>
 
-      <!-- 3-1. [Diary Detail] 일기 상세글 화면 -->
-      <div id="view-diary-detail" class="view-screen">
-        <div class="detail-top-bar">
-          <span id="diaryDetailNavTitle" style="font-size: 12px; font-weight: bold;">날짜</span>
-        </div>
-        <div class="post-list">
-          <div class="detail-card">
-            <div id="diaryDetailContent" class="post-card-content"></div>
-          </div>
-        </div>
-        <button class="back-btn" onclick="goBack()">◀ BACK</button>
+      <div class="diary-more-btn" onclick="openDiaryDetail()">더보기 ◀</div>
+    </div>
+
+    <!-- 2️⃣ [속지 2] 다이어리 상세글 화면 (처음엔 숨겨짐) -->
+    <div id="diary-inner-detail" class="diary-inner-box" style="display: none;">
+      <!-- 년월일 한자 + 날씨 표시 -->
+      <div class="diary-detail-header">
+        <span>2014年 4月 1日</span>
+        <span>☀️</span>
       </div>
+      
+      <div class="diary-detail-title">T I T L E</div>
+      
+      <div class="diary-detail-content">
+        (상세글 내용이 들어가는 곳)
+      </div>
+
+      <div class="diary-more-btn" onclick="closeDiaryDetail()">◀ BACK</div>
+    </div>
+
+  </div>
+
+</div>
 
       <!-- 4. [Char / 愛] 게시글 목록 화면 -->
       <div id="view-char" class="view-screen">
@@ -2221,6 +2478,7 @@ function switchOocTab(tabNum, tabEl) {
         showRetroModal("⚠️ 로그인 실패!\n비밀번호가 틀렸거나\n인가되지 않은 계정입니다.");
       }
     }
+    
   </script>
 
 </body>
